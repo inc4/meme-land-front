@@ -14,6 +14,7 @@
   --color-beige-100: #E5E1D2;
   --color-error-900: #ED4646;
   --color-error-800: #E25A57;
+  --color-background: #080808;
 }
 
 html,
@@ -23,4 +24,17 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+a, span, p, li {
+  color: #fff;
+}
+
+.header-border {
+  border-width: 1px;
+  border-image: linear-gradient(
+          to bottom,
+          red,
+          rgba(0, 0, 0, 0)
+  ) 100%;
 }
