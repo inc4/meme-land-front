@@ -16,18 +16,18 @@ const navigationBottom = [
 
 const Footer = () => {
   return (
-    <footer className="p-4">
+    <footer className="p-4 max-w-[1334px] mx-auto w-full">
       <div className="flex flex-col gap-14 items-center lg:flex-row lg:gap-24">
         <img src={Logo} alt="" className="max-w-[200px]"/>
         <div className="flex flex-col lg:flex-row gap-[21px] items-center">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+            <a key={item.name} href={item.href} className="text-white text-sm/6 font-semibold">
               {item.name}
             </a>
           ))}
         </div>
       </div>
-      <div className="flex flex-col mb-18 lg:mb-[68px] mt-16 lg:mt-[68px] lg:gap-8">
+      <div className="flex flex-col items-center mb-18 lg:mb-[68px] mt-16 lg:mt-[68px] lg:gap-8 lg:items-start">
         <p className="block order-1 text-center opacity-40 mb-10 max-w-[800px] lg:text-left lg:order-2">
           RISK WARNING: Trading Cryptocurrencies is highly speculative, carries a level of risk and may not be suitable
           for all investors. You may lose some or all of your invested capital, therefore you should not speculate with
@@ -48,7 +48,7 @@ const Footer = () => {
       <div className="flex flex-col items-center gap-6 lg:flex-row justify-between mb-9">
         <div className="flex flex-wrap justify-center gap-y-2.5 gap-x-4">
           {navigationBottom.map((item) => (
-            <a href={item.href} className="opacity-50">{item.name}</a>
+            <a key={item.name} href={item.href} className="opacity-50 text-white">{item.name}</a>
           ))}
         </div>
         <span className="opacity-50">© 2025 GreenMeme Ltd. All rights reserved</span>

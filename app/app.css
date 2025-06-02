@@ -26,10 +26,6 @@ body {
   }
 }
 
-a, span, p, li {
-  color: #fff;
-}
-
 .header-border {
   border-width: 1px;
   border-image: linear-gradient(
@@ -38,3 +34,4 @@ a, span, p, li {
           rgba(0, 0, 0, 0)
   ) 100%;
 }
+
