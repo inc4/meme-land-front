@@ -2,15 +2,21 @@
 
 @theme {
   --font-display: 'DM Sans', sans-serif;
+  --color-primary-900: #11251B;
+  --color-primary-800: #1E3E33;
+  --color-primary-700: #329064;
+  --color-primary-600: #09C66E;
   --color-primary: #3AFFA3;
   --color-gray-900: #0C0C0C;
   --color-gray-800: #161616;
   --color-gray-700: #1A1A1A;
   --color-gray-600: #474747;
   --color-gray-500: #9AA4B2;
+  --color-gray-300: #CDD5DF;
   --color-gray-200: #E7E8E7;
   --color-gray-100: #FFFFFF;
   --color-beige-900: #272420;
+  --color-beige-600: #909090;
   --color-beige-100: #E5E1D2;
   --color-error-900: #ED4646;
   --color-error-800: #E25A57;
@@ -25,11 +31,7 @@
   }
 
   html, body {
-    @apply bg-white dark:bg-gray-950 font-display;
-
-    @media (prefers-color-scheme: dark) {
-      color-scheme: dark;
-    }
+    @apply bg-white font-display;
   }
 
   h1 {
