@@ -1,6 +1,6 @@
 import beerToken from "~/assets/imgs/beercoin.png";
 import beerTokenLogo from "~/assets/imgs/beercoin-logo.png";
-import twoDots from "~/assets/svg/two-dots.svg";
+import Countdown from "~/components/Countdown";
 
 const PresaleBlock = () => {
   return (
@@ -49,31 +49,7 @@ const PresaleBlock = () => {
         </div>
         <div className="py-5 rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3">
           <span className="text-center font-bold text-white text-[20px] w-fit mx-auto block mb-5">Presale will start in:</span>
-          <div className="flex items-center justify-center gap-1">
-            <div className="rounded-[14px] flex flex-col gap-1 items-center justify-center bg-[#1A1E21] w-[66px] h-[55px]">
-              <span className="text-[15px] font-medium text-white">17</span>
-              <span className="text-xs font-semibold opacity-50">DAYS</span>
-            </div>
-            <img src={twoDots} alt="two dots"/>
-            <div className="rounded-[14px] flex flex-col gap-1 items-center justify-center bg-[#1A1E21] w-[66px] h-[55px]">
-              <span className="text-[15px] font-medium text-white">04</span>
-              <span className="text-xs font-semibold opacity-50">HOURS</span>
-            </div>
-            <img src={twoDots} alt="two dots"/>
-            <div className="rounded-[14px] flex flex-col gap-1 items-center justify-center bg-[#1A1E21] w-[66px] h-[55px]">
-              <span className="text-[15px] font-medium text-white">
-                15
-              </span>
-              <span className="text-xs font-semibold opacity-50">MINUTES</span>
-            </div>
-            <img src={twoDots} alt="two dots"/>
-            <div className="rounded-[14px] flex flex-col gap-1 items-center justify-center bg-[#1A1E21] w-[66px] h-[55px]">
-              <span className="text-[15px] font-medium text-white">
-                24
-              </span>
-              <span className="text-xs font-semibold opacity-50">SECONDS</span>
-            </div>
-          </div>
+          <Countdown className="justify-between" />
         </div>
         <button
           type="button"

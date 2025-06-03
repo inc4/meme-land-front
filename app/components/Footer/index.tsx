@@ -16,7 +16,7 @@ const navigationBottom = [
 
 const Footer = () => {
   return (
-    <footer className="p-4 max-w-[1334px] mx-auto w-full">
+    <footer className="p-4 max-w-[1334px] mx-auto w-full pt-[67px] border-t-[1px] border-[#434343]">
       <div className="flex flex-col gap-14 items-center lg:flex-row lg:gap-24">
         <img src={Logo} alt="" className="max-w-[200px]"/>
         <div className="flex flex-col lg:flex-row gap-[21px] items-center">

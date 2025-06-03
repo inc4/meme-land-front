@@ -19,7 +19,7 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-white dark:bg-[#080808];
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -35,3 +35,7 @@ body {
   ) 100%;
 }
 
+.invite-bg {
+  background: linear-gradient(0deg, #0F1113, #0F1113),
+  linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 152, 56, 0.08) 100%);
+}

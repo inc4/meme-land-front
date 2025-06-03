@@ -35,9 +35,9 @@ const cards = [
 
 const HowItWorks = () => {
   return (
-    <section className="mb-40">
+    <section>
       <h2 className="text-[32px] text-white">How it’s Works?</h2>
-      <div className="grid grid-cols-5 gap-4 items-stretch ">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch mt-8">
         {cards.map((el) => (
           <div className="flex flex-col relative bg-[#0F1113] rounded-[14px] p-5">
             <img className="w-12 h-12" src={el.img} alt="icon" />
