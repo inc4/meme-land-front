@@ -5,7 +5,7 @@ import Hamburger from "~/components/Icons/Hamburger";
 import Logo from "~/assets/imgs/header-logo.png";
 import balanceIcon from "~/assets/svg/header-address.svg";
 import clsx from "clsx";
-import MenuClose from "~/components/Icons/MenuClose";
+import MenuClose from "~/components/Icons/MenuClose.tsx";
 
 const navigation = [
   { name: 'Memepad', href: '#' },
@@ -35,7 +35,7 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-white">
               {item.name}
             </a>
           ))}
@@ -60,7 +60,7 @@ export default function Header() {
           className="fixed inset-y-0 right-0 top-20 z-10 w-full overflow-y-auto h-fit px-6 pt-14 pb-10 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-background">
           <div className="flex flex-col gap-[22px] items-center">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+              <a key={item.name} href={item.href} className="text-sm/6 text-white font-semibold">
                 {item.name}
               </a>
             ))}

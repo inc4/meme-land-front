@@ -1,5 +1,5 @@
 import type { Route } from "../../../.react-router/types/app/routes/+types";
-import { Welcome } from "~/components/welcome/welcome";
+import { Welcome } from "~/components/Welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [

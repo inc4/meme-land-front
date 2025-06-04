@@ -40,7 +40,7 @@
   }
 
   html, body {
-    @apply bg-white font-display;
+    @apply bg-background font-display;
   }
 
   h1 {
@@ -193,10 +193,6 @@
 }
 
 
-a, span, p, li {
-  color: #fff;
-}
-
 .header-border {
   border-width: 1px;
   border-image: linear-gradient(
@@ -204,4 +200,9 @@ a, span, p, li {
           red,
           rgba(0, 0, 0, 0)
   ) 100%;
+}
+
+.invite-bg {
+  background: linear-gradient(0deg, #0F1113, #0F1113),
+  linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 152, 56, 0.08) 100%);
 }
