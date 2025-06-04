@@ -7,6 +7,14 @@
   --color-primary-700: #329064;
   --color-primary-600: #09C66E;
   --color-primary: #3AFFA3;
+  --color-violet-transparent: #F24BE70D;
+  --color-violet: #9D85FF;
+  --color-bronze-transparent: #F89F3F1C;
+  --color-bronze: #F89F3F;
+  --color-silver-transparent: #9797974D;
+  --color-silver: #979797;
+  --color-gold-transparent: #FCD10D1C;
+  --color-gold: #FCD10D;
   --color-gray-900: #0C0C0C;
   --color-gray-800: #161616;
   --color-gray-700: #1A1A1A;
@@ -15,6 +23,7 @@
   --color-gray-300: #CDD5DF;
   --color-gray-200: #E7E8E7;
   --color-gray-100: #FFFFFF;
+  --color-white-transparent: #FFFFFF0D;
   --color-beige-900: #272420;
   --color-beige-600: #909090;
   --color-beige-100: #E5E1D2;
@@ -66,6 +75,7 @@
 
 }
 
+
 @utility text-body-l {
   @apply text-[16px] leading-[1.5] tracking-[-0.3px]
 }
@@ -77,6 +87,111 @@
 @utility text-body-s {
   @apply text-[12px] leading-[1.6] tracking-[-0.1px]
 }
+
+
+@utility shared-styles-box {
+  position: relative;
+  padding: 34px;
+  border-radius: 14px;
+}
+
+@utility shared-styles-box-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px; 
+  padding: 1px; 
+  mask: 
+    linear-gradient(var(--color-gray-900) 0 0) content-box, 
+    linear-gradient(var(--color-gray-900) 0 0);
+  mask-composite: exclude; 
+}
+
+
+@utility green-box {
+  @apply shared-styles-box;
+  background:
+    radial-gradient(88.75% 88.75% at 50% 11.25%, var(--color-primary-800) 0%, var(--color-gray-900) 100%), 
+    linear-gradient(0deg, var(--color-gray-900), var(--color-gray-900));
+}
+@utility green-box-border {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-gray-900) 50%, var(--color-primary) 158.98%);
+}
+@utility green-box-border-top {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-primary) -25.55%, var(--color-gray-900) 44.09%);
+}
+
+
+@utility violet-box {
+  @apply shared-styles-box;
+  background:
+    radial-gradient(88.75% 88.75% at 50% 11.25%, var(--color-violet-transparent) 0%, var(--color-gray-900) 100%),
+    linear-gradient(0deg, var(--color-gray-900), var(--color-gray-900));
+}
+@utility violet-box-border {
+  @apply shared-styles-box-border;
+  background: linear-gradient(227.66deg, transparent 26.3%, var(--color-violet) 96.9%);
+}
+@utility violet-box-border-top {
+  @apply shared-styles-box-border;
+  background: linear-gradient(227.66deg, transparent 26.3%, var(--color-violet) 96.9%);
+}
+
+
+@utility bronze-box {
+  @apply shared-styles-box;
+  background:
+    radial-gradient(88.75% 88.75% at 50% 11.25%, var(--color-bronze-transparent) 0%, var(--color-gray-900) 100%),
+    linear-gradient(0deg, var(--color-gray-900), var(--color-gray-900));
+}
+@utility bronze-box-border {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-gray-700) 50%, var(--color-bronze) 158.98%);
+}
+@utility bronze-box-border-top {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-bronze) -25.55%, var(--color-gray-700) 44.09%);
+}
+
+
+@utility silver-box {
+  @apply shared-styles-box;
+  background:
+    radial-gradient(88.75% 88.75% at 50% 11.25%, var(--color-silver-transparent) 0%, var(--color-gray-900) 100%),
+    linear-gradient(0deg, var(--color-gray-900), var(--color-gray-900));
+}
+@utility silver-box-border {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-gray-700) 50%, var(--color-silver) 158.98%);
+}
+@utility silver-box-border-top {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-silver) -25.55%, var(--color-gray-700) 44.09%);
+}
+
+
+@utility gold-box {
+  @apply shared-styles-box;
+  background:
+    radial-gradient(88.75% 88.75% at 50% 11.25%, var(--color-gold-transparent) 0%, var(--color-gray-900) 100%),
+    linear-gradient(0deg, var(--color-gray-900), var(--color-gray-900));
+}
+@utility gold-box-border {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-gray-700) 50%, var(--color-gold) 158.98%);
+}
+@utility gold-box-border-top {
+  @apply shared-styles-box-border;
+  background: linear-gradient(180deg, var(--color-gold) -25.55%, var(--color-gray-700) 44.09%);
+}
+
+
+@utility dark-box-border {
+  @apply shared-styles-box-border;
+  background: linear-gradient(227.66deg, var(--color-gray-900) 26.3%, var(--color-white-transparent) 96.9%); 
+}
+
 
 a, span, p, li {
   color: #fff;
