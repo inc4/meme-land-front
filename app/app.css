@@ -40,7 +40,11 @@
   }
 
   html, body {
-    @apply bg-background font-display;
+    @apply bg-white dark:bg-background font-display;
+
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+    }
   }
 
   h1 {
