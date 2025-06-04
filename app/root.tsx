@@ -9,8 +9,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import Header from "~/components/Header";
-import Footer from "~/components/Footer";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,11 +35,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="flex min-h-full flex-col">
-        <Header />
-        <main className="grow px-4 lg:px-0">
+        <main className="grow px-4">
           {children}
         </main>
-        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>

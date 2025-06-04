@@ -4,6 +4,7 @@ import waitIcon from "~/assets/svg/wait-circle.svg";
 import walletIcon from "~/assets/svg/wallet-circle.svg";
 import depositIcon from "~/assets/svg/deposit-circle.svg";
 import arrowIcon from "~/assets/svg/arrow-long.svg";
+import Slider from 'react-slick';
 
 const cards = [
   {
@@ -34,13 +35,52 @@ const cards = [
 ]
 
 const HowItWorks = () => {
+  const sliderSettings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    arrows: false,
+    slidesToShow: 1.1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, // Below lg
+        settings: {
+          slidesToShow: 2.1,
+        },
+      },
+      {
+        breakpoint: 640, // Below sm
+        settings: {
+          slidesToShow: 1.1,
+        },
+      },
+    ],
+  };
+
   return (
     <section>
       <h2 className="text-[32px] text-white">How it’s Works?</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch mt-8">
+
+        <div className="mt-8 lg:hidden -mx-1">
+          <Slider {...sliderSettings}>
+            {cards.map((el, idx) => (
+              <div className="px-1">
+                <div className="flex flex-col relative bg-[#0F1113] rounded-[14px] p-5 min-h-[202px] mr-6">
+                  <img className="w-12 h-12" src={el.img} alt="icon"/>
+                  <img src={arrowIcon} alt="arrow" className="absolute top-9 right-5"/>
+                  <span className="mt-5 mb-2 text-[20px]">{el.title}</span>
+                  <span className="text-sm opacity-60">{el.subtitle}</span>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch mt-8">
         {cards.map((el) => (
           <div className="flex flex-col relative bg-[#0F1113] rounded-[14px] p-5">
-            <img className="w-12 h-12" src={el.img} alt="icon" />
+            <img className="w-12 h-12" src={el.img} alt="icon"/>
             <img src={arrowIcon} alt="arrow" className="absolute top-9 right-5"/>
             <span className="mt-5 mb-2 text-[20px]">{el.title}</span>
             <span className="text-sm opacity-60">{el.subtitle}</span>
@@ -48,7 +88,7 @@ const HowItWorks = () => {
         ))}
       </div>
     </section>
-  )
+)
 };
 
 export default HowItWorks;

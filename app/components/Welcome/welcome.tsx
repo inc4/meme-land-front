@@ -7,7 +7,7 @@ import Rules from "~/components/Welcome/components/Rules";
 
 export function Welcome() {
   return (
-    <div className="lg:px-5 flex flex-col gap-[120px] pb-[120px]">
+    <div className="flex flex-col gap-[120px] pb-[120px]">
       <PresaleBlock />
       <HowItWorks />
       <UpcomingSales />

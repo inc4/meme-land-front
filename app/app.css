@@ -39,3 +39,21 @@ body {
   background: linear-gradient(0deg, #0F1113, #0F1113),
   linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 152, 56, 0.08) 100%);
 }
+
+.slick-dots li button:before {
+  width: 12px!important;
+  height: 12px!important;
+  background: #D9D9D9;
+  opacity: 20;
+  content: ''!important;
+  margin-top: 20px!important;
+  border-radius: 50%;
+}
+
+.slick-dots li.slick-active button:before {
+  background: #25925E;
+}
+
+.presale-link-bg {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(153, 153, 153, 0.12) 100%);
+}
