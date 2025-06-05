@@ -12,7 +12,7 @@ const Invite = () => {
         </span>
         <span className="absolute text-[#3AFFA3] text-[32px] right-5 top-5">0</span>
         <div className="text-[#3AFFA3] mt-6 font-semibold">YOUR REFERRAL CODE</div>
-        <div className="flex items-center justify-between py-[14px] px-6 bg-[#090909] border-[1px] border-[#FFFFFF21] rounded-[6px] mt-[10px]">
+        <div className="flex items-center justify-between py-[14px] px-4 bg-[#090909] border-[1px] border-[#FFFFFF21] rounded-[6px] mt-[10px]">
           <span className="font-bold text-[20px]">MemeLand/999a123</span>
           <CopyIcon />
         </div>
