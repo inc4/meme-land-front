@@ -1,14 +1,14 @@
-import type { ReactNode } from "react";
 import { Outlet } from "react-router";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout() {
   return (
-    <div className="max-w-[1334px] mx-auto">
+    <div className="flex flex-col max-w-[1334px] mx-auto">
       <Header />
-      <Outlet />
-      {children}
+      <main className="grow px-4">
+        <Outlet />
+      </main>
       <Footer/>
     </div>
   )

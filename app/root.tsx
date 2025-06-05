@@ -25,6 +25,13 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Green.meme App" },
+    { name: "description", content: "Welcome to Green.meme App!" },
+  ];
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full">
@@ -34,10 +41,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex min-h-full flex-col">
-        <main className="grow px-4">
-          {children}
-        </main>
+      <body className="min-h-full">
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
