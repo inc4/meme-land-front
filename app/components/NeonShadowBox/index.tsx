@@ -123,7 +123,9 @@ const NeonShadowBox = ({
 
       {neonShadowSrc && <img className={neonShadowStyles} src={neonShadowSrc} alt="Shadow" />}
 
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
 
     </div>
   )
