@@ -9,6 +9,8 @@ const getConfig = () => {
         NETWORK_ID: '',
         API_URL: '',
         CONTRACT_ADDRESS: '',
+        X_LINK: "https://x.com/",
+        TG_LINK: "https://web.telegram.org/",
       };
     default:
     case 'prod':
@@ -16,6 +18,8 @@ const getConfig = () => {
         NETWORK_ID: '',
         API_URL: '',
         CONTRACT_ADDRESS: '',
+        X_LINK: "https://x.com/",
+        TG_LINK: "https://web.telegram.org/",
       };
   }
 };
