@@ -41,7 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-full">
+      <body className="min-h-dvh h-dvh">
         {children}
         <ScrollRestoration />
         <Scripts />

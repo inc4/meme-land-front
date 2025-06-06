@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import clsx from "clsx";
 import greenShadowImg from "~/assets/imgs/green-shadow.png";
 import violetShadowImg from "~/assets/imgs/violet-shadow.png";
 import bronzeShadowImg from "~/assets/imgs/bronze-shadow.png";
