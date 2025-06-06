@@ -3,6 +3,8 @@ import PresaleProgress from "~/routes/pages/presale/components/PresaleProgress";
 import TokenInfo from "~/routes/pages/presale/components/TokenInfo";
 import Distribution from "~/routes/pages/presale/components/Distribution";
 import Tokenomics from "~/routes/pages/presale/components/Tokenomics";
+import TokenDescription from "~/routes/pages/presale/components/TokenDescription";
+import UpcomingSales from "~/components/Welcome/components/UpcomingSales";
 
 const Presale = () => {
   return (
@@ -14,6 +16,8 @@ const Presale = () => {
       <TokenInfo />
       <Distribution />
       <Tokenomics />
+      <TokenDescription />
+      <UpcomingSales />
     </div>
   )
 };
