@@ -13,14 +13,14 @@ const ConnectWallet = () => {
       customBorderStyles="dark-box-border!"
     >
       <div className="flex flex-col items-center justify-between gap-[32px] lg:gap-[28px]">
-        <img src={walletOutlineIcon} className="p-[16px]" alt="Wallet" />
+        <img src={walletOutlineIcon} className="p-[17px]" alt="Wallet" />
 
         <div className="flex flex-col justify-center items-center gap-[12px]">
           <span className="text-h1 font-bold text-center">Connect your Wallet</span>
-          <span className="text-h5 font-semibold">It’s Easy and Secure</span>
+          <span className="text-h5 font-semibold text-center">It’s Easy and Secure</span>
         </div>
 
-        <CustomButton customStyles="flex justify-center items-center gap-[8px] p-[12px] max-w-[201px] font-semibold">
+        <CustomButton customStyles="flex justify-center items-center gap-[8px] p-[12px] max-w-[201px] font-semibold text-body-l!">
           Connect Wallet
           <img src={walletSolidIcon} alt="Wallet" />
         </CustomButton>
