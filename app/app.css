@@ -153,7 +153,7 @@
 }
 @utility violet-box-border {
   @apply shared-styles-box-border;
-  background: linear-gradient(227.66deg, transparent 26.3%, var(--color-violet) 96.9%);
+  background: linear-gradient(182deg, transparent 26.3%, var(--color-violet) 96.9%);
 }
 @utility violet-box-border-top {
   @apply shared-styles-box-border;

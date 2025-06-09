@@ -56,7 +56,7 @@ const CustomButton = ({
         break;
       case 'icon-only':
         colors = clsx(
-          'bg-gray-700 border-gray-600 rounded-full',
+          'bg-gray-700 border-gray-600 rounded-full flex items-center justify-center',
           'hover:bg-primary-900 hover:border-primary-800',
           'disabled:bg-gray-700 disabled:border-gray-600'
         );

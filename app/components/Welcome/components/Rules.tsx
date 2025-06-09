@@ -34,16 +34,16 @@ const Rules = () => {
 
   return (
     <section>
-      <h3 className="font-bold text-[32px]">Rules</h3>
+      <h1 className="font-bold">Rules</h1>
       <div className="mt-8 lg:hidden -mx-1">
         <Slider {...sliderSettings}>
           {list.map((el, i) => (
             <div className="px-1">
-              <div className="w-[70px] h-[70px] mb-6 border-[1px] border-gray-700 text-[20px] text-[#3AFFA3] rounded-full flex items-center justify-center">
+              <div className="w-[70px] font-mono h-[70px] mb-6 border-[1px] border-gray-700 text-[20px] text-[#3AFFA3] rounded-full flex items-center justify-center">
                 0{i + 1}
               </div>
               <span className="text-2xl font-bold mb-2 block">{el.label}</span>
-              <span className="text-sm opacity-60">{el.text}</span>
+              <span className="text-body-m opacity-60 max-w-[80%] block">{el.text}</span>
             </div>
           ))}
         </Slider>
@@ -52,11 +52,11 @@ const Rules = () => {
         {list.map((el, i) => (
           <div>
             <div
-              className="w-[70px] h-[70px] mb-6 border-[1px] border-gray-700 text-[20px] text-[#3AFFA3] rounded-full flex items-center justify-center">
+              className="font-mono w-[70px] h-[70px] mb-6 border-[1px] border-gray-700 text-[20px] text-[#3AFFA3] rounded-full flex items-center justify-center">
               0{i + 1}
             </div>
             <span className="text-2xl font-bold mb-2 block">{el.label}</span>
-            <span className="text-sm opacity-60">{el.text}</span>
+            <span className="text-body-m opacity-60 max-w-[290px] block">{el.text}</span>
           </div>
         ))}
       </div>
