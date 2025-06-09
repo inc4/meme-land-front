@@ -1,9 +1,12 @@
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import CustomButton from "~/components/CustomButton";
 import walletOutlineIcon from "~/assets/svg/wallet-outline.svg";
 import walletSolidIcon from "~/assets/svg/wallet-solid.svg";
 
 const ConnectWallet = () => {
+  const { setVisible } = useWalletModal();
+
   return (
     <NeonShadowBox
       variant="green"
@@ -20,7 +23,10 @@ const ConnectWallet = () => {
           <span className="text-h5 font-semibold text-center">It’s Easy and Secure</span>
         </div>
 
-        <CustomButton customStyles="flex justify-center items-center gap-[8px] p-[12px] max-w-[201px] font-semibold text-body-l!">
+        <CustomButton
+          customStyles="flex justify-center items-center gap-[8px] p-[12px] max-w-[201px] font-semibold text-body-l!"
+          handleClick={() => setVisible(true)}
+        >
           Connect Wallet
           <img src={walletSolidIcon} alt="Wallet" />
         </CustomButton>

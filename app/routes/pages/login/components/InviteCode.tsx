@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useWallet } from "@solana/wallet-adapter-react";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import CustomButton from "~/components/CustomButton";
 import checkIcon from '~/assets/svg/check.svg';
@@ -6,7 +7,7 @@ import userAddIcon from '~/assets/svg/user-add.svg';
 import { shortenAddress } from "~/utils/other";
 
 const InviteCode = () => {
-  const walletAddress = '5ZfZAwP2m93waazg8DkrrVmsupeiPEvaEHowiUP7UAbJ';
+  const { publicKey } = useWallet();
   const done = false;
   const isValidCode = false;
 
@@ -17,7 +18,7 @@ const InviteCode = () => {
         <span className="text-h5 font-semibold">Wallet Connected:</span>
         <div className="flex justify-center items-center gap-[8px] px-[12px] py-[8px] border-[1px] rounded-[8px] bg-gray-700 border-beige-900">
           <img src={checkIcon} alt="Checkmark" />
-          <span className="text-body-l font-medium">{shortenAddress(walletAddress)}</span>
+          <span className="text-body-l font-medium">{shortenAddress(publicKey?.toString())}</span>
         </div>
       </div>
 
