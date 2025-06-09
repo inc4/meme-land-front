@@ -5,6 +5,7 @@ import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import Browse from "~/components/Icons/Browse";
+import bgFigure from "~/assets/svg/token-icon-figure.svg";
 
 const PresaleBlock = () => {
   return (
@@ -12,7 +13,7 @@ const PresaleBlock = () => {
       <div className="bg-[#0F1113] rounded-[14px] p-5">
         <div className="relative">
           <img src={beerToken} alt="token" className="w-full h-auto"/>
-          <div className="bg-[url('app/assets/svg/token-icon-figure.svg')] absolute -top-[16px] bg-contain right-4 px-[33px] pt-[11px] pb-[6px] bg-no-repeat flex gap-1 items-stretch">
+          <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[16px] bg-contain right-4 px-[33px] pt-[11px] pb-[6px] bg-no-repeat flex gap-1 items-stretch">
             <div className="text-body-s bg-[#ED4646] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center">
               live
             </div>

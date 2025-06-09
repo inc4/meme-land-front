@@ -10,7 +10,7 @@ const PresaleProgress = () => {
       customBorderStyles="violet-box-border!"
       customStyles="p-5 mt-[30px] lg:mt-[14px]"
     >
-      <div className="bg-[#0F1113] border-[1px] bg-radial-[at_50%_25%] to-[#0F1113] from-[#F24BE70D] to-100% border-[#F24BE700] rounded-[14px] mt-[30px] lg:mt-[14px] grid grid-cols-1 lg:grid-cols-[1fr_452px] lg:grid lg:gap-[68px] gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_452px] lg:grid lg:gap-[68px] gap-8">
         <div>
           <h3 className="font-semibold text-2xl mb-6">Presale progress:</h3>
           <div className="bg-[#222222] rounded-[7px] h-3 w-full">
