@@ -7,22 +7,22 @@ import jupiter from "~/assets/svg/jupiter.svg";
 const TokenInfo = () => {
   return (
     <section>
-      <h2 className="text-[32px] font-bold">Token Info</h2>
+      <h1 className="font-bold">Token Info</h1>
       <div className="grid grid-cols-1 mt-6 lg:grid-cols-2 gap-[14px]">
         <div className="p-5 bg-[#0F1113] rounded-[14px]">
           <div className="flex flex-col gap-5 border-b-[1px] border-b-[#73737320] pb-4 mb-6 lg:flex-row lg:justify-between">
-            <span className="flex items-center gap-2 font-bold text-[20px]">
+            <h3 className="flex items-center gap-2 font-bold">
               <InfoIcon/>
               Current Supply:
-            </span>
-            <span className="text-2xl font-medium">888,888,888 $BEER2</span>
+            </h3>
+            <span className="text-2xl font-medium font-mono">888,888,888 $BEER2</span>
           </div>
           <div className="flex flex-col gap-3 lg:flex-row lg:gap-5">
-            <button disabled className="presale-link-bg flex items-center justify-between text-[#3AFFA3] font-medium py-3 px-4 rounded-[10px] disabled:opacity-50">
+            <button disabled className="presale-link-bg flex items-center justify-between text-[#3AFFA3] font-medium py-3 px-4 rounded-[10px] disabled:opacity-50 gap-[10px]">
               Check on Solscan
               <ArrowIcon />
             </button>
-            <button disabled className="presale-link-bg flex items-center justify-between text-[#3AFFA3] font-medium py-3 px-4 rounded-[10px] disabled:opacity-50">
+            <button disabled className="presale-link-bg flex items-center justify-between text-[#3AFFA3] font-medium py-3 px-4 rounded-[10px] disabled:opacity-50 gap-[10px]">
               Check on Solscan
               <ArrowIcon />
             </button>
@@ -30,11 +30,11 @@ const TokenInfo = () => {
         </div>
         <div className="p-5 bg-[#0F1113] rounded-[14px]">
           <div className="flex items-center justify-between border-b-[1px] border-[#73737320] pb-4 mb-6">
-            <span className="flex items-center gap-2 font-bold text-[20px]">
+            <h3 className="flex items-center gap-2 font-bold">
               <InfoIcon/>
               Swap Token
-            </span>
-            <span className="uppercase text-sm font-semibold flex">
+            </h3>
+            <span className="uppercase text-body-m font-semibold flex">
               waiting
               <img src={clockIcon} alt="clock" className="ml-[10px]"/>
             </span>
@@ -42,14 +42,14 @@ const TokenInfo = () => {
           <div className="flex flex-col gap-3 lg:flex-row lg:gap-5">
             <button
               disabled
-              className="presale-link-bg flex items-center font-medium py-3 px-4 rounded-[10px] disabled:opacity-50"
+              className="presale-link-bg flex items-center font-medium py-3 px-4 rounded-[10px] disabled:opacity-50 gap-[10px]"
             >
-              <img src={raydium} alt="" className="mr-2"/>
+              <img src={raydium} alt=""/>
               Check on Solscan
               <ArrowIcon className="ml-auto" />
             </button>
-            <button disabled className="presale-link-bg flex items-center font-medium py-3 px-4 rounded-[10px] disabled:opacity-50">
-              <img src={jupiter} alt="" className="mr-2"/>
+            <button disabled className="presale-link-bg flex items-center font-medium py-3 px-4 rounded-[10px] disabled:opacity-50 gap-[10px]">
+              <img src={jupiter} alt=""/>
               Check on Solscan
               <ArrowIcon className="ml-auto" />
             </button>

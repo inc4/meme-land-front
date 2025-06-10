@@ -17,8 +17,8 @@ const TokenDescription = () => (
           quests, and rewards into one unforgettable, beer-powered journey. It’s not just a token — it’s a movement with
           hops.</p>
       </div>
-      <div className="#14181B p-5 rounded-[14px] bg-[#14181B] max-w-[484px] ml-auto w-full">
-        <h3 className="font-bold text-[20px] mb-[10px]">Share this project with friends</h3>
+      <div className="#14181B p-5 rounded-[14px] bg-[#14181B] lg:max-w-[484px] ml-auto w-full">
+        <h3 className="font-bold mb-[10px]">Share this project with friends</h3>
         <span className="text-[14px] font-semibold">Copy link</span>
         <div
           className="flex items-center justify-between py-[14px] px-4 bg-[#090909] border-[1px] border-[#FFFFFF21] rounded-[6px] my-2">
