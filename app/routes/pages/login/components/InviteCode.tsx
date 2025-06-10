@@ -33,6 +33,7 @@ const InviteCode = () => {
     try {
       setIsLoading(true);
 
+      // TODO: Change to the real check
       const valid = await checkInviteCode();
 
       setIsValid(valid);
