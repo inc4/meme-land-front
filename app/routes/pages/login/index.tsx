@@ -8,19 +8,6 @@ import InviteCode from "./components/InviteCode";
 const Login = () => {
   const { connecting, connected, autoConnect, wallet, disconnect } = useWallet();
 
-  // Detect manual wallet disconnection from wallet extension
-  useEffect(() => {
-    const provider = window.solana;
-
-    if (provider && disconnect) {
-      provider.on('disconnect', disconnect);
-
-      return () => {
-        provider.off('disconnect', disconnect);
-      };
-    }
-  }, [disconnect]);
-
   useEffect(() => {
     if (!wallet || !disconnect) return;
 

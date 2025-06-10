@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, useEffect, type ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 import { useWallet } from "@solana/wallet-adapter-react";
 import clsx from "clsx";
@@ -9,24 +9,18 @@ import Spinner from "~/components/Spinner";
 import checkIcon from '~/assets/svg/check.svg';
 import userAddIcon from '~/assets/svg/user-add.svg';
 
-import { shortenAddress, sleep } from "~/utils/other";
+import { shortenAddress } from "~/utils/other";
+import { checkIsVerified, checkInviteCode } from "~/utils/mockup";
 import { HOME_PAGE } from "~/utils/constants";
 
 const InviteCode = () => {
   const navigate = useNavigate();
   const { publicKey } = useWallet();
   const [isLoading, setIsLoading] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(true);
   const [isValid, setIsValid] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [inviteCode, setInviteCode] = useState('');
-
-  const checkInviteCode = async () => {
-    await sleep(1500);
-
-    const valid = true;
-
-    return valid;
-  }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     // Reset border and span styles for input if code is not valid
@@ -54,8 +48,36 @@ const InviteCode = () => {
     } finally {
       setIsLoading(false);
     }
-
   };
+
+  // Redirect to home page if wallet is verified
+  useEffect(() => {
+    if (!publicKey) {
+      setIsVerifying(false);
+      return;
+    }
+
+    (async () => {
+      try {
+        setIsVerifying(true);
+
+        // TODO: Change hardcoded value to the real check
+        const isVerified = await checkIsVerified();
+        if (isVerified) navigate(HOME_PAGE);
+
+      } catch (e) {
+        console.log(e, 'Wallet verification error')
+      } finally {
+        setIsVerifying(false);
+      }
+    })()
+  }, [publicKey]);
+
+  if (isVerifying) {
+    return (
+      <Spinner wrapperStyles="fixed inset-0 flex justify-center items-center w-full h-dvh bg-background" />
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-[36px] h-full pt-[32px] pb-[55px]">
