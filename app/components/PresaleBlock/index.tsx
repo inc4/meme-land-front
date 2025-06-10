@@ -6,6 +6,8 @@ import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import Browse from "~/components/Icons/Browse";
 import bgFigure from "~/assets/svg/token-icon-figure.svg";
+import Modal from "~/components/Modal";
+import CustomInput from "~/components/CustomInput";
 
 const PresaleBlock = () => {
   return (
@@ -80,6 +82,17 @@ const PresaleBlock = () => {
           PARTICIPATE NOW
         </button>
       </div>
+      <Modal isOpen={false} onClose={() => {}}>
+        <div>
+          <span className="text-2xl font-semibold block w-full text-center">Invest in Presale</span>
+          <div className="flex flex-col gap-[10px] my-8">
+            <CustomInput label="You Invest" value="1" tokenName="SOL" />
+            <CustomInput label="Your chance to get" value="13,242" tokenName="$BEER2" />
+          </div>
+          <CustomButton customStyles="!text-body-l">Enter to Presale</CustomButton>
+          <CustomButton variant="linear" customStyles="!text-body-l !border-[1px] !border-[#697586] mt-3">Cancel</CustomButton>
+        </div>
+      </Modal>
     </div>
   );
 };

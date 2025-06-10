@@ -40,9 +40,9 @@
   }
 
   html, body {
-    @apply 
+    @apply
       bg-white dark:bg-background font-display
-      text-body-s md:text-body-m lg:text-body-l;
+      text-body-l;
 
     @media (prefers-color-scheme: dark) {
       color-scheme: dark;
@@ -263,4 +263,8 @@
   font-weight: 500;
   display: block;
   margin-bottom: 12px;
+}
+
+.white-shadow {
+  box-shadow: 0px 1px 36px 0px #FFFFFF57;
 }
