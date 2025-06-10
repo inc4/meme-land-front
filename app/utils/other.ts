@@ -9,3 +9,5 @@ export const shortenAddress = (
 
   return `${address.slice(0, leftSlice)}...${address.slice(-rightSlice)}`;
 };
+
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
