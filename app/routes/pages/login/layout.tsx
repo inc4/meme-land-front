@@ -13,7 +13,7 @@ const { X_LINK, TG_LINK } = getConfig();
 const LoginLayout = () => {
   return (
     <div className={clsx(
-      "flex flex-col justify-between h-full overflow-scroll",
+      "flex flex-col justify-between min-h-dvh h-full",
       "pt-[45px] pb-[28px] px-[16px] bg-gray-900",
       "lg:pt-[85px] lg:pb-[60px] lg:px-[40px]"
     )}>
@@ -22,9 +22,7 @@ const LoginLayout = () => {
         <img className="m-auto" src={logoIcon} alt="Logo" />
       </header>
 
-      <div className="grow">
-        <Outlet />
-      </div>
+      <Outlet />
 
       <footer className="flex items-center justify-center gap-[8px]">
 

@@ -29,7 +29,7 @@ const Login = () => {
   }, [wallet, disconnect])
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="grow flex justify-center items-center">
       {connecting ? (
         <ConnectionPending />
       ) : connected || (autoConnect && wallet) ? (
