@@ -13,7 +13,8 @@ const { X_LINK, TG_LINK } = getConfig();
 const LoginLayout = () => {
   return (
     <div className={clsx(
-      "flex flex-col justify-between h-full pt-[45px] pb-[28px] px-[16px] bg-gray-900",
+      "flex flex-col justify-between h-full overflow-scroll",
+      "pt-[45px] pb-[28px] px-[16px] bg-gray-900",
       "lg:pt-[85px] lg:pb-[60px] lg:px-[40px]"
     )}>
 
@@ -25,7 +26,7 @@ const LoginLayout = () => {
         <Outlet />
       </div>
 
-      <footer className="flex items-center gap-[8px] m-auto">
+      <footer className="flex items-center justify-center gap-[8px]">
 
         <Link
           to={PRIVACY_NOTICE_PAGE}

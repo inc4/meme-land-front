@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import SolanaProvider from "~/components/SolanaProvider";
+import RouteGuard from "~/components/RouteGuard";
 import type { Route } from "./+types/root";
 import "./app.css";
 import 'slick-carousel/slick/slick.css';
@@ -34,14 +36,14 @@ export function meta({}: Route.MetaArgs) {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="min-h-dvh h-dvh">
+      <body className="h-dvh">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -51,7 +53,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <SolanaProvider>
+      <RouteGuard>
+        <Outlet />
+      </RouteGuard>
+    </SolanaProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

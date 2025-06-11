@@ -1,4 +1,5 @@
 import type { TEnv } from "~/types";
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 
 const getConfig = () => {
   const env: TEnv = import.meta.env.VITE_APP_ENV || 'prod';
@@ -6,7 +7,7 @@ const getConfig = () => {
   switch (env) {
     case 'dev':
       return {
-        NETWORK_ID: '',
+        NETWORK_ID: WalletAdapterNetwork.Devnet,
         API_URL: '',
         CONTRACT_ADDRESS: '',
         X_LINK: "https://x.com/",
@@ -15,7 +16,7 @@ const getConfig = () => {
     default:
     case 'prod':
       return {
-        NETWORK_ID: '',
+        NETWORK_ID: WalletAdapterNetwork.Mainnet,
         API_URL: '',
         CONTRACT_ADDRESS: '',
         X_LINK: "https://x.com/",
