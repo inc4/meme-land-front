@@ -268,3 +268,35 @@
 .white-shadow {
   box-shadow: 0px 1px 36px 0px #FFFFFF57;
 }
+
+.static-page {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding-bottom: 94px;
+}
+
+.static-page p, .static-page li {
+  font-size: 20px;
+  opacity: 80%;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.static-page h1 {
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.static-page li {
+  list-style: disc;
+  padding-left: 10px;
+  margin-left: 30px;
+}
+
+.static-page h3 {
+  font-size: 20px;
+  opacity: 80;
+  display: block;
+  font-weight: 700;
+}

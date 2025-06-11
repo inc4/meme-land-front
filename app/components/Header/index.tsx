@@ -27,7 +27,7 @@ export default function Header() {
       )}
       <header className="z-50">
         <nav aria-label="Global"
-             className={clsx("mx-auto flex max-w-7xl items-center bg-background py-5 px-3 lg:px-8 border-[1px] border-transparent z-20 relative", mobileMenuOpen && 'header-border')}>
+             className={clsx("mx-auto flex max-w-7xl items-center bg-background py-5 px-3 lg:px-0 border-[1px] border-transparent z-20 relative", mobileMenuOpen && 'header-border')}>
           <div className="flex lg:flex-1 mr-auto">
             <a href="#" className="-m-1.5 p-1.5">
               <img
