@@ -1,13 +1,42 @@
-
+import { useEffect } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletReadyState } from "@solana/wallet-adapter-base";
 import ConnectionPending from "./components/ConnectionPending";
 import ConnectWallet from "./components/ConnectWallet";
+import InviteCode from "./components/InviteCode";
 
 const Login = () => {
-  const isLoading = false;
+  const { connecting, connected, autoConnect, wallet, disconnect } = useWallet();
+
+  useEffect(() => {
+    if (!wallet || !disconnect) return;
+
+    const { readyState, adapter } = wallet;
+
+    // Manually trigger disconnect() if wallet is not installed
+    if (readyState === WalletReadyState.NotDetected) {
+      window.open(adapter.url);
+      disconnect();
+      return;
+    }
+
+    // Manually trigger disconnect() if wallet is unsupported
+    if (readyState === WalletReadyState.Unsupported) {
+      alert('Unsupported wallet');
+      disconnect();
+      return;
+    }
+  }, [wallet, disconnect])
 
   return (
-    <div className="flex justify-center items-center h-full">
-      {isLoading ? <ConnectionPending /> : <ConnectWallet />}
+    <div className="grow flex justify-center items-center">
+      {connecting ? (
+        <ConnectionPending />
+      ) : connected || (autoConnect && wallet) ? (
+        <InviteCode />
+      ) : (
+        <ConnectWallet />
+      )}
     </div>
   );
 };
