@@ -1,0 +1,82 @@
+name: Deploy to Amplify
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: eu-central-1
+  APP_ID: d2ukxy5u2yj4wt
+  BRANCH_NAME: ${{ github.ref_name }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Start Amplify job
+        id: amplify_start
+        run: |
+          JOB_ID=$(aws amplify start-job \
+            --app-id $APP_ID \
+            --branch-name $BRANCH_NAME \
+            --job-type RELEASE \
+            --query 'jobSummary.jobId' \
+            --output text)
+
+          echo "Started job: $JOB_ID"
+          echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
+
+      - name: Wait for Amplify job to finish
+        run: |
+          while [[ "$(aws amplify get-job \
+            --app-id $APP_ID \
+            --branch-name $BRANCH_NAME \
+            --job-id $JOB_ID \
+            | jq -r '.job.summary.status')" =~ ^(PENDING|RUNNING)$ ]]; do
+              echo "Job is still running..."
+              sleep 5
+          done
+
+          JOB_STATUS=$(aws amplify get-job \
+            --app-id $APP_ID \
+            --branch-name $BRANCH_NAME \
+            --job-id $JOB_ID \
+            | jq -r '.job.summary.status')
+
+          echo "Job finished"
+          echo "Job status is $JOB_STATUS"
+          echo "JOB_STATUS=$JOB_STATUS" >> $GITHUB_ENV
+
+      - name: Get build logs
+        run: |
+          logs_urls=$(aws amplify get-job \
+            --app-id $APP_ID \
+            --branch-name $BRANCH_NAME \
+            --job-id $JOB_ID \
+            --query 'job.steps[*].logUrl' \
+            | jq -r '.[]')
+
+          for url in $logs_urls; do
+            step_name=$(echo $url | awk -F '/' '{print $(NF-1)}')
+            echo "Logs for step $step_name:"
+            logs=$(curl -s "$url")
+            echo "$logs"
+            printf "\n"
+          done
+
+          if [ "$JOB_STATUS" != "SUCCEED" ]; then
+            echo "Amplify job failed with status: $JOB_STATUS"
+            exit 1
+          fi
