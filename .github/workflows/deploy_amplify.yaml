@@ -25,17 +25,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Start Amplify job
+      - name: Get amplify job id
         id: amplify_start
         run: |
-          JOB_ID=$(aws amplify start-job \
-            --app-id $APP_ID \
-            --branch-name $BRANCH_NAME \
-            --job-type RELEASE \
-            --query 'jobSummary.jobId' \
-            --output text)
+          JOB_ID=$(aws amplify list-jobs --app-id $APP_ID --branch-name $BRANCH_NAME --output json | \
+          jq -r --arg hash "$GITHUB_SHA" '.jobSummaries | map(select(.commitId == $hash)) | .[0] | .jobId')
 
-          echo "Started job: $JOB_ID"
+          echo "Found job: $JOB_ID"
           echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
 
       - name: Wait for Amplify job to finish
