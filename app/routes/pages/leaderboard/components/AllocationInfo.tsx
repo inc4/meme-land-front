@@ -9,7 +9,7 @@ const AllocationInfo = () => {
       variant="green"
       primaryShadowPosition="top"
       secondaryShadowPosition="inner"
-      customStyles="p-[12px] pt-[71px]"
+      customStyles="p-[12px] pt-[38px] lg:pt-[71px]"
     >
       <div>
 
@@ -20,13 +20,13 @@ const AllocationInfo = () => {
 
         <CustomButton
           variant="white"
-          customStyles="block max-w-[128px] w-full m-auto mb-[43px] shadow-none"
+          customStyles="block max-w-[128px] w-full m-auto mb-[36px] shadow-none text-body-l! lg:mb-[43px]"
         >
           Claim
         </CustomButton>
 
         <div className={clsx(
-          "flex justify-between items-center gap-[10px] w-full px-[22px] py-[24px]",
+          "flex justify-between items-center w-full px-[18px] py-[20px] lg:py-[24px]",
           "bg-black border-[2px] border-gray-700 rounded-[8px]"
         )}>
           <div className="flex flex-col gap-[8px]">

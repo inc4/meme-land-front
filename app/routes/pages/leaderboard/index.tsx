@@ -16,27 +16,27 @@ const Leaderboard = () => {
         <Title isLive={isLive} />
       </div>
 
-      <div className="grid grid-cols-3 grid-rows-[1fr,127px] gap-[12px] mb-[64px]">
-        <div className="[grid-area:1/1/3/2]">
+      <div className="grid grid-cols-1 gap-[12px] mb-[64px] lg:grid-cols-3 lg:grid-rows-[1fr,127px]">
+        <div className="lg:[grid-area:1/1/3/2]">
           <TokenInfo />
         </div>
 
-        <div className="[grid-area:1/2/2/3]">
+        <div className="lg:[grid-area:1/2/2/3]">
           <WalletInfo />
         </div>
 
-        <div className="[grid-area:2/2/3/3]">
+        <div className="lg:[grid-area:2/2/3/3]">
           <DrawSpeed />
         </div>
 
-        <div className="[grid-area:1/3/3/4]">
+        <div className="lg:[grid-area:1/3/3/4]">
           <AllocationInfo />
         </div>
       </div>
 
-      <div className="pb-[120px]">
-        <h2 className="mb-[32px] text-center text-white font-bold">Real-time results:</h2>
-        <div className="grid grid-cols-3 gap-[12px] mb-[64px]">
+      <div className="pb-[88px] lg:pb-[120px]">
+        <h2 className="mb-[24px] text-center text-white font-bold lg:mb-[32px]">Real-time results:</h2>
+        <div className="grid grid-cols-1 gap-[12px] mb-[64px] lg:grid-cols-3">
           <TopWallet variant="gold" />
           <TopWallet variant="silver" />
           <TopWallet variant="bronze" />

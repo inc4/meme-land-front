@@ -3,7 +3,7 @@ import beerTokenLogo from "~/assets/imgs/beercoin-logo.png";
 
 const TokenInfo = () => {
   return (
-    <div className="p-[12px] pb-[36px] bg-background border-[2px] border-gray-700 rounded-[12px]">
+    <div className="p-[12px] bg-background border-[2px] border-gray-700 rounded-[12px] lg:pb-[36px]">
       <div className="flex justify-between items-start gap-[10px] mb-[24px]">
         <div className="flex flex-col gap-[4px]">
           <span className="text-h3 text-white font-bold">Beercoin2.0</span>
@@ -27,7 +27,7 @@ const TokenInfo = () => {
 
       <div className="flex flex-col items-center gap-[12px]">
         <span className="text-h3 font-bold text-white">Time since draw start: </span>
-        <Countdown />
+        <Countdown timeSectionStyles="w-[70px]! lg:w-[64px]!" />
       </div>
 
     </div>
