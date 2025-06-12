@@ -13,6 +13,7 @@
   --color-bronze: #F89F3F;
   --color-silver-transparent: #9797974D;
   --color-silver: #979797;
+  --color-night: #252B30;
   --color-gold-transparent: #FCD10D1C;
   --color-gold: #FCD10D;
   --color-gray-900: #0C0C0C;
@@ -25,10 +26,12 @@
   --color-gray-100: #FFFFFF;
   --color-white-transparent: #FFFFFF0D;
   --color-beige-900: #272420;
+  --color-beige-800: #0F1113;
   --color-beige-600: #909090;
   --color-beige-100: #E5E1D2;
   --color-error-900: #ED4646;
   --color-error-800: #E25A57;
+  --color-red: #FF0000;
   --color-background: #080808;
 }
 
