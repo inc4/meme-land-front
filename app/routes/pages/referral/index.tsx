@@ -5,16 +5,16 @@ import arrowIcon from "~/assets/svg/arrow-long.svg";
 
 const Referral = () => {
   return (
-    <div className="pt-[52px] pb-16">
+    <div className="pt-[52px] pb-16 flex flex-col items-center">
       <h1 className="font-bold mb-4 text-center block">Invite Friends</h1>
-      <span className="font-semibold text-[18px] text-center opacity-60 block">
+      <span className="font-semibold text-[18px] text-center opacity-60 block max-w-[444px]">
         Contribute together! Boost your chances to secure an allocation and earn higher allocations.
       </span>
       <NeonShadowBox
         variant="green"
         primaryShadowPosition="top"
         secondaryShadowPosition="outer"
-        customStyles="!border-[#3AFFA3] border-[1px] p-6 mt-8 mb-3"
+        customStyles="!border-[#3AFFA3] border-[1px] p-6 mt-8 mb-3 max-w-[444px] w-full"
       >
         <div>
           <span className="text-[#3AFFA3] text-body-m font-semibold">YOUR REFERRAL CODE</span>
@@ -24,7 +24,7 @@ const Referral = () => {
           </div>
         </div>
       </NeonShadowBox>
-      <div className="bg-[#0F1113] rounded-[14px] p-6 flex flex-col mt-7 mb-16">
+      <div className="bg-[#0F1113] rounded-[14px] p-6 flex flex-col mb-16 max-w-[444px] w-full">
         <span className="text-h3 text-[#3AFFA3] flex items-center font-bold mb-7">
           <img src={paymentIcon} alt="payment" className="mr-[10px]"/>
           Earnings Overview
@@ -50,7 +50,7 @@ const Referral = () => {
       <h2 className="font-bold text-center max-w-[284px] mb-6">How Referral System Works?</h2>
       <div className="flex flex-col gap-3 px-6 lg:px-0 lg:grid lg:grid-cols-5">
         <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0"/>
+          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
           <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             01
           </div>
@@ -65,8 +65,9 @@ const Referral = () => {
           </button>
         </div>
         <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] flex flex-col">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0"/>
-          <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
+          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
+          <div
+            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             02
           </div>
           <span className="text-[20px] font-bold">
@@ -80,8 +81,9 @@ const Referral = () => {
           </button>
         </div>
         <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0"/>
-          <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
+          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
+          <div
+            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             03
           </div>
           <span className="text-[20px] font-bold">
@@ -89,8 +91,9 @@ const Referral = () => {
           </span>
         </div>
         <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0"/>
-          <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
+          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
+          <div
+            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             04
           </div>
           <span className="text-[20px] font-bold">
@@ -98,8 +101,9 @@ const Referral = () => {
           </span>
         </div>
         <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0"/>
-          <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
+          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
+          <div
+            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             05
           </div>
           <span className="text-[20px] font-bold">

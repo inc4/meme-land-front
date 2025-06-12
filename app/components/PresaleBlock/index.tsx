@@ -56,19 +56,19 @@ const PresaleBlock = () => {
           className="py-9 px-5 rounded-[14px] bg-[#] flex flex-col gap-4 mb-3 bg-radial-[at_50%_25%] to-[#0F1113] from-[#3AFFA31C] to-50%">
           <div className="text-lg flex justify-between items-center">
             <span className="font-semibold lg:font-bold text-h4">Presale price</span>
-            <span className="text-h4 font-medium font-mono lg:text-2xl">$ 1.00</span>
+            <span className="font-medium font-mono">$ 1.00</span>
           </div>
           <div className="text-lg flex justify-between items-center">
             <span className="font-semibold lg:font-bold text-h4">Listing Multiplier</span>
-            <span className="text-h4 font-medium text-[#9D85FF] font-mono lg:text-2xl">X3.1</span>
+            <span className="font-medium text-[#9D85FF] font-mono ">X3.1</span>
           </div>
           <div className="text-lg flex justify-between items-center">
             <span className="font-semibold lg:font-bold text-h4">Listing price</span>
-            <span className="text-h4 font-medium text-[#12F287] font-mono lg:text-2xl">$ 3.1</span>
+            <span className="font-medium text-[#12F287] font-mono">$ 3.1</span>
           </div>
           <div className="text-lg flex justify-between items-center">
             <span className="font-semibold lg:font-bold text-h4">Profit Chance</span>
-            <span className="text-h4 font-medium text-[#FFA544] font-mono lg:text-2xl">45.5%</span>
+            <span className="font-medium text-[#FFA544] font-mono">45.5%</span>
           </div>
         </div>
         <div className="py-5 rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3">
