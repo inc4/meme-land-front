@@ -1,3 +1,5 @@
+import {clusterApiUrl, Connection} from "@solana/web3.js";
+
 export const ROOT_PAGE = '/';
 
 export const PRESALE_PAGE_SEGMENT = 'tokenId';
@@ -10,3 +12,5 @@ export const PRIVACY_NOTICE_PAGE = '/privacy-notice';
 export const TERMS_OF_USE_PAGE = '/terms-of-use';
 export const FEES_PAGE = '/fees';
 export const RULES_PAGE = '/rules';
+
+export const connection = new Connection(clusterApiUrl('devnet'));

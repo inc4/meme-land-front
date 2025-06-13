@@ -278,6 +278,7 @@ body {
   flex-direction: column;
   gap: 36px;
   padding-bottom: 94px;
+  padding-top: 27px;
 }
 
 .static-page p, .static-page li {
