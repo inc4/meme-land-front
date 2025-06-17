@@ -35,6 +35,11 @@
   --color-background: #080808;
 }
 
+body {
+  background: #080808;
+  color: white;
+}
+
 @layer base {
   *,
   ::after,
@@ -46,10 +51,6 @@
     @apply
       bg-white dark:bg-background font-display
       text-body-l;
-
-    @media (prefers-color-scheme: dark) {
-      color-scheme: dark;
-    }
   }
 
   h1 {
@@ -277,6 +278,7 @@
   flex-direction: column;
   gap: 36px;
   padding-bottom: 94px;
+  padding-top: 27px;
 }
 
 .static-page p, .static-page li {

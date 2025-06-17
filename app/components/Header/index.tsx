@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import Hamburger from "~/components/Icons/Hamburger";
 import Logo from "~/assets/imgs/header-logo.png";
@@ -9,16 +9,38 @@ import MenuClose from "~/components/Icons/MenuClose.tsx";
 import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
+import {shortenAddress} from "~/utils/other";
+import fetchSolBalance from "~/utils/fetchSolBalance";
+import {NavLink} from "react-router";
+import {REFERRAL_PAGE, RULES_PAGE} from "~/utils/constants";
 
 const navigation = [
   { name: 'Memepad', href: '#' },
-  { name: 'Rules', href: '#' },
-  { name: 'Referral', href: '#' },
+  { name: 'Rules', href: RULES_PAGE },
+  { name: 'Referral', href: REFERRAL_PAGE },
   { name: 'About', href: '#' },
 ]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [userAddress, setUserAddress] = useState('');
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    getAddress()
+  }, []);
+
+  useEffect(() => {
+    if (userAddress) {
+      fetchSolBalance(userAddress)
+        .then((bal) => setBalance(balance))
+    }
+  }, [userAddress]);
+
+  const getAddress = async () => {
+    const resp = await window.solana.connect(); // triggers the Phantom popup
+    return setUserAddress(resp.publicKey.toString());
+  };
 
   return (
     <>
@@ -27,7 +49,7 @@ export default function Header() {
       )}
       <header className="z-50">
         <nav aria-label="Global"
-             className={clsx("mx-auto flex max-w-7xl items-center bg-background py-5 px-3 lg:px-0 border-[1px] border-transparent z-20 relative", mobileMenuOpen && 'header-border')}>
+             className={clsx("mx-auto flex w-full items-center bg-background py-5 px-3 lg:px-0 border-[1px] border-transparent z-20 relative", mobileMenuOpen && 'header-border')}>
           <div className="flex lg:flex-1 mr-auto">
             <a href="#" className="-m-1.5 p-1.5">
               <img
@@ -39,14 +61,16 @@ export default function Header() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-h5 lg:text-body-l font-semibold text-white">
+              <NavLink key={item.name} to={item.href} className="text-h5 lg:text-body-l font-semibold text-white">
                 {item.name}
-              </a>
+              </NavLink>
             ))}
           </div>
           <div className="py-2 px-3 rounded-lg flex gap-2 items-center bg-neutral-900 border-[1px] border-[#272420] lg:ml-10 mr-2">
-            <span className="border-r-[1px] border-[#D9D9D920] pr-2 hidden lg:block font-mono text-body-l">J6j3...u2pSXRe</span>
-            <span className="font-mono">29 SOL</span>
+            <span className="border-r-[1px] border-[#D9D9D920] pr-2 hidden lg:block font-mono text-body-l">
+              {shortenAddress(userAddress)}
+            </span>
+            <span className="font-mono">{balance} SOL</span>
             <img src={balanceIcon} alt="sol"/>
           </div>
           <div className="flex lg:hidden">
