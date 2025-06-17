@@ -4,7 +4,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 
 import Spinner from '../Spinner';
 import { checkIsVerified } from '~/utils/mockup';
-import { ROOT_PAGE } from '~/utils/constants';
+import { CONNECT_PAGE } from '~/utils/constants';
 
 const RouteGuard = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
 
-  const publicRoutes = [ROOT_PAGE];
+  const publicRoutes = [CONNECT_PAGE];
 
   const isPublicRoute = (path: string) => {
     return !!publicRoutes.find((r) => r === path);
@@ -67,7 +67,7 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
   }
 
   if (!isVerified && !isPublicRoute(pathname)) {
-    navigate(ROOT_PAGE, { replace: true });
+    navigate(CONNECT_PAGE, { replace: true });
     return;
   }
 
