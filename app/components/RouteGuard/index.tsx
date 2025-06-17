@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useWallet } from '@solana/wallet-adapter-react';
 
 import Spinner from '../Spinner';
-import { checkIsVerified } from '~/utils/mockup';
+import { checkIsVerified } from "~/utils/request";
 import { CONNECT_PAGE } from '~/utils/constants';
 
 const RouteGuard = ({ children }: { children: ReactNode }) => {
@@ -44,21 +44,17 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
       return;
     }
 
+    if (!publicKey || isVerified) return;
+
     (async () => {
-      try {
-        setIsLoading(true);
+      setIsLoading(true);
 
-        // TODO: Change hardcoded value to the real check
-        const verified = await checkIsVerified();
-        setIsVerified(verified);
+      const verified = await checkIsVerified(publicKey.toString());
+      setIsVerified(verified);
 
-      } catch (e) {
-        console.log(e, "Wallet verification error");
-      } finally {
-        setIsLoading(false);
-      }
+      setIsLoading(false);
     })()
-  }, [publicKey, autoConnect]);
+  }, [publicKey, autoConnect, pathname, isVerified]);
 
   if (isLoading) {
     return (

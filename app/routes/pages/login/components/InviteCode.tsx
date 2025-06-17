@@ -10,7 +10,7 @@ import checkIcon from '~/assets/svg/check.svg';
 import userAddIcon from '~/assets/svg/user-add.svg';
 
 import { shortenAddress } from "~/utils/other";
-import { checkIsVerified, checkInviteCode } from "~/utils/mockup";
+import { checkIsVerified, checkInviteCode } from "~/utils/request";
 import { HOME_PAGE } from "~/utils/constants";
 
 const InviteCode = () => {
@@ -30,11 +30,12 @@ const InviteCode = () => {
   }
 
   const handleApplyCode = async () => {
+    if (!publicKey) return;
+
     try {
       setIsLoading(true);
 
-      // TODO: Change to the real check
-      const valid = await checkInviteCode();
+      const valid = await checkInviteCode(publicKey.toString(), inviteCode);
 
       setIsValid(valid);
       setIsDone(true);
@@ -59,18 +60,12 @@ const InviteCode = () => {
     }
 
     (async () => {
-      try {
-        setIsVerifying(true);
+      setIsVerifying(true);
 
-        // TODO: Change hardcoded value to the real check
-        const isVerified = await checkIsVerified();
-        if (isVerified) navigate(HOME_PAGE);
+      const isVerified = await checkIsVerified(publicKey.toString());
+      if (isVerified) navigate(HOME_PAGE);
 
-      } catch (e) {
-        console.log(e, 'Wallet verification error')
-      } finally {
-        setIsVerifying(false);
-      }
+      setIsVerifying(false);
     })()
   }, [publicKey]);
 
