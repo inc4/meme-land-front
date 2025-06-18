@@ -1,9 +1,9 @@
 import getConfig from "~/config";
-import type { TPostWalletsBody } from "~/types";
+import type { TGetWalletsResponse, TPostWalletsBody } from "~/types";
 
 const { API_URL } = getConfig();
 
-export const checkIsVerified = async (publicKey: string) => {
+export const getWalletByAddress = async (publicKey: string) => {
   try {
     const response = await fetch(`${API_URL}/wallets/${publicKey}`, {
       headers: {
@@ -12,15 +12,15 @@ export const checkIsVerified = async (publicKey: string) => {
       }
     })
 
-    if (!response.ok) return false;
+    if (!response.ok) return null;
 
-    const wallet = await response.json();
+    const wallet: TGetWalletsResponse = await response.json();
 
-    return !!wallet;
+    return wallet;
 
   } catch (e) {
     console.log(e, "Wallet verification error");
-    return false;
+    return null;
   }
 };
 

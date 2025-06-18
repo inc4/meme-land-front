@@ -10,7 +10,7 @@ import checkIcon from '~/assets/svg/check.svg';
 import userAddIcon from '~/assets/svg/user-add.svg';
 
 import { shortenAddress } from "~/utils/other";
-import { checkIsVerified, checkInviteCode } from "~/utils/request";
+import { getWalletByAddress, checkInviteCode } from "~/utils/request";
 import { HOME_PAGE } from "~/utils/constants";
 
 const InviteCode = () => {
@@ -62,8 +62,8 @@ const InviteCode = () => {
     (async () => {
       setIsVerifying(true);
 
-      const isVerified = await checkIsVerified(publicKey.toString());
-      if (isVerified) navigate(HOME_PAGE);
+      const wallet = await getWalletByAddress(publicKey.toString());
+      if (wallet) navigate(HOME_PAGE);
 
       setIsVerifying(false);
     })()
