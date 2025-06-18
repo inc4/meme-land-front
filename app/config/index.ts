@@ -8,7 +8,7 @@ const getConfig = () => {
     case 'dev':
       return {
         NETWORK_ID: WalletAdapterNetwork.Devnet,
-        API_URL: 'http://ec2-35-158-146-88.eu-central-1.compute.amazonaws.com/api/1.0.0',
+        API_URL: 'https://ec2-35-158-146-88.eu-central-1.compute.amazonaws.com/api/1.0.0',
         CONTRACT_ADDRESS: '',
         X_LINK: "https://x.com/",
         TG_LINK: "https://web.telegram.org/",
