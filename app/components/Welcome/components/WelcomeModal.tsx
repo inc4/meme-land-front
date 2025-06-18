@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useCopyToClipboard } from "react-use";
 
 import Modal from "~/components/Modal";
 import CustomButton from "~/components/CustomButton";
@@ -10,25 +9,29 @@ import giftIcon from "~/assets/svg/gift.svg";
 import checkIcon from '~/assets/svg/check.svg';
 
 import { getLocalStorage, setLocalStorage } from "~/utils/localStorage";
-import { isAppVisitedKey } from "~/utils/constants";
 import { getWalletByAddress } from "~/utils/request";
 import useCopy from "~/hooks/useCopy";
 
 const WelcomeModal = () => {
   const { publicKey } = useWallet();
-  const [isAppVisited, setIsAppVisited] = useState(!!getLocalStorage(isAppVisitedKey));
+  const [isOpen, setIsOpen] = useState(false);
   const [inviteCode, setInviteCode] = useState('');
   const { isCopied, copy } = useCopy();
 
   const handleStartExploring = () => {
-    setLocalStorage(isAppVisitedKey, true);
-    setIsAppVisited(true);
+    if (!publicKey || !inviteCode) return;
+
+    setLocalStorage(publicKey.toString(), inviteCode);
+    setIsOpen(false);
   };
 
   const handleCopy = () => copy(inviteCode);
 
   useEffect(() => {
     if (!publicKey) return;
+
+    // Check if the user with the current wallet has visited the app before
+    setIsOpen(!getLocalStorage(publicKey.toString()));
 
     (async () => {
       const wallet = await getWalletByAddress(publicKey.toString());
@@ -37,7 +40,7 @@ const WelcomeModal = () => {
   }, [publicKey]);
 
   return (
-    <Modal isOpen={!isAppVisited} onClose={() => {}}>
+    <Modal isOpen={isOpen} onClose={() => {}}>
       <div>
         <div className="flex items-center justify-center p-[17px] mb-[32px]">
           <div className="absolute w-[30px] h-[30px] bg-primary blur-[30px]" />
@@ -83,6 +86,7 @@ const WelcomeModal = () => {
         <CustomButton
           variant="default"
           handleClick={handleStartExploring}
+          disabled={!publicKey || !inviteCode}
           customStyles="text-body-l!"
         >
           Start Exploring

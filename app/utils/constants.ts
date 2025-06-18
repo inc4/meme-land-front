@@ -11,6 +11,4 @@ export const TERMS_OF_USE_PAGE = '/terms-of-use';
 export const FEES_PAGE = '/fees';
 export const RULES_PAGE = '/rules';
 
-export const isAppVisitedKey = 'isAppVisited';
-
 export const connection = new Connection(clusterApiUrl('devnet'));
