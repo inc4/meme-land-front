@@ -8,7 +8,7 @@ const getConfig = () => {
     case 'dev':
       return {
         NETWORK_ID: WalletAdapterNetwork.Devnet,
-        API_URL: 'https://memeland-backend.inc4.net',
+        API_URL: 'https://memeland-backend.inc4.net/api/1.0.0',
         CONTRACT_ADDRESS: '',
         X_LINK: "https://x.com/",
         TG_LINK: "https://web.telegram.org/",
