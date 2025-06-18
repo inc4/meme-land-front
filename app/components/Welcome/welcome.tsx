@@ -1,3 +1,4 @@
+import WelcomeModal from "./components/WelcomeModal";
 import PresaleBlock from "~/components/PresaleBlock";
 import HowItWorks from "~/components/Welcome/components/HowItWorks";
 import UpcomingSales from "~/components/Welcome/components/UpcomingSales";
@@ -8,6 +9,7 @@ import Rules from "~/components/Welcome/components/Rules";
 export function Welcome() {
   return (
     <div className="flex flex-col gap-16 lg:gap-[120px] pb-[120px]">
+      <WelcomeModal />
       <PresaleBlock />
       <HowItWorks />
       <UpcomingSales />
