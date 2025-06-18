@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useWallet } from '@solana/wallet-adapter-react';
 
 import Spinner from '../Spinner';
-import { checkIsVerified } from "~/utils/request";
+import { getWalletByAddress } from "~/utils/request";
 import { CONNECT_PAGE } from '~/utils/constants';
 
 const RouteGuard = ({ children }: { children: ReactNode }) => {
@@ -49,8 +49,8 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
     (async () => {
       setIsLoading(true);
 
-      const verified = await checkIsVerified(publicKey.toString());
-      setIsVerified(verified);
+      const wallet = await getWalletByAddress(publicKey.toString());
+      setIsVerified(!!wallet);
 
       setIsLoading(false);
     })()
