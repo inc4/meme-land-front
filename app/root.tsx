@@ -6,7 +6,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
 import SolanaProvider from "~/components/SolanaProvider";
 import RouteGuard from "~/components/RouteGuard";
 import type { Route } from "./+types/root";
