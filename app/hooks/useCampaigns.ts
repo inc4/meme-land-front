@@ -9,7 +9,7 @@ const useCampaigns = (conditions?: Partial<TCampaign>) => {
   const { publicKey } = useWallet();
   const params = encodeURIComponent(JSON.stringify(conditions));
   const fetcher = async () => {
-    const response = await fetch(`${API_URL}/campaigns?${params}`, {
+    const response = await fetch(`${API_URL}/campaigns${conditions ? '?conditions=' + params : ''}`, {
       method: 'GET',
       headers: {
         accept: 'application/json',

@@ -10,10 +10,12 @@ import Modal from "~/components/Modal";
 import CustomInput from "~/components/CustomInput";
 import {useState} from "react";
 import ParticipateModal from "~/components/PresaleBlock/ParticipateModal";
+import useCampaigns from "~/hooks/useCampaigns";
 
-const PresaleBlock = ({isLoading}: {isLoading: boolean}) => {
+const PresaleBlock = () => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
-
+  const {data, isLoading} = useCampaigns({currentStatus: 'waiting'});
+  console.log(data);
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_472px] lg:grid gap-[14px]">
       {isLoading ? (
