@@ -1,32 +1,40 @@
 import useSWR from "swr";
 import getConfig from "~/config";
-import {useWallet} from "@solana/wallet-adapter-react";
-import type {TCampaign, TCampaignResponse} from "~/types";
+import { useWallet } from "@solana/wallet-adapter-react";
+import type { TCampaign, TCampaignResponse } from "~/types";
 
 const { API_URL } = getConfig();
 
-const useCampaigns = (conditions?: Partial<TCampaign>) => {
+const useCampaigns = (conditions?: Partial<TCampaign>, limit = 10, page=0) => {
   const { publicKey } = useWallet();
-  const params = encodeURIComponent(JSON.stringify(conditions));
+
+  const queryParams = new URLSearchParams();
+  if (conditions) {
+    queryParams.append("conditions", JSON.stringify(conditions));
+  }
+  queryParams.append("limit", limit.toString());
+  queryParams.append("page", page.toString());
+
   const fetcher = async () => {
-    const response = await fetch(`${API_URL}/campaigns${conditions ? '?conditions=' + params : ''}`, {
+    const response = await fetch(`${API_URL}/campaigns?${queryParams.toString()}`, {
       method: 'GET',
       headers: {
         accept: 'application/json',
         'X-Wallet': publicKey?.toString() || '',
       },
-    })
+    });
 
     if (response.ok) {
       return await response.json() as TCampaignResponse;
     }
 
-    throw new Error('Error: Get companies');
-  }
+    throw new Error('Error: Get campaigns');
+  };
 
   return useSWR({
-    key:'/campaigns',
-    conditions
+    key: '/campaigns',
+    conditions,
+    limit,
   }, fetcher);
 };
 
