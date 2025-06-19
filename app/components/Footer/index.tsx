@@ -2,7 +2,7 @@ import Logo from "~/assets/imgs/header-logo.png";
 import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
-import {FEES_PAGE, PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, RULES_PAGE} from "~/utils/constants";
+import {FEES_PAGE, PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, RULES_PAGE, TERMS_OF_USE_PAGE} from "~/utils/constants";
 
 const navigation = [
   { name: 'Memepad', href: '#' },
@@ -13,7 +13,7 @@ const navigation = [
 const navigationBottom = [
   { name: 'Privacy & Policy', href: PRIVACY_NOTICE_PAGE },
   { name: 'Fees', href: FEES_PAGE },
-  { name: 'Terms & Conditions', href: '#' },
+  { name: 'Terms & Conditions', href: TERMS_OF_USE_PAGE },
   { name: 'Refund Policy', href: '#' },
   { name: 'Platfrom Status', href: '#' },
 ]
