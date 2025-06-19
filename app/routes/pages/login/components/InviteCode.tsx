@@ -9,15 +9,16 @@ import Spinner from "~/components/Spinner";
 import checkIcon from '~/assets/svg/check.svg';
 import userAddIcon from '~/assets/svg/user-add.svg';
 
+import useWalletByAddress from "~/hooks/useWalletByAddress";
 import { shortenAddress } from "~/utils/other";
-import { getWalletByAddress, checkInviteCode } from "~/utils/request";
+import { checkInviteCode } from "~/utils/request";
 import { HOME_PAGE } from "~/utils/constants";
 
 const InviteCode = () => {
   const navigate = useNavigate();
   const { publicKey } = useWallet();
+  const { isLoading: isWalletLoading, data: wallet } = useWalletByAddress();
   const [isLoading, setIsLoading] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(true);
   const [isValid, setIsValid] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [inviteCode, setInviteCode] = useState('');
@@ -54,22 +55,10 @@ const InviteCode = () => {
 
   // Redirect to home page if wallet is verified
   useEffect(() => {
-    if (!publicKey) {
-      setIsVerifying(false);
-      return;
-    }
+    if (wallet) navigate(HOME_PAGE);
+  }, [wallet]);
 
-    (async () => {
-      setIsVerifying(true);
-
-      const wallet = await getWalletByAddress(publicKey.toString());
-      if (wallet) navigate(HOME_PAGE);
-
-      setIsVerifying(false);
-    })()
-  }, [publicKey]);
-
-  if (isVerifying) {
+  if (isWalletLoading) {
     return (
       <Spinner wrapperStyles="fixed inset-0 flex justify-center items-center w-full h-dvh bg-background" />
     );
