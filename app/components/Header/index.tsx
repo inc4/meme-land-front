@@ -10,9 +10,9 @@ import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import {shortenAddress} from "~/utils/other";
-import fetchSolBalance from "~/utils/fetchSolBalance";
 import {NavLink} from "react-router";
 import {REFERRAL_PAGE, RULES_PAGE} from "~/utils/constants";
+import useGetBalance from "~/hooks/useGetBalance";
 
 const navigation = [
   { name: 'Memepad', href: '#' },
@@ -23,24 +23,7 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [userAddress, setUserAddress] = useState('');
-  const [balance, setBalance] = useState(0);
-
-  useEffect(() => {
-    getAddress()
-  }, []);
-
-  useEffect(() => {
-    if (userAddress) {
-      fetchSolBalance(userAddress)
-        .then((bal) => setBalance(balance))
-    }
-  }, [userAddress]);
-
-  const getAddress = async () => {
-    const resp = await window.solana.connect(); // triggers the Phantom popup
-    return setUserAddress(resp.publicKey.toString());
-  };
+  const { userAddress, balance } = useGetBalance()
 
   return (
     <>
@@ -85,7 +68,8 @@ export default function Header() {
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
           <DialogPanel
-            className="fixed inset-y-0 right-0 top-20 z-10 w-full overflow-y-auto h-fit px-6 pt-14 pb-10 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-background">
+            className="fixed inset-y-0 right-0 top-20 z-10 w-full overflow-y-auto h-fit px-6 pt-14 pb-10 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-background"
+          >
             <div className="flex flex-col gap-[22px] items-center">
               {navigation.map((item) => (
                 <a key={item.name} href={item.href} className="text-h4 text-white font-semibold">

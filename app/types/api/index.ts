@@ -10,3 +10,72 @@ export type TGetWalletsResponse = {
   isAdmin: boolean,
   createdAt: string,
 };
+
+export type DecimalString = {
+  $numberDecimal: string;
+};
+
+export type TCampaign = {
+  _id: string;
+  campaignId: string;
+  tokenName: string;
+  tokenSymbol: string;
+  tokenImage: string;
+  projectName: string;
+  shortDescription1: string;
+  shortDescription2: string;
+  bigDescription: {
+    header: string;
+    text: string;
+    _id: string;
+  }[];
+  coverImage: string;
+  currentStatus: 'waiting' | 'live' | 'closed' | 'etc' | string;
+  presaleProgress: DecimalString;
+  walletAddress: string;
+  onChainTokenDescriptor: string;
+  onChainCampaignDescriptor: string;
+  presalePrice: DecimalString;
+  listingMultiplier: DecimalString;
+  listingPrice: DecimalString;
+  profitChance: DecimalString;
+  amountOfWallet: number;
+  minInvestmentSize: DecimalString;
+  maxInvestmentSize: DecimalString;
+  presaleStartUTC: string;
+  presaleEndUTC: string;
+  presaleDrawStartUTC: string;
+  solscan: string;
+  dexscreener: string;
+  raydium: string;
+  jupiter: string;
+  fundsToLP: DecimalString;
+  buybackReserve: DecimalString;
+  team: DecimalString;
+  liquidityAtListing: DecimalString;
+  tokensSentToLP: DecimalString;
+  priceLevelSupport: DecimalString;
+  publicProvision: DecimalString;
+  liquidity: DecimalString;
+  pieChartTeam: DecimalString;
+  marketing: DecimalString;
+  tokenomics: {
+    item: string;
+    percent: DecimalString;
+    _id: string;
+  }[];
+  twitter: string;
+  website: string;
+  telegram: string;
+  createdAt: string;
+  __v: number;
+};
+
+export type TCampaignResponse = {
+  page: {
+    index: number;
+    size: number;
+    data: TCampaign[]
+  };
+  totalItems: number;
+}

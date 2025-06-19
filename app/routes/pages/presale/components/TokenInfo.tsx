@@ -4,7 +4,7 @@ import clockIcon from "~/assets/svg/clock.svg";
 import raydium from "~/assets/svg/raydium.svg";
 import jupiter from "~/assets/svg/jupiter.svg";
 
-const TokenInfo = () => {
+const TokenInfo = ({isLoading}: {isLoading: boolean}) => {
   return (
     <section>
       <h1 className="font-bold">Token Info</h1>
@@ -15,7 +15,7 @@ const TokenInfo = () => {
               <InfoIcon/>
               Current Supply:
             </h3>
-            <span className="text-2xl font-medium font-mono">888,888,888 $BEER2</span>
+            <span className="text-2xl font-medium font-mono">{isLoading ? '-' : '888,888,888 $BEER2'}</span>
           </div>
           <div className="flex flex-col gap-3 lg:flex-row lg:gap-5">
             <button disabled className="presale-link-bg flex items-center justify-between text-[#3AFFA3] font-medium py-3 px-4 rounded-[10px] disabled:opacity-50 gap-[10px]">
