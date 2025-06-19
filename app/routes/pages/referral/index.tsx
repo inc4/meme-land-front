@@ -1,9 +1,24 @@
+import clsx from "clsx";
+
 import NeonShadowBox from "~/components/NeonShadowBox";
 import CopyIcon from "~/components/Icons/Copy";
+import useWalletByAddress from "~/hooks/useWalletByAddress";
+import useCopy from "~/hooks/useCopy";
+
 import paymentIcon from "~/assets/svg/payment.svg";
 import arrowIcon from "~/assets/svg/arrow-long.svg";
+import checkIcon from '~/assets/svg/check.svg';
 
 const Referral = () => {
+  const { data } = useWalletByAddress();
+  const { isCopied, copy } = useCopy();
+
+  const handleCopy = () => {
+    if (!data?.inviteCode) return;
+
+    copy(data.inviteCode);
+  }
+
   return (
     <div className="pt-[52px] pb-16 flex flex-col items-center">
       <h1 className="font-bold mb-4 text-center block">Invite Friends</h1>
@@ -18,9 +33,19 @@ const Referral = () => {
       >
         <div>
           <span className="text-[#3AFFA3] text-body-m font-semibold">YOUR REFERRAL CODE</span>
-          <div className="flex justify-between mt-2">
-            <span className="text-h2 font-bold">OOORE-EWOQ-1234</span>
-            <CopyIcon />
+          <div className="flex justify-between items-start mt-2">
+            <span className="text-h2 font-bold uppercase">{data?.inviteCode || '---'}</span>
+            {isCopied ? (
+              <img src={checkIcon} alt="Checkmark" className="shrink-0 w-[27px]" />
+            ) : (
+              <CopyIcon
+                onClick={handleCopy}
+                className={clsx(
+                  "shrink-0 cursor-pointer hover:[&_path]:fill-primary",
+                  "[&_path]:duration-300 [&_path]:ease-in-out",
+                )}
+              />
+            )}
           </div>
         </div>
       </NeonShadowBox>
@@ -32,19 +57,19 @@ const Referral = () => {
         <span className="font-semibold opacity-50 text-body-l mb-2">
           Friends Invited
         </span>
-        <span className="font-mono text-h3 font-medium mb-4">0</span>
+        <span className="font-mono opacity-30 text-h3 font-medium mb-4">0</span>
         <span className="font-semibold opacity-50 text-body-l mb-2">
           Commissions made from invites
         </span>
-        <span className="font-mono text-h3 font-medium">
-          123.01$
+        <span className="font-mono opacity-30 text-h3 font-medium">
+          0$
         </span>
         <div className="h-[1px] w-full bg-[#D9D9D91A] my-7"/>
         <span className="font-semibold opacity-50 text-body-l mb-2">
           Your commissions wallet
         </span>
         <span className="font-mono text-lg break-all">
-          138xfxzxc12ejfksfjjzkvakjasjdkasjdak
+          {data?.wallet || '---'}
         </span>
       </div>
       <h2 className="font-bold text-center max-w-[284px] mb-6">How Referral System Works?</h2>

@@ -1,8 +1,20 @@
-import inviteIcon from "~/assets/imgs/invite.png";
-import starIcon from "~/assets/svg/star.svg";
+import clsx from "clsx";
 import CopyIcon from "~/components/Icons/Copy";
+import inviteIcon from "~/assets/imgs/invite.png";
+import checkIcon from '~/assets/svg/check.svg';
+import useCopy from "~/hooks/useCopy";
+import useWalletByAddress from "~/hooks/useWalletByAddress";
 
 const Invite = () => {
+  const { data } = useWalletByAddress();
+  const { isCopied, copy } = useCopy();
+
+  const handleCopy = () => {
+    if (!data?.inviteCode) return;
+
+    copy(data.inviteCode);
+  }
+
   return (
     <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <div className="bg-linear-to-b from-[#0F1113] to-[#0B983834] relative p-5 rounded-[14px] overflow-hidden">
@@ -13,8 +25,18 @@ const Invite = () => {
         <span className="absolute text-[#3AFFA3] text-[32px] right-5 top-5 font-mono">0</span>
         <div className="text-[#3AFFA3] mt-6 font-semibold text-body-m">YOUR REFERRAL CODE</div>
         <div className="flex items-center justify-between py-[14px] px-4 bg-[#090909] border-[1px] border-[#FFFFFF21] rounded-[6px] mt-[10px]">
-          <span className="font-bold text-[20px]">MemeLand/999a123</span>
-          <CopyIcon />
+          <span className="font-bold text-[20px] uppercase">{data?.inviteCode || '---'}</span>
+          {isCopied ? (
+              <img src={checkIcon} alt="Checkmark" className="shrink-0 w-[27px]" />
+            ) : (
+              <CopyIcon
+                onClick={handleCopy}
+                className={clsx(
+                  "shrink-0 cursor-pointer hover:[&_path]:fill-primary",
+                  "[&_path]:duration-300 [&_path]:ease-in-out",
+                )}
+              />
+            )}
         </div>
         <img src={inviteIcon} alt="invite icon" className="mx-auto w-full -mb-5" />
       </div>

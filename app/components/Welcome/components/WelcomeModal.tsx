@@ -8,15 +8,17 @@ import CopyIcon from "~/components/Icons/Copy";
 import giftIcon from "~/assets/svg/gift.svg";
 import checkIcon from '~/assets/svg/check.svg';
 
-import { getLocalStorage, setLocalStorage } from "~/utils/localStorage";
-import { getWalletByAddress } from "~/utils/request";
 import useCopy from "~/hooks/useCopy";
+import useWalletByAddress from "~/hooks/useWalletByAddress";
+import { getLocalStorage, setLocalStorage } from "~/utils/localStorage";
 
 const WelcomeModal = () => {
   const { publicKey } = useWallet();
   const [isOpen, setIsOpen] = useState(false);
-  const [inviteCode, setInviteCode] = useState('');
+  const { data } = useWalletByAddress();
   const { isCopied, copy } = useCopy();
+
+  const inviteCode = data?.inviteCode || '';
 
   const handleStartExploring = () => {
     if (!publicKey || !inviteCode) return;
@@ -25,22 +27,21 @@ const WelcomeModal = () => {
     setIsOpen(false);
   };
 
-  const handleCopy = () => copy(inviteCode);
+  const handleCopy = () => {
+    if (!inviteCode) return;
+
+    copy(inviteCode);
+  }
 
   useEffect(() => {
     if (!publicKey) return;
 
     // Check if the user with the current wallet has visited the app before
     setIsOpen(!getLocalStorage(publicKey.toString()));
-
-    (async () => {
-      const wallet = await getWalletByAddress(publicKey.toString());
-      if (wallet) setInviteCode(wallet.inviteCode)
-    })()
   }, [publicKey]);
 
   return (
-    <Modal isOpen={isOpen} onClose={() => {}}>
+    <Modal isOpen={isOpen} onClose={() => {}} containerStyles="rounded-[20px]!">
       <div>
         <div className="flex items-center justify-center p-[17px] mb-[32px]">
           <div className="absolute w-[30px] h-[30px] bg-primary blur-[30px]" />
