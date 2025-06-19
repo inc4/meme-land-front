@@ -41,7 +41,7 @@ const WelcomeModal = () => {
   }, [publicKey]);
 
   return (
-    <Modal isOpen={isOpen} onClose={() => {}}>
+    <Modal isOpen={isOpen} onClose={() => {}} containerStyles="rounded-[20px]!">
       <div>
         <div className="flex items-center justify-center p-[17px] mb-[32px]">
           <div className="absolute w-[30px] h-[30px] bg-primary blur-[30px]" />

@@ -2,7 +2,7 @@ import {Dialog, DialogBackdrop, DialogPanel} from "@headlessui/react";
 import type {ReactNode} from "react";
 import clsx from "clsx";
 
-const Modal = ({isOpen, onClose, children, containerStyles}: {isOpen: boolean, onClose: () => void, children: ReactNode, containerStyles: string}) => {
+const Modal = ({isOpen, onClose, children, containerStyles = ''}: {isOpen: boolean, onClose: () => void, children: ReactNode, containerStyles?: string}) => {
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-[9999999]">
       <DialogBackdrop
