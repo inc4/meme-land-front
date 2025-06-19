@@ -2,16 +2,17 @@ import Logo from "~/assets/imgs/header-logo.png";
 import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
+import {FEES_PAGE, PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, RULES_PAGE} from "~/utils/constants";
 
 const navigation = [
   { name: 'Memepad', href: '#' },
-  { name: 'Rules', href: '#' },
-  { name: 'Referral', href: '#' },
+  { name: 'Rules', href: RULES_PAGE },
+  { name: 'Referral', href: REFERRAL_PAGE },
   { name: 'About', href: '#' },
 ]
 const navigationBottom = [
-  { name: 'Privacy & Policy', href: '#' },
-  { name: 'Fees', href: '#' },
+  { name: 'Privacy & Policy', href: PRIVACY_NOTICE_PAGE },
+  { name: 'Fees', href: FEES_PAGE },
   { name: 'Terms & Conditions', href: '#' },
   { name: 'Refund Policy', href: '#' },
   { name: 'Platfrom Status', href: '#' },
