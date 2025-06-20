@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import logoIcon from "~/assets/svg/logo.svg";
+import bgImage from "~/assets/svg/connect-bg.svg";
 
 import { PRIVACY_NOTICE_PAGE, TERMS_OF_USE_PAGE } from "~/utils/constants";
 import getConfig from "~/config";
@@ -12,11 +13,15 @@ const { X_LINK, TG_LINK } = getConfig();
 
 const LoginLayout = () => {
   return (
-    <div className={clsx(
-      "flex flex-col justify-between min-h-dvh h-full",
-      "pt-[45px] pb-[28px] px-[16px] bg-gray-900",
-      "lg:pt-[85px] lg:pb-[60px] lg:px-[40px]"
-    )}>
+    <div
+      style={{ backgroundImage: `url("${bgImage}"` }}
+      className={clsx(
+        "flex flex-col justify-between min-h-dvh h-full",
+        "pt-[45px] pb-[28px] px-[16px] bg-gray-900",
+        "lg:pt-[85px] lg:pb-[60px] lg:px-[40px]",
+        "bg-center bg-origin-content bg-repeat-space",
+      )}
+    >
 
       <header>
         <img className="m-auto" src={logoIcon} alt="Logo" />
