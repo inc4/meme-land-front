@@ -1,5 +1,5 @@
 {
-  "address": "Bg1w6VCXAJdBTHaEjJqcXYYFHhKKcUdQmy6GimhTF8aK",
+  "address": "CkS3hTfBrkzu6JeqbTXDZuN2X5uQZVzfoU9VJUfN4iVq",
   "metadata": {
     "name": "mem_land",
     "version": "0.1.0",
@@ -1205,6 +1205,221 @@
       ]
     },
     {
+      "name": "get_user_group",
+      "discriminator": [
+        82,
+        128,
+        89,
+        148,
+        154,
+        176,
+        177,
+        239
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true
+        },
+        {
+          "name": "campaign",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  109,
+                  112,
+                  97,
+                  105,
+                  103,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "args.token_name"
+              },
+              {
+                "kind": "arg",
+                "path": "args.token_symbol"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rand_seed",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111,
+                  114,
+                  97,
+                  111,
+                  45,
+                  118,
+                  114,
+                  102,
+                  45,
+                  114,
+                  97,
+                  110,
+                  100,
+                  111,
+                  109,
+                  110,
+                  101,
+                  115,
+                  115,
+                  45,
+                  114,
+                  101,
+                  113,
+                  117,
+                  101,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "campaign"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                7,
+                71,
+                177,
+                26,
+                250,
+                145,
+                180,
+                209,
+                249,
+                34,
+                242,
+                123,
+                14,
+                186,
+                193,
+                218,
+                178,
+                59,
+                33,
+                41,
+                164,
+                190,
+                243,
+                79,
+                50,
+                164,
+                123,
+                88,
+                245,
+                206,
+                252,
+                120
+              ]
+            }
+          }
+        },
+        {
+          "name": "participant_data",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  114,
+                  116,
+                  105,
+                  99,
+                  105,
+                  112,
+                  97,
+                  110,
+                  116,
+                  95,
+                  100,
+                  97,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "campaign"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign_stats",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": {
+              "name": "GetUserGroupArgs"
+            }
+          }
+        }
+      ],
+      "returns": "u64"
+    },
+    {
       "name": "initialize",
       "discriminator": [
         175,
@@ -1743,6 +1958,11 @@
       ],
       "accounts": [
         {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
           "name": "campaign",
           "writable": true,
           "pda": {
@@ -1763,6 +1983,26 @@
               {
                 "kind": "account",
                 "path": "mint_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "role_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  111,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "signer"
               }
             ]
           }
@@ -2485,6 +2725,164 @@
       ]
     }
   ],
+  "events": [
+    {
+      "name": "AssignAdminEvent",
+      "discriminator": [
+        200,
+        249,
+        90,
+        99,
+        49,
+        124,
+        125,
+        189
+      ]
+    },
+    {
+      "name": "AssignOperatorEvent",
+      "discriminator": [
+        177,
+        20,
+        202,
+        215,
+        58,
+        192,
+        135,
+        14
+      ]
+    },
+    {
+      "name": "AssignVerifiedUserEvent",
+      "discriminator": [
+        178,
+        254,
+        248,
+        20,
+        164,
+        102,
+        229,
+        71
+      ]
+    },
+    {
+      "name": "CalculateDistributionEvent",
+      "discriminator": [
+        213,
+        213,
+        160,
+        43,
+        30,
+        189,
+        31,
+        31
+      ]
+    },
+    {
+      "name": "ClaimTokensEvent",
+      "discriminator": [
+        71,
+        156,
+        103,
+        32,
+        16,
+        211,
+        150,
+        191
+      ]
+    },
+    {
+      "name": "CreateCampaignEvent",
+      "discriminator": [
+        96,
+        13,
+        225,
+        107,
+        16,
+        121,
+        219,
+        254
+      ]
+    },
+    {
+      "name": "CreateTokenEvent",
+      "discriminator": [
+        4,
+        4,
+        86,
+        151,
+        191,
+        94,
+        245,
+        193
+      ]
+    },
+    {
+      "name": "MintTokenEvent",
+      "discriminator": [
+        244,
+        9,
+        85,
+        49,
+        190,
+        66,
+        241,
+        138
+      ]
+    },
+    {
+      "name": "ParticipateEvent",
+      "discriminator": [
+        42,
+        125,
+        44,
+        79,
+        117,
+        82,
+        38,
+        124
+      ]
+    },
+    {
+      "name": "SetStatusEvent",
+      "discriminator": [
+        87,
+        177,
+        47,
+        38,
+        78,
+        141,
+        211,
+        81
+      ]
+    },
+    {
+      "name": "TransferToTreasureEvent",
+      "discriminator": [
+        248,
+        7,
+        80,
+        84,
+        52,
+        239,
+        231,
+        197
+      ]
+    },
+    {
+      "name": "WithdrawFromTreasureEvent",
+      "discriminator": [
+        90,
+        149,
+        183,
+        205,
+        94,
+        29,
+        188,
+        236
+      ]
+    }
+  ],
   "errors": [
     {
       "code": 6000,
@@ -2524,6 +2922,54 @@
   ],
   "types": [
     {
+      "name": "AssignAdminEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AssignOperatorEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AssignVerifiedUserEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "assigner",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
       "name": "CalculateDistributionArgs",
       "type": {
         "kind": "struct",
@@ -2535,6 +2981,30 @@
           {
             "name": "token_symbol",
             "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CalculateDistributionEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "campaign",
+            "type": "pubkey"
           }
         ]
       }
@@ -2573,6 +3043,14 @@
             "type": "u64"
           },
           {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
             "name": "status",
             "type": {
               "defined": {
@@ -2582,6 +3060,10 @@
           },
           {
             "name": "sol_treasury",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_account",
             "type": "pubkey"
           }
         ]
@@ -2606,6 +3088,10 @@
           },
           {
             "name": "total_tokens_claimed",
+            "type": "u64"
+          },
+          {
+            "name": "wallets_claimed",
             "type": "u64"
           }
         ]
@@ -2649,6 +3135,38 @@
           {
             "name": "token_symbol",
             "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClaimTokensEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "group",
+            "type": "u64"
+          },
+          {
+            "name": "campaign",
+            "type": "pubkey"
           }
         ]
       }
@@ -2702,6 +3220,62 @@
       }
     },
     {
+      "name": "CreateCampaignEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "step",
+            "type": "u64"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "min_amount",
+            "type": "u64"
+          },
+          {
+            "name": "max_amount",
+            "type": "u64"
+          },
+          {
+            "name": "token_supply",
+            "type": "u64"
+          },
+          {
+            "name": "listing_price",
+            "type": "u64"
+          },
+          {
+            "name": "number_of_wallets",
+            "type": "u64"
+          },
+          {
+            "name": "sol_treasury",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "campaign",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
       "name": "CreateTokenArgs",
       "docs": [
         "Arguments for creating a new token"
@@ -2725,6 +3299,46 @@
       }
     },
     {
+      "name": "CreateTokenEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "type": "string"
+          },
+          {
+            "name": "uri",
+            "type": "string"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GetUserGroupArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
       "name": "MintTokenArgs",
       "type": {
         "kind": "struct",
@@ -2740,6 +3354,34 @@
           {
             "name": "mint_amount",
             "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MintTokenEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "type": "string"
+          },
+          {
+            "name": "mint_amount",
+            "type": "u64"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "receiver",
+            "type": "pubkey"
           }
         ]
       }
@@ -2881,6 +3523,38 @@
       }
     },
     {
+      "name": "ParticipateEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "sol_amount",
+            "type": "u64"
+          },
+          {
+            "name": "token_amount",
+            "type": "u64"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "campaign",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
       "name": "Role",
       "docs": [
         "Role-based access control system for mem-land",
@@ -2958,6 +3632,38 @@
       }
     },
     {
+      "name": "SetStatusEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "CampaignStatus"
+              }
+            }
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "campaign",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
       "name": "TransferToTreasureArgs",
       "type": {
         "kind": "struct",
@@ -2973,6 +3679,34 @@
           {
             "name": "amount",
             "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TransferToTreasureEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasure_account",
+            "type": "pubkey"
           }
         ]
       }
@@ -3021,6 +3755,38 @@
           {
             "name": "amount",
             "type": "u64"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WithdrawFromTreasureEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasure_account",
+            "type": "pubkey"
           },
           {
             "name": "recipient",

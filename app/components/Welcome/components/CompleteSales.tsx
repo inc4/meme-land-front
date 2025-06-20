@@ -1,6 +1,7 @@
 import DexLogo from "~/components/Icons/DexLogo";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
+import useCampaigns from "~/hooks/useCampaigns";
 
 const list = [
   { project: 'Project 1', descr: 'The first Meme in Game', ath: '%2,000.00' },
@@ -12,7 +13,9 @@ const list = [
 ]
 
 const CompleteSales = () => {
-  return (
+  const {data} = useCampaigns({currentStatus: 'distributionFinished'});
+
+  return !!data?.page.size && (
     <section>
       <h1 className="mb-8 font-bold">Completed Sales</h1>
       <div className="rounded-lg overflow-auto border-1 border-[#1A1A1A]">
@@ -22,16 +25,16 @@ const CompleteSales = () => {
           <span className="text-right">All Time High</span>
           <span className="text-right">Links</span>
         </div>
-        {list.map((el) => (
-          <div className="grid grid-cols-[167px_320px_1fr_1fr] min-w-[900px] gap-6 p-3 bg-[#0D0D0D]" key={el.project}>
+        {data.page.data.map((el) => (
+          <div className="grid grid-cols-[167px_320px_1fr_1fr] min-w-[900px] gap-6 p-3 bg-[#0D0D0D]" key={el.projectName}>
             <div className="flex items-center">
               <div className="w-8 h-9 mr-3 rounded-[6px] bg-[#C5C5C5]" />
-              <span className="text-[20px] font-bold">{el.project}</span>
+              <span className="text-[20px] font-bold">{el.projectName}</span>
             </div>
-            <span className="font-medium text-body-l">{el.descr}</span>
-            <span className="text-[#3AFFA3] font-medium text-right">{el.ath}</span>
+            <span className="font-medium text-body-l">{el.shortDescription1}</span>
+            <span className="text-[#3AFFA3] font-medium text-right">-</span>
             <div className="flex gap-[14px] items-center justify-end">
-              <a href="#">
+              <a>
                 <DexLogo />
               </a>
               <a href="#">

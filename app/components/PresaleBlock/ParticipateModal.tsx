@@ -108,7 +108,7 @@ const ParticipateModal = ({isOpen, onClose}: {isOpen: boolean, onClose: () => vo
         >
           Cancel
         </CustomButton>
-    </div>
+      </div>
     </Modal>
   )
 };

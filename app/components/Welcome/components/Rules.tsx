@@ -34,7 +34,7 @@ const Rules = () => {
 
   return (
     <section>
-      <h1 className="font-bold">Rules</h1>
+      <h1 className="font-bold mb-6 lg:mb-8">Rules</h1>
       <div className="mt-8 lg:hidden -mx-1">
         <Slider {...sliderSettings}>
           {list.map((el, i) => (

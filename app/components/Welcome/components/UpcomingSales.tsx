@@ -1,31 +1,48 @@
-import icon from "../test-icon.svg";
 import Countdown from "~/components/Countdown";
-import bgFigure from "~/assets/svg/token-icon-figure.svg";
-import zash from "~/components/Welcome/zash.png";
+import useCampaigns from "~/hooks/useCampaigns";
+import {formatPinataUrl} from "~/utils/formatPinataUrl";
+import {NavLink} from "react-router";
 
 const UpcomingSales = () => {
+  const {data, isLoading} = useCampaigns({currentStatus: 'upcoming'}, 3);
+  console.log(data);
   return (
     <section className="mt-6 lg:mt-0">
       <h1 className="font-bold">More Upcoming Sales</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6 lg:mt-8">
-        <div className="bg-[#0F1113] rounded-[14px] py-4 px-5 flex flex-col min-h-[502px]">
-          <div style={{backgroundImage: `url("${zash}"`}} className="h-[222px] bg-cover bg-center rounded-xl relative mb-[52px]">
-            <img src={icon} alt="" className="absolute left-4 w-[70px] h-[70px] rounded-[10px] -bottom-8"/>
-          </div>
-          <span className="text-white font-bold text-2xl">Zesh AI Layer</span>
-          <span className="text-white text-body-m opacity-60 mb-4">ZAI</span>
-          <span className="text-white text-body-m opacity-60">Zesh AI Layer is an AI Layer on SUI, with 1.6M+ users.For a chance to participate in this crypto IDO please check the pre-sale details below.</span>
-          <span className="text-white my-3 text-body-l font-semibold">Presale Will be live in:</span>
-          <Countdown />
-        </div>
-        {[1, 2].map(() => (
-          <div className="bg-[#0F1113] rounded-[14px] py-4 px-5 min-h-[502px]">
-            <div className="h-[222px] w-full bg-[#161B1F] relative flex items-center justify-center">
-              <span className="uppercase text-2xl font-bold text-[#90C5EF] opacity-30">coming soon</span>
-              <div className="absolute left-8 w-[70px] h-[70px] rounded-[10px] -bottom-8 border-1 border-[#FFFFFF1A] bg-[#161B1F]"/>
-            </div>
-          </div>
-        ))}
+        {isLoading ? (
+          Array(3).fill('').map(() => (
+            <div className="rounded-[14px] animate-pulse bg-neutral-900 h-[546px]" />
+          ))
+        ) : (
+          <>
+            {data?.page.data.map((el) => (
+              <NavLink
+                to={`/presale/${el.campaignId}`}
+                className="bg-[#0F1113] rounded-[14px] py-4 px-5 flex flex-col cursor-pointer min-h-[502px] border-[1px] border-transparent hover:border-gray-600 transition"
+              >
+                <div style={{backgroundImage: `url("${formatPinataUrl(el.coverImage)}"`}}
+                     className="h-[222px] bg-cover bg-center rounded-xl relative mb-[52px]">
+                  <img src={formatPinataUrl(el.tokenImage)} alt="" className="absolute left-4 w-[70px] h-[70px] rounded-[10px] -bottom-8"/>
+                </div>
+                <span className="text-white font-bold text-2xl">{el.tokenName}</span>
+                <span className="text-white text-body-m opacity-60 mb-4">{el.tokenSymbol}</span>
+                <span className="text-white text-body-m opacity-60">{el.shortDescription1}</span>
+                <span className="text-white my-3 text-body-l font-semibold mt-auto">Presale Will be live in:</span>
+                <Countdown timestamp={new Date(el.presaleStartUTC).getTime()}/>
+              </NavLink>
+            ))}
+            {Array(3 - (data?.page.size || 0)).fill('').map(() => (
+              <div className="bg-[#0F1113] rounded-[14px] py-4 px-5 min-h-[502px]">
+                <div className="h-[222px] w-full bg-[#161B1F] relative flex items-center justify-center">
+                  <span className="uppercase text-2xl font-bold text-[#90C5EF] opacity-30">coming soon</span>
+                  <div
+                    className="absolute left-8 w-[70px] h-[70px] rounded-[10px] -bottom-8 border-1 border-[#FFFFFF1A] bg-[#161B1F]"/>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </section>
   )

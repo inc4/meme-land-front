@@ -5,7 +5,7 @@ import type { TCampaign, TCampaignResponse } from "~/types";
 
 const { API_URL } = getConfig();
 
-const useCampaigns = (conditions?: Partial<TCampaign>, limit = 10, page=0) => {
+const useCampaigns = (conditions?: Partial<TCampaign> | null, limit = 10, page=0) => {
   const { publicKey } = useWallet();
 
   const queryParams = new URLSearchParams();

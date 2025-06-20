@@ -253,14 +253,13 @@ body {
 }
 
 .inner-shadow-presale {
-  box-shadow: 1px 1px 100px 3px rgba(0,0,0,0.95) inset;
+  box-shadow: inset 0px 4px 61px 0px #1c1c1c;
 }
 
-.token-description h3 {
+.token-description h3, .token-description h2 {
   font-weight: bold;
-  font-size: 24px;
   display: block;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .token-description p {

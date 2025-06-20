@@ -3,9 +3,17 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useInView } from 'react-intersection-observer';
 
-const DonutChart = () => {
+type GaugeChartProps = {
+  data: {
+    name: string;
+    percent: string;
+    color: string;
+  }[]
+}
+
+const DonutChart = ({data}:GaugeChartProps) => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // only once
+    triggerOnce: false, // only once
     threshold: 0.3,    // percentage of chart visible before triggering
   });
 
@@ -44,12 +52,7 @@ const DonutChart = () => {
     series: [
       {
         name: 'Distribution',
-        data: [
-          { name: 'Team', y: 8, color: '#FF00FF' },
-          { name: 'Investor B', y: 2, color: '#A8FF44' },
-          { name: 'Investor A', y: 2, color: '#0D86FC' },
-          { name: 'Big Holder', y: 90, color: '#FFD700' },
-        ],
+        data: data.map(({name, percent: y, color}) => ({name, y: +y, color})),
       },
     ],
     credits: { enabled: false },

@@ -34,13 +34,13 @@ export default function Header() {
         <nav aria-label="Global"
              className={clsx("mx-auto flex w-full items-center bg-background py-5 px-3 lg:px-0 border-[1px] border-transparent z-20 relative", mobileMenuOpen && 'header-border')}>
           <div className="flex lg:flex-1 mr-auto">
-            <a href="#" className="-m-1.5 p-1.5">
+            <NavLink to="/" className="-m-1.5 p-1.5">
               <img
                 className="w-[164px]"
                 alt="green meme"
                 src={Logo}
               />
-            </a>
+            </NavLink>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (

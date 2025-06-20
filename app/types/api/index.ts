@@ -30,7 +30,7 @@ export type TCampaign = {
     _id: string;
   }[];
   coverImage: string;
-  currentStatus: 'waiting' | 'live' | 'closed' | 'etc' | string;
+  currentStatus: 'upcoming' | 'presaleOpened' | 'presaleFinished' | 'distributionOpened' | 'distributionFinished' | string;
   presaleProgress: DecimalString;
   walletAddress: string;
   onChainTokenDescriptor: string;
@@ -69,6 +69,10 @@ export type TCampaign = {
   telegram: string;
   createdAt: string;
   __v: number;
+  bigDescriptionHeader1: string;
+  bigDescriptionText1: string;
+  bigDescriptionHeader2: string;
+  bigDescriptionText2: string;
 };
 
 export type TCampaignResponse = {
