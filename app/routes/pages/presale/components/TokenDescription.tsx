@@ -42,19 +42,12 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
               {campaign.bigDescriptionText2}
             </p>
           )}
-          <p>
-            A Web3-native world where community, fun, and rewards come together over a cold one.
-          </p>
-          <p>Beercoin is creating a social-finance ecosystem built on vibes, community-driven actions, and a meme-fueled
-            economy. Designed to blur the lines between entertainment and token utility, Beercoin combines staking,
-            quests, and rewards into one unforgettable, beer-powered journey. It’s not just a token — it’s a movement with
-            hops.</p>
         </div>
         <div className="#14181B p-5 rounded-[14px] bg-[#14181B] lg:max-w-[484px] ml-auto w-full">
           <h3 className="font-bold mb-[10px]">Share this project with friends</h3>
           <span className="text-[14px] font-semibold">Copy link</span>
           <div className="flex items-center justify-between py-[14px] px-4 bg-[#090909] border-[1px] border-[#FFFFFF21] rounded-[6px] my-2">
-            <span className="font-bold text-[20px]">{window.location.href}</span>
+            <span className="font-bold text-[20px] break-all">{window.location.href}</span>
             {isCopied ? (
               <img src={checkIcon} alt="Checkmark" className="shrink-0 w-[27px]" />
             ) : (
