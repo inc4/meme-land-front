@@ -34,6 +34,9 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     }
   }
 
+  if (!isLoading && !campaign) {
+    return null;
+  }
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_472px] lg:grid gap-[14px]">
       {isLoading ? (
