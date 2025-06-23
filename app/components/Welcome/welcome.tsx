@@ -18,10 +18,10 @@ export function Welcome() {
     } else {
       return data?.page.data[0] || upcomingPresale?.page.data[0]
     }
-  }, [data, upcomingPresale, isLoading])
+  }, [data, upcomingPresale, isLoading]);
 
   return (
-    <div className="flex flex-col gap-16 lg:gap-[120px] pb-[120px]">
+    <div className="flex flex-col gap-16 lg:gap-[120px] pb-[120px] pt-8">
       <WelcomeModal />
       <PresaleBlock homePage campaign={currentPresale} isLoading={isLoading} />
       <HowItWorks />

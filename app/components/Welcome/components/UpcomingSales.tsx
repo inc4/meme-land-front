@@ -6,6 +6,12 @@ import {NavLink} from "react-router";
 const UpcomingSales = () => {
   const {data, isLoading} = useCampaigns({currentStatus: 'upcoming'}, 3);
   console.log(data);
+  const sortByPresaleStartUTC = (data) => {
+    return data.sort((a, b) => {
+      return new Date(a.presaleStartUTC).getTime() - new Date(b.presaleStartUTC).getTime();
+    });
+  };
+
   return (
     <section className="mt-6 lg:mt-0">
       <h1 className="font-bold">More Upcoming Sales</h1>
@@ -16,7 +22,7 @@ const UpcomingSales = () => {
           ))
         ) : (
           <>
-            {data?.page.data.map((el) => (
+            {sortByPresaleStartUTC(data?.page.data).map((el) => (
               <NavLink
                 to={`/presale/${el.campaignId}`}
                 className="bg-[#0F1113] rounded-[14px] py-4 px-5 flex flex-col cursor-pointer min-h-[502px] border-[1px] border-transparent hover:border-gray-600 transition"
