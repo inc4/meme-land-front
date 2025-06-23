@@ -11,14 +11,16 @@ import {useMemo} from "react";
 export function Welcome() {
   const {data, isLoading} = useCampaigns();
   const {data: upcomingPresale} = useCampaigns({currentStatus: "upcoming"});
+  const {data: completedPresales} = useCampaigns({currentStatus: 'distributionFinished'});
 
   const currentPresale = useMemo(() => {
     if (isLoading) {
       return undefined;
     } else {
-      return data?.page.data[0] || upcomingPresale?.page.data[0]
+      return data?.page.data[0] || upcomingPresale?.page.data[0] || completedPresales?.page.data[0];
     }
   }, [data, upcomingPresale, isLoading]);
+
 
   return (
     <div className="flex flex-col gap-16 lg:gap-[120px] pb-[120px] pt-8">
@@ -27,7 +29,7 @@ export function Welcome() {
       <HowItWorks />
       <UpcomingSales />
       <Invite />
-      <CompleteSales />
+      <CompleteSales campaigns={completedPresales} />
       <Rules />
     </div>
   );

@@ -6,7 +6,7 @@ const getPdas = (tokenName: string, tokenSymbol: string, programId: PublicKey, u
     [Buffer.from("mint"), Buffer.from(tokenName), Buffer.from(tokenSymbol)],
     programId
   );
-  console.log(mintPda);
+
   const [campaignPda] = PublicKey.findProgramAddressSync(
     [Buffer.from("campaign"), mintPda.toBuffer()],
     programId
@@ -28,7 +28,7 @@ const getPdas = (tokenName: string, tokenSymbol: string, programId: PublicKey, u
   );
 
   let roleAccountPda;
-  console.log(userPubkey);
+
   if (userPubkey) {
     [roleAccountPda] = PublicKey.findProgramAddressSync(
       [Buffer.from("role"), userPubkey.toBuffer()],

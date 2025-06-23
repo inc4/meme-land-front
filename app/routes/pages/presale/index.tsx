@@ -23,7 +23,7 @@ const Presale = () => {
         {isLoading ? (
           <div className="rounded-[14px] bg-neutral-900 animate-pulse h-[148px] w-full mt-[30px] lg:mt-[14px]" />
         ) : (
-          <PresaleProgress />
+          <PresaleProgress campaign={data} />
         )}
       </div>
       <TokenInfo campaign={data} isLoading={isLoading} />

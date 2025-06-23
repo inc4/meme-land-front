@@ -44,7 +44,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
       ) : campaign && (
         <div className="bg-[#0F1113] rounded-[14px] p-5">
           <div className="relative">
-            <img src={formatPinataUrl(campaign.coverImage)} alt="token" className="w-full h-[318px] object-cover rounded-[11px]"/>
+            <img src={formatPinataUrl(campaign.projectCoverImage)} alt="token" className="w-full h-[318px] object-cover rounded-[11px]"/>
             <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[18px] bg-contain right-4 px-[33px] pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch">
               <div className="text-body-s bg-[#ED4646] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center">
                 live

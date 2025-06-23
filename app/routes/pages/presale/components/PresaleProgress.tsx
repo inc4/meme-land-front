@@ -1,7 +1,33 @@
 import solIcon from "~/assets/svg/solana-logo.svg";
 import NeonShadowBox from "~/components/NeonShadowBox";
+import type {TCampaign} from "~/types";
+import {useEffect, useState} from "react";
+import useAnchorProvider from "~/hooks/useAnchorProvider";
+import {useWallet} from "@solana/wallet-adapter-react";
+import {Program} from "@coral-xyz/anchor";
+import idl from "~/idl/mem_land.json";
+import getPdas from "~/utils/getPdas";
 
-const PresaleProgress = () => {
+const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
+  const provider = useAnchorProvider();
+  const { publicKey } = useWallet();
+
+  const [solRaised, setSolRaised] = useState(null);
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = async () => {
+    if (!campaign || !publicKey) return null;
+    const program = new Program(idl, provider);
+
+    const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
+    const data = await program.account.campaignStats
+      .fetch(pdas.campaignStatsPda);
+    console.log(data);
+  }
+
   return (
     <NeonShadowBox
       variant="violet"

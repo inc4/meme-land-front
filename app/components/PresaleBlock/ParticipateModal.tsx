@@ -10,11 +10,9 @@ import getPdas from "~/utils/getPdas";
 import {useWallet} from "@solana/wallet-adapter-react";
 import {Keypair, PublicKey} from "@solana/web3.js";
 import {Buffer} from 'buffer';
+import type {TCampaign} from "~/types";
 
-const name = 'MemLand Token OLR';
-const symbol = 'OLR';
-
-const ParticipateModal = ({isOpen, onClose}: {isOpen: boolean, onClose: () => void}) => {
+const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const { balance, userAddress } = useGetBalance();
   const provider = useAnchorProvider();
   const { publicKey } = useWallet();
@@ -26,8 +24,10 @@ const ParticipateModal = ({isOpen, onClose}: {isOpen: boolean, onClose: () => vo
   }, [isOpen]);
 
   const participate = async () => {
+    if (!publicKey) return null;
+
     const program = new Program(idl, provider);
-    const pdas = getPdas(name, symbol, program.programId, publicKey);
+    const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
     const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
 
     const [participantDataPda] = PublicKey.findProgramAddressSync(
@@ -53,8 +53,8 @@ const ParticipateModal = ({isOpen, onClose}: {isOpen: boolean, onClose: () => vo
     try {
       const tx = await program.methods
         .participate({
-          tokenName: name,
-          tokenSymbol: symbol,
+          tokenName: campaign.tokenName,
+          tokenSymbol: campaign.tokenSymbol,
           amount: amountInSmallestUnits,
         })
         .accounts({
