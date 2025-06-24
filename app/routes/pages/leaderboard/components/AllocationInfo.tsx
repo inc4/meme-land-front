@@ -16,7 +16,7 @@ type TProps = {
 
 const AllocationInfo = ({ campaign, userAllocation, userGroup }: TProps) => {
   const { tokenSymbol, campaignId } = campaign;
-  const { data: isClamableData } = useIsClaimable(campaignId);
+  const { data: isClaimableData } = useIsClaimable(campaignId);
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   return (
@@ -47,7 +47,7 @@ const AllocationInfo = ({ campaign, userAllocation, userGroup }: TProps) => {
           <CustomButton
             variant="white"
             customStyles="block max-w-[128px] w-full m-auto mb-[36px] shadow-none text-body-l! lg:mb-[43px]"
-            disabled={!isClamableData?.available || !userAllocation}
+            disabled={!isClaimableData?.available || !userAllocation}
             handleClick={() => setIsModalOpened(true)}
           >
             Claim
