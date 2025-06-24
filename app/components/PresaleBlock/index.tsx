@@ -21,7 +21,31 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     if (campaign?.currentStatus === 'upcoming') {
       return {
         title: 'Presale will start in:',
-        timestamp: new Date(campaign.presaleStartUTC).getTime()
+        timestamp: new Date(campaign.presaleStartUTC).getTime(),
+        btn: () => (
+          <button
+            type="button"
+            onClick={handleParticipate}
+            disabled
+            className="text-doby-l flex items-center justify-center font-semibold rounded-2xl py-4 w-full max-w-[500px] mx-auto"
+          >
+            WAIT UNTIL PRESALE STARTS
+          </button>
+        )
+      }
+    } else if (campaign?.currentStatus === 'presaleOpened') {
+      return {
+        title: 'Presale will start in:',
+        timestamp: new Date(campaign.presaleStartUTC).getTime(),
+        btn: () => (
+          <button
+            type="button"
+            onClick={handleParticipate}
+            className="text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
+          >
+            PARTICIPATE NOW
+          </button>
+        )
       }
     }
   }, [campaign]);
@@ -154,13 +178,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             <Countdown timestamp={timerData.timestamp} className="justify-between"/>
           </div>
         )}
-        <button
-          type="button"
-          onClick={handleParticipate}
-          className="text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
-        >
-          PARTICIPATE NOW
-        </button>
+
       </div>
       <ParticipateModal isOpen={participateModalOpen} onClose={() => setParticipateModalOpen(false)}/>
     </div>
