@@ -8,9 +8,10 @@ import idl from '~/idl/mem_land.json'
 import {Program, BN, web3} from "@coral-xyz/anchor";
 import getPdas from "~/utils/getPdas";
 import {useWallet} from "@solana/wallet-adapter-react";
-import {Keypair, PublicKey} from "@solana/web3.js";
+import {PublicKey} from "@solana/web3.js";
 import {Buffer} from 'buffer';
 import type {TCampaign} from "~/types";
+import {formatPinataUrl} from "~/utils/formatPinataUrl";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const { balance, userAddress } = useGetBalance();
@@ -30,6 +31,10 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
     const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
     const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
 
+    const campaignStatsData = await program.account.campaignStats.fetch(
+      pdas.campaignStatsPda
+    );
+
     const [participantDataPda] = PublicKey.findProgramAddressSync(
       [
         Buffer.from("participant_data"),
@@ -43,11 +48,12 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
       [
         Buffer.from("participant_pubkey"),
         pdas.campaignPda.toBuffer(),
-        campaignData.counter.toBuffer("le", 8),
+        campaignStatsData.totalParticipants.toBuffer("le", 8),
       ],
       program.programId
     );
-    const decimals = 9; // usually 9 for SOL or SPL tokens
+
+    const decimals = 9;
     const amountInSmallestUnits = new BN(amount * 10 ** decimals);
 
     try {
@@ -68,7 +74,6 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
           campaignStats: pdas.campaignStatsPda,
           systemProgram: web3.SystemProgram.programId,
         })
-        // .signers([signer])
         .rpc();
 
       return tx;
@@ -76,6 +81,10 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
       if (err) console.error(err);
     }
   };
+
+  if (!campaign) {
+    return null
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -91,8 +100,9 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
           />
           <CustomInput
             label="Your chance to get"
-            value="13,242"
-            tokenName="$BEER2"
+            value={(+amount / campaign.presalePrice.$numberDecimal).toString()}
+            tokenName={campaign.tokenSymbol}
+            tokenIcon={formatPinataUrl(campaign.tokenImage)}
           />
         </div>
         <CustomButton

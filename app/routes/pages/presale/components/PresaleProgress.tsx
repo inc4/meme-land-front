@@ -7,11 +7,13 @@ import {useWallet} from "@solana/wallet-adapter-react";
 import {Program} from "@coral-xyz/anchor";
 import idl from "~/idl/mem_land.json";
 import getPdas from "~/utils/getPdas";
+import useCampaignStats from "~/hooks/useCampaignStats";
 
 const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   const provider = useAnchorProvider();
   const { publicKey } = useWallet();
-
+  const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
+  console.log(campaignStatsData);
   const [solRaised, setSolRaised] = useState(null);
 
   useEffect(() => {
