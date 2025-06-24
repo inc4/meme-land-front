@@ -12,6 +12,7 @@ export function Welcome() {
   const {data, isLoading} = useCampaigns();
   const {data: upcomingPresale} = useCampaigns({currentStatus: "upcoming"});
   const {data: completedPresales} = useCampaigns({currentStatus: 'distributionFinished'});
+  console.log(Buffer.from("campaign"));
 
   const currentPresale = useMemo(() => {
     if (isLoading) {
