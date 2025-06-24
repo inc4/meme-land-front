@@ -4,12 +4,7 @@ import Modal from "~/components/Modal";
 import {useEffect, useState} from "react";
 import useGetBalance from "~/hooks/useGetBalance";
 import useAnchorProvider from "~/hooks/useAnchorProvider";
-import idl from '~/idl/mem_land.json'
-import {Program, BN, web3} from "@coral-xyz/anchor";
-import getPdas from "~/utils/getPdas";
 import {useWallet} from "@solana/wallet-adapter-react";
-import {PublicKey} from "@solana/web3.js";
-import {Buffer} from 'buffer';
 import type {TCampaign} from "~/types";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
 import participate from "~/utils/participate";

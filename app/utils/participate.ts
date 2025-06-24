@@ -2,7 +2,6 @@ import {BN, Program, web3} from "@coral-xyz/anchor";
 import idl from "~/idl/mem_land.json";
 import getPdas from "~/utils/getPdas";
 import {PublicKey} from "@solana/web3.js";
-import {Buffer} from "buffer";
 import type {TCampaign} from "~/types";
 
 const participate = async (publicKey: PublicKey | null, campaign: TCampaign, provider: any, amount: string) => {

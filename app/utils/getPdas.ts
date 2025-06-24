@@ -1,5 +1,4 @@
 import {PublicKey} from "@solana/web3.js";
-import {Buffer} from 'buffer';
 
 const getPdas = (tokenName: string, tokenSymbol: string, programId: PublicKey, userPubkey?: PublicKey) => {
   const [mintPda] = PublicKey.findProgramAddressSync(
