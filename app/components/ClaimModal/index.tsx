@@ -4,6 +4,7 @@ import CustomInput from "~/components/CustomInput";
 import CustomButton from "~/components/CustomButton";
 import useClaim from "~/hooks/useClaim";
 import { formatPinataUrl } from "~/utils/formatPinataUrl";
+import { formatNumberWithCommas } from "~/utils/numbers";
 import type { TCampaign } from "~/types";
 
 type TProps = {
@@ -31,13 +32,13 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={isMutating ? () => {} : onClose}>
       <div>
         <span className="text-2xl font-semibold block w-full text-center">Claim Your Tokens</span>
         <div className="flex flex-col gap-[10px] my-8">
           <CustomInput
             label="You Invest"
-            value={userAllocation.toString()}
+            value={formatNumberWithCommas(userAllocation)}
             tokenName={tokenSymbol}
             tokenImage={formatPinataUrl(tokenImage)}
             disabled
