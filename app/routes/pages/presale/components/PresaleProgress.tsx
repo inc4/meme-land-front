@@ -7,8 +7,8 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
 
   if (!campaignStatsData || !campaign) {
-    return null;
-  };
+    return <div className="rounded-[14px] bg-neutral-900 animate-pulse h-[148px] w-full mt-[30px] lg:mt-[14px]"/>;
+  }
 
   const percentCompleted = campaignStatsData.totalParticipants * 100 / campaign.amountOfWallet;
   console.log(percentCompleted);
