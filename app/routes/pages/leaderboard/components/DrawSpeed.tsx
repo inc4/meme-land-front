@@ -1,7 +1,20 @@
 import speedIcon from "~/assets/svg/speed.svg";
 import NeonShadowBox from "~/components/NeonShadowBox";
+import type { TCampaign } from "~/types";
 
-const DrawSpeed = () => {
+type TProps = {
+  campaign: TCampaign;
+}
+
+const DrawSpeed = ({ campaign }: TProps) => {
+  const { tokenUnlockInterval } = campaign;
+
+  const calcSpeed = (step: number) => {
+    const minuteMs = 60000;
+
+    return minuteMs / step;
+  };
+
   return (
     <NeonShadowBox
       variant="green"
@@ -16,7 +29,7 @@ const DrawSpeed = () => {
         <div className="flex flex-col items-center justify-between gap-[4px]">
           <span className="text-body-s text-beige-600 uppercase font-semibold">Draw Speed</span>
           <span className="text-h3 text-primary font-medium font-mono">
-            100 wallets<sub className="text-gray-600">/minute</sub>
+            {calcSpeed(tokenUnlockInterval)} wallets<sub className="text-gray-600">/minute</sub>
           </span>
         </div>
 
