@@ -20,7 +20,7 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
   return (
     <section className="bg-[#0F1113] w-full p-5 rounded-[14px]">
       <img
-        src={formatPinataUrl(campaign.coverImage)}
+        src={formatPinataUrl(campaign.projectCoverImage)}
         className="w-full inner-shadow-presale mb-6 rounded-[14px] max-h-[659px] object-cover"
         alt="cover image"
       />
