@@ -7,6 +7,10 @@ import CompleteSales from "~/components/Welcome/components/CompleteSales";
 import Rules from "~/components/Welcome/components/Rules";
 import useCampaigns from "~/hooks/useCampaigns";
 import {useMemo} from "react";
+import { Buffer } from 'buffer';
+
+// @ts-ignore
+window.Buffer = Buffer;
 
 export function Welcome() {
   const {data, isLoading} = useCampaigns();
