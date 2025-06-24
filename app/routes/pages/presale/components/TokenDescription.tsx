@@ -65,10 +65,10 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
               />
             )}
           </div>
-          {campaign.telegram || campaign.website || campaign.twitter && (
+          {(!!campaign.telegram || !!campaign.website || !!campaign.twitter) && (
             <span>Or Share in Socials:</span>
           )}
-          <div className="flex gap-4">
+          <div className="flex gap-4 mt-1">
             {campaign.telegram && (
               <a href={campaign.telegram} target="_blank">
                 <CustomButton variant="icon-only" customStyles="!w-10 !h-10 !p-0">

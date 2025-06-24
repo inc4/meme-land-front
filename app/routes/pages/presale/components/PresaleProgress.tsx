@@ -11,7 +11,7 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   }
 
   const percentCompleted = campaignStatsData.totalParticipants * 100 / campaign.amountOfWallet;
-  console.log(percentCompleted);
+
   return (
     <NeonShadowBox
       variant="violet"
