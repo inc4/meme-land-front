@@ -2,20 +2,11 @@ import DexLogo from "~/components/Icons/DexLogo";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import useCampaigns from "~/hooks/useCampaigns";
+import type {TCampaignResponse} from "~/types";
 
-const list = [
-  { project: 'Project 1', descr: 'The first Meme in Game', ath: '%2,000.00' },
-  { project: 'Project 2', descr: 'The first Meme in Game', ath: '%2,000.00' },
-  { project: 'Project 3', descr: 'The first Meme in Game', ath: '%2,000.00' },
-  { project: 'Project 4', descr: 'The first Meme in Game', ath: '%2,000.00' },
-  { project: 'Project 5', descr: 'The first Meme in Game', ath: '%2,000.00' },
-  { project: 'Project 6', descr: 'The first Meme in Game', ath: '%2,000.00' },
-]
+const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) => {
 
-const CompleteSales = () => {
-  const {data} = useCampaigns({currentStatus: 'distributionFinished'});
-
-  return !!data?.page.size && (
+  return !!campaigns?.page.size && (
     <section>
       <h1 className="mb-8 font-bold">Completed Sales</h1>
       <div className="rounded-lg overflow-auto border-1 border-[#1A1A1A]">
@@ -25,7 +16,7 @@ const CompleteSales = () => {
           <span className="text-right">All Time High</span>
           <span className="text-right">Links</span>
         </div>
-        {data.page.data.map((el) => (
+        {campaigns.page.data.map((el) => (
           <div className="grid grid-cols-[167px_320px_1fr_1fr] min-w-[900px] gap-6 p-3 bg-[#0D0D0D]" key={el.projectName}>
             <div className="flex items-center">
               <div className="w-8 h-9 mr-3 rounded-[6px] bg-[#C5C5C5]" />

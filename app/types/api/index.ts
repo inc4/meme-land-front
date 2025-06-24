@@ -78,6 +78,7 @@ export type TCampaign = {
   bigDescriptionText1: string;
   bigDescriptionHeader2: string;
   bigDescriptionText2: string;
+  projectCoverImage: string;
 };
 
 export type TCampaignResponse = {
