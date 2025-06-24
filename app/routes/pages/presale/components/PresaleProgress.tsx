@@ -5,7 +5,7 @@ import useCampaignStats from "~/hooks/useCampaignStats";
 
 const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
-
+  console.log(1);
   if (!campaignStatsData || !campaign) {
     return <div className="rounded-[14px] bg-neutral-900 animate-pulse h-[148px] w-full mt-[30px] lg:mt-[14px]"/>;
   }
