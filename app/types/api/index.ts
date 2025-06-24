@@ -1,3 +1,5 @@
+import { BN } from "@coral-xyz/anchor";
+
 export type TPostWalletsBody = {
   wallet: string,
   referrerInviteCode: string,
@@ -45,6 +47,9 @@ export type TCampaign = {
   presaleStartUTC: string;
   presaleEndUTC: string;
   presaleDrawStartUTC: string;
+  presaleDrawEndUTC: string;
+  tokenUnlockInterval: number;
+  campaignPda: string;
   solscan: string;
   dexscreener: string;
   raydium: string;
@@ -83,3 +88,29 @@ export type TCampaignResponse = {
   };
   totalItems: number;
 }
+
+export type TCampaignStats = {
+  totalTokensClaimed: BN;
+  totalTokensSold: BN;
+  walletsClaimed: BN;
+  totalParticipants: BN;
+  [key: string]: any;
+};
+
+export type TParticipations = {
+  participationId: string,
+  campaignId: string,
+  wallet: string,
+  solSpent: number,
+  tokenAllocation: number,
+  createdAt: string;
+};
+
+export type TParticipationsResponse = {
+  page: {
+    index: number;
+    size: number;
+    data: TParticipations[];
+  };
+  totalItems: number;
+};
