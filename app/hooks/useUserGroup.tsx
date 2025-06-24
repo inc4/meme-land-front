@@ -7,6 +7,10 @@ import useAnchorProvider from "./useAnchorProvider";
 import useCampaign from "./useCampaign";
 import getPdas from "~/utils/getPdas";
 import idl from '~/idl/mem_land.json'
+import {Buffer} from "buffer";
+
+// @ts-ignore
+window.Buffer = Buffer;
 
 const useUserGroup = (campaignId: string) => {
   const { publicKey } = useWallet();

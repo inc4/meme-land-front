@@ -3,13 +3,16 @@ import idl from "~/idl/mem_land.json";
 import getPdas from "~/utils/getPdas";
 import {PublicKey} from "@solana/web3.js";
 import type {TCampaign} from "~/types";
+import {Buffer} from "buffer";
+
+// @ts-ignore
+window.Buffer = Buffer;
 
 const participate = async (publicKey: PublicKey | null, campaign: TCampaign, provider: any, amount: string) => {
   if (!publicKey) return null;
 
   const program = new Program(idl, provider);
-  console.log(1);
-  console.log(Buffer.from("participant_data"));
+
   const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
   const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
 
@@ -24,7 +27,7 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
     ],
     program.programId
   );
-  console.log(publicKey.toBuffer());
+
   const [participantPubkeyPda] = PublicKey.findProgramAddressSync(
     [
       Buffer.from("participant_pubkey"),
