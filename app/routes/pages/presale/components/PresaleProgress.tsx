@@ -35,7 +35,7 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
               <span className="mr-1 block">
                 RAISED:
               </span>
-              <span className="font-black text-[#F24BE7] font-mono">{campaignStatsData.totalSolCollected.toNumber()} SOL</span>
+              <span className="font-black text-[#F24BE7] font-mono">{campaignStatsData.totalSolCollected.toNumber() / 10 ** 9} SOL</span>
               <img src={solIcon} alt="solana" className="w-4 h-4 ml-3"/>
             </p>
           </div>
