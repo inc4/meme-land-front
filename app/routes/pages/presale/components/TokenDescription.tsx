@@ -1,4 +1,3 @@
-import beercoin from "~/assets/imgs/beercoin.png"
 import CopyIcon from "~/components/Icons/Copy";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
 import type {TCampaign} from "~/types";
