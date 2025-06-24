@@ -40,7 +40,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
             label="You Invest"
             value={formatNumberWithCommas(userAllocation)}
             tokenName={tokenSymbol}
-            tokenImage={formatPinataUrl(tokenImage)}
+            tokenIcon={formatPinataUrl(tokenImage)}
             disabled
           />
         </div>

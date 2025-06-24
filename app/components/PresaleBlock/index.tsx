@@ -10,54 +10,113 @@ import type {TCampaign} from "~/types";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
 import clsx from "clsx";
 import NeonShadowBox from "~/components/NeonShadowBox";
-import {useNavigate} from "react-router";
+import {NavLink} from "react-router";
+import useCampaignStats from "~/hooks/useCampaignStats";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
-  const navigate = useNavigate();
-
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
+  const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
 
   const timerData = useMemo(() => {
+    if (!campaign) return null;
+
     if (campaign?.currentStatus === 'upcoming') {
       return {
         title: 'Presale will start in:',
-        timestamp: new Date(campaign.presaleStartUTC).getTime()
+        titleColor: 'text-white',
+        timestamp: new Date(campaign.presaleStartUTC).getTime(),
+        btn: () => (
+          <button
+            type="button"
+            disabled
+            className="text-doby-l flex items-center justify-center font-semibold rounded-2xl bg-[#3E3E3E] py-4 w-full max-w-[500px] mx-auto"
+          >
+            WAIT UNTIL PRESALE STARTS
+          </button>
+        )
+      }
+    } else if (campaign?.currentStatus === 'presaleOpened') {
+      return {
+        title: 'Presale will end in:',
+        titleColor: 'text-[#F24B4D]',
+        timestamp: new Date(campaign.presaleEndUTC).getTime(),
+        btn: () => (
+          <button
+            type="button"
+            onClick={handleParticipate}
+            className="text-doby-l flex items-center justify-center bg-[#3AFFA3] font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
+          >
+            PARTICIPATE NOW
+          </button>
+        )
+      }
+    } else if (campaign?.currentStatus === 'presaleFinished') {
+      return {
+        title: 'Draw Will start in:',
+        titleColor: 'text-[#FFA544]',
+        timestamp: new Date(campaign.presaleDrawStartUTC).getTime(),
+        btn: () => (
+          <button
+            type="button"
+            disabled
+            className="text-doby-l flex items-center justify-center bg-[#3E3E3E] font-semibold rounded-2xl text-white shadow-lg py-4 w-full max-w-[500px] mx-auto"
+          >
+            WAIT UNTIL DRAW STARTS
+          </button>
+        )
+      }
+    } else {
+      return {
+        title: 'Draw Will end in:',
+        titleColor: 'text-[#F24B4D]',
+        timestamp: new Date(campaign.presaleDrawStartUTC).getTime(),
+        btn: () => (
+          <NavLink to={`/presale/${campaign?.campaignId}/leaderboard`}>
+            <button
+              type="button"
+              disabled
+              className="text-doby-l flex items-center justify-center bg-[#3E3E3E] font-semibold rounded-2xl text-white shadow-lg py-4 w-full max-w-[500px] mx-auto"
+            >
+              CHECK DRAW
+            </button>
+          </NavLink>
+        )
       }
     }
   }, [campaign]);
 
   const handleParticipate = () => {
-    if (homePage) {
-      navigate(`/presale/${campaign?.campaignId}`)
-    } else {
-      setParticipateModalOpen(true);
-    }
+    setParticipateModalOpen(true);
   }
 
   if (!isLoading && !campaign) {
     return null;
   }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_472px] lg:grid gap-[14px]">
-      {isLoading ? (
+    {isLoading ? (
         <div className="rounded-[14px] animate-pulse bg-neutral-900" />
       ) : campaign && (
         <div className="bg-[#0F1113] rounded-[14px] p-5">
           <div className="relative">
             <img src={formatPinataUrl(campaign.projectCoverImage)} alt="token" className="w-full h-[318px] object-cover rounded-[11px]"/>
-            <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[18px] bg-contain right-4 px-[33px] pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch">
-              <div className="text-body-s bg-[#ED4646] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center">
-                live
+            {campaign.currentStatus && (
+              <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[18px] bg-contain right-4 px-[33px] pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch">
+                <div className="text-body-s bg-[#ED4646] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center -mt-1">
+                  live
+                </div>
+                <div className="font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] -mt-1 before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative">
+                  {campaignStatsData?.totalParticipants.toNumber()} Participant{campaignStatsData?.totalParticipants.toNumber() > 1 && 's'}
+                </div>
               </div>
-              <div className="font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative">
-                12,432 Participants
-              </div>
-            </div>
+            )}
           </div>
           <div className="flex flex-col mt-5">
             <div className="flex flex-col gap-6 mb-4 lg:flex-row lg:justify-between">
               <div className="flex gap-[10px] items-center">
-                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo" className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
+                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo"
+                     className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
                 <div className="flex flex-col gap-[2px]">
                   <span className="text-white font-bold text-[24px]">{campaign.projectName}</span>
                   <span className="opacity-60 text-white text-body-m">{campaign.shortDescription1}</span>
@@ -148,21 +207,28 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <div className="rounded-[14px] animate-pulse bg-neutral-900 h-[154px]" />
         ) : (
           <div className="py-5 rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3">
-            <span className="text-center font-bold text-white text-[20px] w-fit mx-auto block mb-5">
+            <span className={clsx('text-center font-bold text-[20px] w-fit mx-auto block mb-5', timerData.titleColor)}>
               {timerData.title}
             </span>
             <Countdown timestamp={timerData.timestamp} className="justify-between"/>
           </div>
         )}
-        <button
-          type="button"
-          onClick={handleParticipate}
-          className="text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
-        >
-          PARTICIPATE NOW
-        </button>
+        {homePage ? (
+          <NavLink to={`/presale/${campaign?.campaignId}`}>
+            <button
+              type="button"
+              className="text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
+            >
+              PARTICIPATE NOW
+            </button>
+          </NavLink>
+        ) : timerData && timerData.btn()}
       </div>
-      <ParticipateModal isOpen={participateModalOpen} onClose={() => setParticipateModalOpen(false)}/>
+      <ParticipateModal
+        campaign={campaign as TCampaign}
+        isOpen={participateModalOpen}
+        onClose={() => setParticipateModalOpen(false)}
+      />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import beercoin from "~/assets/imgs/beercoin.png"
 import CopyIcon from "~/components/Icons/Copy";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
 import type {TCampaign} from "~/types";
@@ -20,7 +19,7 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
   return (
     <section className="bg-[#0F1113] w-full p-5 rounded-[14px]">
       <img
-        src={formatPinataUrl(campaign.coverImage)}
+        src={formatPinataUrl(campaign.projectCoverImage)}
         className="w-full inner-shadow-presale mb-6 rounded-[14px] max-h-[659px] object-cover"
         alt="cover image"
       />
@@ -65,10 +64,10 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
               />
             )}
           </div>
-          {campaign.telegram || campaign.website || campaign.twitter && (
+          {(!!campaign.telegram || !!campaign.website || !!campaign.twitter) && (
             <span>Or Share in Socials:</span>
           )}
-          <div className="flex gap-4">
+          <div className="flex gap-4 mt-1">
             {campaign.telegram && (
               <a href={campaign.telegram} target="_blank">
                 <CustomButton variant="icon-only" customStyles="!w-10 !h-10 !p-0">

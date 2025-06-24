@@ -4,13 +4,10 @@ import Modal from "~/components/Modal";
 import {useEffect, useState} from "react";
 import useGetBalance from "~/hooks/useGetBalance";
 import useAnchorProvider from "~/hooks/useAnchorProvider";
-import idl from '~/idl/mem_land.json'
-import {Program, BN, web3} from "@coral-xyz/anchor";
-import getPdas from "~/utils/getPdas";
 import {useWallet} from "@solana/wallet-adapter-react";
-import {Keypair, PublicKey} from "@solana/web3.js";
-import {Buffer} from 'buffer';
 import type {TCampaign} from "~/types";
+import {formatPinataUrl} from "~/utils/formatPinataUrl";
+import participate from "~/utils/participate";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const { balance, userAddress } = useGetBalance();
@@ -23,59 +20,13 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
     setAmount('1');
   }, [isOpen]);
 
-  const participate = async () => {
-    if (!publicKey) return null;
+  const handleSubmit = ()=> {
+    participate(publicKey, campaign, provider, amount);
+  }
 
-    const program = new Program(idl, provider);
-    const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
-    const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
-
-    const [participantDataPda] = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("participant_data"),
-        pdas.campaignPda.toBuffer(),
-        publicKey.toBuffer(),
-      ],
-      program.programId
-    );
-
-    const [participantPubkeyPda] = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("participant_pubkey"),
-        pdas.campaignPda.toBuffer(),
-        campaignData.counter.toBuffer("le", 8),
-      ],
-      program.programId
-    );
-    const decimals = 9; // usually 9 for SOL or SPL tokens
-    const amountInSmallestUnits = new BN(amount * 10 ** decimals);
-
-    try {
-      const tx = await program.methods
-        .participate({
-          tokenName: campaign.tokenName,
-          tokenSymbol: campaign.tokenSymbol,
-          amount: amountInSmallestUnits,
-        })
-        .accounts({
-          payer: publicKey,
-          roleAccount: pdas.roleAccountPda,
-          campaign: pdas.campaignPda,
-          mintAccount: pdas.mintPda,
-          solTreasury: campaignData.solTreasury,
-          participantData: participantDataPda,
-          participantPubkey: participantPubkeyPda,
-          campaignStats: pdas.campaignStatsPda,
-          systemProgram: web3.SystemProgram.programId,
-        })
-        // .signers([signer])
-        .rpc();
-
-      return tx;
-    } catch (err) {
-      if (err) console.error(err);
-    }
-  };
+  if (!campaign) {
+    return null
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -91,13 +42,14 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
           />
           <CustomInput
             label="Your chance to get"
-            value="13,242"
-            tokenName="$BEER2"
+            value={(+amount / campaign.presalePrice.$numberDecimal).toString()}
+            tokenName={campaign.tokenSymbol}
+            tokenIcon={formatPinataUrl(campaign.tokenImage)}
           />
         </div>
         <CustomButton
           customStyles="!text-body-l"
-          handleClick={participate}
+          handleClick={handleSubmit}
         >
           Enter to Presale
         </CustomButton>

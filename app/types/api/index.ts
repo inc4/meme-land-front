@@ -95,6 +95,7 @@ export type TCampaignStats = {
   totalTokensSold: BN;
   walletsClaimed: BN;
   totalParticipants: BN;
+  totalSolCollected: BN;
   [key: string]: any;
 };
 

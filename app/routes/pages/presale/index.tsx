@@ -15,16 +15,12 @@ const Presale = () => {
   const {data, isLoading} = useCampaign(tokenId);
 
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
-
+  console.log(data);
   return (
     <div className="pb-16 flex flex-col gap-16 lg:gap-[120px]">
       <div>
         <PresaleBlock campaign={data} isLoading={isLoading} />
-        {isLoading ? (
-          <div className="rounded-[14px] bg-neutral-900 animate-pulse h-[148px] w-full mt-[30px] lg:mt-[14px]" />
-        ) : (
-          <PresaleProgress campaign={data} />
-        )}
+        <PresaleProgress campaign={data} />
       </div>
       <TokenInfo campaign={data} isLoading={isLoading} />
       <Distribution campaign={data} isLoading={isLoading} />

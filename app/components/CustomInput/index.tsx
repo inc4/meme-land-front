@@ -4,10 +4,10 @@ type CustomInputProps = {
   label: string;
   value: string;
   tokenName: string;
-  tokenImage?: string;
   onChange?: (value: string) => void;
   balance?: string;
   disabled?: boolean;
+  tokenIcon?: string;
 }
 
 const CustomInput = ({
@@ -15,9 +15,9 @@ const CustomInput = ({
   value,
   onChange = () => {},
   tokenName,
-  tokenImage = solanaLogo,
   disabled = false,
-  balance
+  balance,
+  tokenIcon = solanaLogo
 }: CustomInputProps) => {
 
   const handleInput = (inputValue: string) => {
@@ -54,7 +54,7 @@ const CustomInput = ({
         />
         <div className="font-semibold ml-auto text-body-m py-2 px-3 h-[38px] flex items-center gap-2 bg-[#FFFFFF1F] rounded-xl">
           <span>{tokenName}</span>
-          <img src={tokenImage} className="w-[24px] h-auto object-contain" alt="logo"/>
+          <img src={tokenIcon} alt="logo" className="w-4 h-4"/>
         </div>
       </div>
       <div className="flex justify-between">
