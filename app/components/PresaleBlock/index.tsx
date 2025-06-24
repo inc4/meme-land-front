@@ -11,9 +11,11 @@ import {formatPinataUrl} from "~/utils/formatPinataUrl";
 import clsx from "clsx";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import {NavLink} from "react-router";
+import useCampaignStats from "~/hooks/useCampaignStats";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
+  const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
 
   const timerData = useMemo(() => {
     if (!campaign) return null;
@@ -104,7 +106,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
                 live
               </div>
               <div className="font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative">
-                12,432 Participants
+                {campaignStatsData?.totalParticipants.toNumber()} Participant{campaignStatsData?.totalParticipants.toNumber() > 1 && 's'}
               </div>
             </div>
           </div>
