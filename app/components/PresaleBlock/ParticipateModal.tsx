@@ -12,77 +12,22 @@ import {PublicKey} from "@solana/web3.js";
 import {Buffer} from 'buffer';
 import type {TCampaign} from "~/types";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
-import useUserAllocation from "~/hooks/useUserAllocation";
+import participate from "~/utils/participate";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const { balance, userAddress } = useGetBalance();
   const provider = useAnchorProvider();
   const { publicKey } = useWallet();
-const a = useUserAllocation(campaign?.campaignId);
-  console.log(a);
+
   const [amount, setAmount] = useState('1');
 
   useEffect(() => {
     setAmount('1');
   }, [isOpen]);
 
-  const participate = async () => {
-    if (!publicKey) return null;
-
-    const program = new Program(idl, provider);
-    const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
-    const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
-
-    const campaignStatsData = await program.account.campaignStats.fetch(
-      pdas.campaignStatsPda
-    );
-
-    const [participantDataPda] = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("participant_data"),
-        pdas.campaignPda.toBuffer(),
-        publicKey.toBuffer(),
-      ],
-      program.programId
-    );
-
-    const [participantPubkeyPda] = PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("participant_pubkey"),
-        pdas.campaignPda.toBuffer(),
-        campaignStatsData.totalParticipants.toBuffer("le", 8),
-      ],
-      program.programId
-    );
-
-    const decimals = 9;
-    const amountInSmallestUnits = new BN(amount * 10 ** decimals);
-
-    try {
-      const tx = await program.methods
-        .participate({
-          tokenName: campaign.tokenName,
-          tokenSymbol: campaign.tokenSymbol,
-          amount: amountInSmallestUnits,
-        })
-        .accounts({
-          payer: publicKey,
-          roleAccount: pdas.roleAccountPda,
-          campaign: pdas.campaignPda,
-          mintAccount: pdas.mintPda,
-          solTreasury: campaignData.solTreasury,
-          participantData: participantDataPda,
-          participantPubkey: participantPubkeyPda,
-          campaignStats: pdas.campaignStatsPda,
-          systemProgram: web3.SystemProgram.programId,
-        })
-        .rpc();
-
-      return tx;
-    } catch (err) {
-      if (err) console.error(err);
-    }
-  };
+  const handleSubmit = ()=> {
+    participate(publicKey, campaign, provider, amount);
+  }
 
   if (!campaign) {
     return null
@@ -109,7 +54,7 @@ const a = useUserAllocation(campaign?.campaignId);
         </div>
         <CustomButton
           customStyles="!text-body-l"
-          handleClick={participate}
+          handleClick={handleSubmit}
         >
           Enter to Presale
         </CustomButton>

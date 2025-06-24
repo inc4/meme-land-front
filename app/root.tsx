@@ -14,9 +14,6 @@ import "./app.css";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-if (!window.Buffer) {
-  window.Buffer = Buffer;
-}
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

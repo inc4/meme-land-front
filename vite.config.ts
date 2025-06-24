@@ -6,12 +6,4 @@ import devtoolsJson from 'vite-plugin-devtools-json';
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), devtoolsJson()],
-  resolve: {
-    alias: {
-      buffer: 'buffer', // <-- Add this
-    },
-  },
-  define: {
-    global: {}, // <-- Needed for buffer to work in browser
-  },
 });
