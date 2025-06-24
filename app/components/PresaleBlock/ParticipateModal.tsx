@@ -12,12 +12,14 @@ import {PublicKey} from "@solana/web3.js";
 import {Buffer} from 'buffer';
 import type {TCampaign} from "~/types";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
+import useUserAllocation from "~/hooks/useUserAllocation";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const { balance, userAddress } = useGetBalance();
   const provider = useAnchorProvider();
   const { publicKey } = useWallet();
-
+const a = useUserAllocation(campaign?.campaignId);
+  console.log(a);
   const [amount, setAmount] = useState('1');
 
   useEffect(() => {
