@@ -1,9 +1,19 @@
-const WalletInfo = () => {
+import type { TCampaignStats } from "~/types";
+
+type TProps = {
+  campaignStats: TCampaignStats;
+  userGroup: number | undefined;
+}
+
+const WalletInfo = ({ campaignStats, userGroup }: TProps) => {
+  const { walletsClaimed, totalParticipants } = campaignStats;
+  const walletsWaiting = +totalParticipants - +walletsClaimed;
+
   return (
     <div className="p-[12px] pt-[18px] bg-background border-[2px] border-gray-700 rounded-[12px]">
       <div className="flex flex-col items-center mb-[21px]">
         <span className="text-body-s text-beige-600 uppercase font-semibold">Current Wallet #</span>
-        <span className="text-h2 text-primary font-medium font-mono">243</span>
+        <span className="text-h2 text-primary font-medium font-mono">{userGroup || '---'}</span>
       </div>
       
 
@@ -16,7 +26,7 @@ const WalletInfo = () => {
         <div className="grow flex flex-col items-center gap-[4px]">
           <span className="text-body-s text-beige-600 uppercase font-semibold">Wallets drawn:</span>
           <span className="text-h3 text-primary font-medium font-mono">
-            1980<sub className="text-gray-600">/10000</sub>
+            {+walletsClaimed}<sub className="text-gray-600">/{+totalParticipants}</sub>
           </span>
         </div>
 
@@ -25,7 +35,7 @@ const WalletInfo = () => {
         <div className="grow flex flex-col items-center gap-[4px]">
           <span className="text-body-s text-beige-600 uppercase font-semibold">Wallets waiting:</span>
           <span className="text-h3 text-primary font-medium font-mono">
-            9231<sub className="text-gray-600">/10000</sub>
+            {walletsWaiting}<sub className="text-gray-600">/{+totalParticipants}</sub>
           </span>
         </div>
 

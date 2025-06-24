@@ -4,15 +4,18 @@ import goldIcon from "~/assets/svg/gold.svg";
 import silverIcon from "~/assets/svg/silver.svg";
 import bronzeIcon from "~/assets/svg/bronze.svg";
 import { shortenAddress } from "~/utils/other";
+import { formatNumberWithCommas } from "~/utils/numbers";
+import type { TParticipations } from "~/types";
 
 type TVariant = NonNullable<Parameters<typeof NeonShadowBox>[0]["variant"]>;
 
 type TProps = {
   variant: TVariant;
+  data: TParticipations;
 }
 
-const TopWallet = ({ variant = "gold" }: TProps) => {
-  const address = 'A86EzVnP4VnHUKoK1w2DkZ1pYN17U7751YTMNEyGmEmp';
+const TopWallet = ({ data, variant = "gold" }: TProps) => {
+  const { wallet, tokenAllocation } = data;
 
   const getIconSrc = (v: TVariant) => {
     switch (v) {
@@ -54,14 +57,14 @@ const TopWallet = ({ variant = "gold" }: TProps) => {
 
           <div className="flex items-center gap-[8px]">
             <img src={walletOutlineSecondaryIcon} alt={variant} />
-            <span className="text-body-l text-white font-medium font-mono">{shortenAddress(address, 3, 3)}</span>
+            <span className="text-body-l text-white font-medium font-mono">{shortenAddress(wallet, 3, 3)}</span>
           </div>
 
         </div>
 
         <div className="flex flex-col items-center">
           <span className="text-body-s text-beige-600 uppercase font-semibold">Tokens</span>
-          <span className="text-h2 text-white font-medium font-mono">31,993,321</span>
+          <span className="text-h2 text-white font-medium font-mono">{formatNumberWithCommas(tokenAllocation)}</span>
         </div>
     </NeonShadowBox>
   );
