@@ -7,7 +7,7 @@ import CustomButton from "~/components/CustomButton";
 import useClaim from "~/hooks/useClaim";
 import useSolPrice from "~/hooks/useSolPrice";
 import { formatPinataUrl } from "~/utils/formatPinataUrl";
-import { formatNumberWithCommas } from "~/utils/numbers";
+import { formatNumberWithCommas, fromLamports } from "~/utils/numbers";
 import type { TCampaign } from "~/types";
 
 type TProps = {
@@ -27,7 +27,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
     ? +listingPrice.$numberDecimal * +solPrice
     : 0;
   
-  const allocationPrice = +(userAllocation * tokenFiatPrice).toFixed(2);
+  const allocationPrice = +(+fromLamports(userAllocation) * tokenFiatPrice).toFixed(2);
 
   const handleClaim = async () => {
     if (!tokenName || !tokenSymbol || !publicKey) return;
@@ -48,7 +48,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
         <div className="flex flex-col gap-[10px] my-8">
           <CustomInput
             label="You Invest"
-            value={formatNumberWithCommas(userAllocation)}
+            value={formatNumberWithCommas(+fromLamports(userAllocation))}
             fiatPrice={formatNumberWithCommas(allocationPrice)}
             tokenName={tokenSymbol}
             tokenIcon={formatPinataUrl(tokenImage)}

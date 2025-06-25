@@ -29,4 +29,8 @@ export const formatNumberShortEU = (num: number) => {
   } else {
     return num.toString();
   }
-}
+};
+
+export const toLamports = (value: string | number) => (+value * 1e9).toString();
+
+export const fromLamports = (value: string | number) => (+value / 1e9).toString();
