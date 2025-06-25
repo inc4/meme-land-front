@@ -8,6 +8,7 @@ type CustomInputProps = {
   balance?: string;
   disabled?: boolean;
   tokenIcon?: string;
+  fiatPrice?: string;
 }
 
 const CustomInput = ({
@@ -17,6 +18,7 @@ const CustomInput = ({
   tokenName,
   disabled = false,
   balance,
+  fiatPrice,
   tokenIcon = solanaLogo
 }: CustomInputProps) => {
 
@@ -58,7 +60,7 @@ const CustomInput = ({
         </div>
       </div>
       <div className="flex justify-between">
-        <span className="font-mono text-[#67686D] text-body-s">≈ $0.00</span>
+        <span className="font-mono text-[#67686D] text-body-s">≈ ${fiatPrice || '0.00'}</span>
         {balance && onChange && (
           <span className="text-[#67686D] text-body-s">
             Balance:{" "}

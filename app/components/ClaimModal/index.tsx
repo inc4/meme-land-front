@@ -1,8 +1,11 @@
 import { useWallet } from "@solana/wallet-adapter-react";
+
 import Modal from "~/components/Modal";
 import CustomInput from "~/components/CustomInput";
 import CustomButton from "~/components/CustomButton";
+
 import useClaim from "~/hooks/useClaim";
+import useSolPrice from "~/hooks/useSolPrice";
 import { formatPinataUrl } from "~/utils/formatPinataUrl";
 import { formatNumberWithCommas } from "~/utils/numbers";
 import type { TCampaign } from "~/types";
@@ -15,9 +18,16 @@ type TProps = {
 }
 
 const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
-  const { tokenSymbol, tokenName, tokenImage, campaignId } = campaign;
+  const { tokenSymbol, tokenName, tokenImage, campaignId, listingPrice } = campaign;
   const { isMutating, trigger: claim } = useClaim(campaignId);
   const { publicKey } = useWallet();
+  const solPrice = useSolPrice();
+
+  const tokenFiatPrice = solPrice
+    ? +listingPrice.$numberDecimal * +solPrice
+    : 0;
+  
+  const allocationPrice = +(userAllocation * tokenFiatPrice).toFixed(2);
 
   const handleClaim = async () => {
     if (!tokenName || !tokenSymbol || !publicKey) return;
@@ -39,6 +49,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
           <CustomInput
             label="You Invest"
             value={formatNumberWithCommas(userAllocation)}
+            fiatPrice={formatNumberWithCommas(allocationPrice)}
             tokenName={tokenSymbol}
             tokenIcon={formatPinataUrl(tokenImage)}
             disabled
