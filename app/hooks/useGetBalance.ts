@@ -10,10 +10,17 @@ const useGetBalance = () => {
   }, []);
 
   useEffect(() => {
+    let interval;
+
     if (userAddress) {
-      fetchSolBalance(userAddress)
-        .then((bal) => setBalance(bal))
+      interval = setInterval(() => {
+        fetchSolBalance(userAddress)
+          .then((bal) => setBalance(bal))
+      }, 2000)
     }
+
+    return () => clearInterval(interval);
+
   }, [userAddress]);
 
   const getAddress = async () => {
