@@ -12,7 +12,7 @@ const WalletInfo = ({ campaignStats, userGroup }: TProps) => {
   const widthPercentage = (+walletsClaimed * 100) / +totalParticipants;
 
   return (
-    <div className="p-[12px] pt-[18px] bg-background border-[2px] border-gray-700 rounded-[12px]">
+    <div className="h-full p-[12px] pt-[18px] bg-background border-[2px] border-gray-700 rounded-[12px]">
       <div className="flex flex-col items-center mb-[21px]">
         <span className="text-body-s text-beige-600 uppercase font-semibold">Current Wallet #</span>
         <span className="text-h2 text-primary font-medium font-mono">{userGroup || '---'}</span>

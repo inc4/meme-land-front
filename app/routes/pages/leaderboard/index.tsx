@@ -24,17 +24,17 @@ const Leaderboard = () => {
   const { data: userGroupData } = useUserGroup(campaignId);
   const { data: userAllocationData } = useUserAllocation(campaignId);
   
-  const { isLive, isEarly } = useIsLiveDraw({
+  const { isLoading, isLive, isEarly } = useIsLiveDraw({
     drawStart: campaignData?.presaleDrawStartUTC,
     drawEnd: campaignData?.presaleDrawEndUTC,
   });
 
-  if (isEarly || !campaignId || !campaignData) return;
+  if (isLoading || isEarly || !campaignId || !campaignData) return;
 
   return (
     <div>
       <div className="mb-[24px] lg:mb-[48px]">
-        {isLive ? <Title isLive={isLive} /> : <Skeleton className="h-[30px]! w-[300px]!" />}
+        <Title isLive={isLive} />
       </div>
 
       <div className="grid grid-cols-1 gap-[12px] mb-[64px] lg:grid-cols-3 lg:grid-rows-[1fr,127px]">

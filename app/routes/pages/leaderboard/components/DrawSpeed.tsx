@@ -20,7 +20,7 @@ const DrawSpeed = ({ campaign }: TProps) => {
       variant="green"
       primaryShadowPosition="bottom"
       secondaryShadowPosition="inner"
-      customStyles="p-[17px]"
+      customStyles="h-full p-[17px]"
     >
       <div className="flex flex-col items-center justify-between gap-[8px]">
 

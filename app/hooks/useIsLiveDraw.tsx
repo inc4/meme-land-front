@@ -6,8 +6,9 @@ type TParams = {
 };
 
 const useIsLiveDraw = ({ drawStart, drawEnd }: TParams) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [isLive, setIsLive] = useState(false);
-  const [isEarly, setIsEarly] = useState(true);
+  const [isEarly, setIsEarly] = useState(false);
   const intervalMs = 1000;
 
   const checkIsLive = (startTime: string, endTime: string) => {
@@ -39,12 +40,16 @@ const useIsLiveDraw = ({ drawStart, drawEnd }: TParams) => {
     const early = checkIsEarly(drawStart);
     setIsEarly(early);
 
-    if (early) return;
+    if (early) {
+      setIsLoading(false);
+      return;
+    }
 
     const timer = setInterval(() => {
       const live = checkIsLive(drawStart, drawEnd);
 
       setIsLive(live);
+      setIsLoading(false);
 
       if (!live) clearInterval(timer);
     }, intervalMs);
@@ -52,7 +57,7 @@ const useIsLiveDraw = ({ drawStart, drawEnd }: TParams) => {
     return () => clearInterval(timer);
   }, [drawStart, drawEnd]);
 
-  return { isLive, isEarly };
+  return { isLoading, isLive, isEarly };
 };
 
 export default useIsLiveDraw;
