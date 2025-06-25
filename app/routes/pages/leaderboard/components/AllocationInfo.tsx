@@ -33,7 +33,7 @@ const AllocationInfo = ({ campaign, userAllocation, userGroup }: TProps) => {
         variant="green"
         primaryShadowPosition="top"
         secondaryShadowPosition="inner"
-        customStyles="p-[12px] pt-[38px] lg:pt-[71px]"
+        customStyles="h-full p-[12px] pt-[38px] lg:pt-[71px]"
       >
         <div>
 
