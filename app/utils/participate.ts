@@ -28,9 +28,8 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
     program.programId
   );
   console.log(
-    "typeof publicKey:",
-    typeof publicKey,
-    publicKey
+    "pdas.campaignPda:",
+    pdas.campaignPda
   );
   console.log(
     "typeof campaignStatsData.totalParticipants:",
