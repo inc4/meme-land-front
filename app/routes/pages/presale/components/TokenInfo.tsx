@@ -16,7 +16,7 @@ const TokenInfo = ({isLoading, campaign}: {isLoading: boolean, campaign: TCampai
               <InfoIcon/>
               Current Supply:
             </h3>
-            <span className="text-2xl font-medium font-mono">{isLoading ? '-' : `888,888,888 ${campaign?.tokenSymbol}`}</span>
+            <span className="text-2xl font-medium font-mono">{isLoading ? '-' : `1,000,000,888 ${campaign?.tokenSymbol}`}</span>
           </div>
           <div className="flex flex-col gap-3 lg:flex-row lg:gap-5">
             <a href={campaign?.solscan || ''} target="_blank">
