@@ -36,7 +36,7 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
     [
       Buffer.from("participant_pubkey"),
       pdas.campaignPda.toBuffer(),
-      Buffer.from(campaignStatsData.totalParticipants),
+      Buffer.from(campaignStatsData.totalParticipants.toArray("le", 8)),
     ],
     program.programId
   );
