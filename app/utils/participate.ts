@@ -27,7 +27,16 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
     ],
     program.programId
   );
-  console.log(campaignStatsData.totalParticipants, campaignStatsData.totalParticipants.toBuffer, campaignStatsData.totalParticipants.toBuffer());
+  console.log(
+    "typeof publicKey:",
+    typeof publicKey,
+    publicKey
+  );
+  console.log(
+    "typeof campaignStatsData.totalParticipants:",
+    typeof campaignStatsData.totalParticipants,
+    campaignStatsData.totalParticipants
+  );
   const [participantPubkeyPda] = PublicKey.findProgramAddressSync(
     [
       Buffer.from("participant_pubkey"),
