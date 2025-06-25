@@ -3,6 +3,7 @@ import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import useCampaigns from "~/hooks/useCampaigns";
 import type {TCampaignResponse} from "~/types";
+import {NavLink} from "react-router";
 
 const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) => {
 
@@ -20,7 +21,7 @@ const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) 
           <div className="grid grid-cols-[267px_120px_1fr_1fr] min-w-[900px] gap-6 p-3 bg-[#0D0D0D]" key={el.projectName}>
             <div className="flex items-center">
               <div className="w-8 h-9 mr-3 rounded-[6px] bg-[#C5C5C5]" />
-              <span className="text-[20px] font-bold">{el.projectName}</span>
+              <NavLink to={`/presale/${el.campaignId}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
             </div>
             <span className="font-medium text-body-l">{el.shortDescription1}</span>
             <span className="text-[#3AFFA3] font-medium text-right">-</span>

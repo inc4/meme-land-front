@@ -74,8 +74,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <NavLink to={`/presale/${campaign?.campaignId}/leaderboard`}>
             <button
               type="button"
-              disabled
-              className="text-doby-l flex items-center justify-center bg-[#3E3E3E] font-semibold rounded-2xl text-white shadow-lg py-4 w-full max-w-[500px] mx-auto"
+              className="text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-white shadow-lg py-4 w-full max-w-[500px] mx-auto"
             >
               CHECK DRAW
             </button>
