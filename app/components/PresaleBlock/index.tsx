@@ -87,7 +87,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
   const handleParticipate = () => {
     setParticipateModalOpen(true);
   }
-
+  console.log(campaignStatsData);
   if (!isLoading && !campaign) {
     return null;
   }
