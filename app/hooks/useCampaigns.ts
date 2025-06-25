@@ -35,7 +35,10 @@ const useCampaigns = (conditions?: Partial<TCampaign> | null, limit = 10, page=0
     key: '/campaigns',
     conditions,
     limit,
-  }, fetcher);
+  },
+    fetcher,
+    { refreshInterval: 2000 },
+  );
 };
 
 export default useCampaigns;

@@ -2,9 +2,11 @@ import solIcon from "~/assets/svg/solana-logo.svg";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import type {TCampaign} from "~/types";
 import useCampaignStats from "~/hooks/useCampaignStats";
+import useUserAllocation from "~/hooks/useUserAllocation";
 
 const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
+  const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string);
 
   if (!campaignStatsData || !campaign) {
     return <div className="rounded-[14px] bg-neutral-900 animate-pulse h-[148px] w-full mt-[30px] lg:mt-[14px]"/>;
@@ -43,7 +45,7 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
         <div className="bg-[#080808] rounded-xl py-5 px-4 flex items-center justify-between">
           <span className="text-body-m font-semibold">Your Allocation</span>
           <div className="flex flex-col items-end gap-1 font-semibold text-body-m font-mono">
-            <span>0.00 $BEER</span>
+            <span>{userAllocationData / 10 ** 9} {campaign.tokenSymbol}</span>
             <span className="opacity-50">(0.00$)</span>
           </div>
         </div>
