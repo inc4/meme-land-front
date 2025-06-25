@@ -115,8 +115,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <div className="flex flex-col mt-5">
             <div className="flex flex-col gap-6 mb-4 lg:flex-row lg:justify-between">
               <div className="flex gap-[10px] items-center">
-                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo"
-                     className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
+                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo" className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
                 <div className="flex flex-col gap-[2px]">
                   <span className="text-white font-bold text-[24px]">{campaign.projectName}</span>
                   <span className="opacity-60 text-white text-body-m">{campaign.shortDescription1}</span>

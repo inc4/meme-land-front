@@ -12,6 +12,7 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
   if (!publicKey) return null;
 
   const program = new Program(idl, provider);
+  console.log(publicKey, publicKey.toBuffer);
 
   const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
   const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
@@ -27,7 +28,7 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
     ],
     program.programId
   );
-
+  console.log(campaignStatsData.totalParticipants, campaignStatsData.totalParticipants.toBuffer);
   const [participantPubkeyPda] = PublicKey.findProgramAddressSync(
     [
       Buffer.from("participant_pubkey"),
