@@ -27,15 +27,10 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
     ],
     program.programId
   );
-  console.log(
-    "pdas.campaignPda:",
-    pdas.campaignPda
-  );
-  console.log(
-    "typeof campaignStatsData.totalParticipants:",
-    new BN(campaignStatsData.totalParticipants),
-    new BN(campaignStatsData.totalParticipants).toBuffer
-  );
+
+  console.log(pdas.campaignPda, pdas.campaignPda.toBuffer);
+  console.log(campaignStatsData.totalTokensClaimed, campaignStatsData.totalTokensClaimed.toBuffer);
+  console.log(campaignStatsData.totalTokensSold, campaignStatsData.totalTokensSold.toBuffer);
   const [participantPubkeyPda] = PublicKey.findProgramAddressSync(
     [
       Buffer.from("participant_pubkey"),
