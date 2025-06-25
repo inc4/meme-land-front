@@ -116,3 +116,8 @@ export type TParticipationsResponse = {
   };
   totalItems: number;
 };
+
+export type TBinanceSolPrice = {
+  symbol: string,
+  price: string,
+};

@@ -27,7 +27,7 @@ const useCampaign = (campaignId: string) => {
   return useSWR(
     publicKey && campaignId
     ? {
-      key: `/campaigns`,
+      key: `campaign`,
       campaignId,
       publicKey: publicKey.toString()
     } : null,
