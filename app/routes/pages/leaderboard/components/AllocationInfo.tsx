@@ -5,7 +5,7 @@ import NeonShadowBox from "~/components/NeonShadowBox";
 import ClaimModal from "~/components/ClaimModal";
 
 import useIsClaimable from "~/hooks/useIsClaimable";
-import { formatNumberWithCommas } from "~/utils/numbers";
+import { formatNumberWithCommas, fromLamports } from "~/utils/numbers";
 import type { TCampaign } from "~/types";
 
 type TProps = {
@@ -33,14 +33,14 @@ const AllocationInfo = ({ campaign, userAllocation, userGroup }: TProps) => {
         variant="green"
         primaryShadowPosition="top"
         secondaryShadowPosition="inner"
-        customStyles="p-[12px] pt-[38px] lg:pt-[71px]"
+        customStyles="h-full p-[12px] pt-[38px] lg:pt-[71px]"
       >
         <div>
 
           <div className="flex flex-col items-center m-auto mb-[24px]">
             <span className="text-body-s text-beige-600 uppercase font-semibold">Your Allocation</span>
             <span className="text-h2 text-primary font-medium font-mono">
-              {userAllocation ? formatNumberWithCommas(userAllocation) : '0'} ${tokenSymbol}
+              {userAllocation ? formatNumberWithCommas(+fromLamports(userAllocation)) : '0'} ${tokenSymbol}
             </span>
           </div>
 
