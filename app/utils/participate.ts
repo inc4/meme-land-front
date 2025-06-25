@@ -12,6 +12,7 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
   if (!publicKey) return null;
 
   const program = new Program(idl, provider);
+  console.log(publicKey, publicKey.toBuffer);
 
   const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
   const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
