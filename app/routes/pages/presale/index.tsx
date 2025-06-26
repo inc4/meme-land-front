@@ -7,12 +7,16 @@ import TokenDescription from "~/routes/pages/presale/components/TokenDescription
 import UpcomingSales from "~/components/Welcome/components/UpcomingSales";
 import CheckDrawModal from "~/components/CheckDrawModal";
 import {useEffect, useState} from "react";
-import useCampaign from "~/hooks/useCampaign";
+import useCampaigns from "~/hooks/useCampaigns";
 import {useParams} from "react-router";
+import { PRESALE_PAGE_SEGMENT } from "~/utils/constants";
 
 const Presale = () => {
-  let {tokenId} = useParams();
-  const {data, isLoading} = useCampaign(tokenId);
+  let params = useParams();
+  const tokenName = params[PRESALE_PAGE_SEGMENT];
+
+  const { data: campaignsData, isLoading } = useCampaigns({ tokenName });
+  const data = campaignsData?.page.data[0];
 
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
 
@@ -36,7 +40,7 @@ const Presale = () => {
       <CheckDrawModal
         isOpen={checkDrawOpen}
         onClose={() => setCheckDrawOpen(false)}
-        campaignId={tokenId}
+        tokenName={tokenName}
       />
     </div>
   )

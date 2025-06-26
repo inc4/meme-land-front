@@ -71,7 +71,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         titleColor: 'text-[#F24B4D]',
         timestamp: new Date(campaign.presaleDrawStartUTC).getTime(),
         btn: () => (
-          <NavLink to={`/presale/${campaign?.campaignId}/leaderboard`}>
+          <NavLink to={`/presale/${campaign?.tokenName}/leaderboard`}>
             <button
               type="button"
               className="text-doby-l lg:text-[18px] text-black flex items-center justify-center bg-white font-semibold rounded-2xl shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
@@ -217,7 +217,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           </div>
         )}
         {homePage ? (
-          <NavLink to={`/presale/${campaign?.campaignId}`}>
+          <NavLink to={`/presale/${campaign?.tokenName}`}>
             <button
               type="button"
               className="text-doby-l lg:text-[18px] flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
