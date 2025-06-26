@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Program, web3 } from "@coral-xyz/anchor";
+import { Program, web3, BN } from "@coral-xyz/anchor";
 
 import useAnchorProvider from "./useAnchorProvider";
 import useCampaign from "./useCampaign";
@@ -39,7 +39,9 @@ const useUserAllocation = (campaignId: string) => {
         accountInfo.data,
       );
 
-      return campaignStatsData.amount as number;
+      const amount = campaignStatsData.amount as BN;
+
+      return +amount;
     }
   };
 

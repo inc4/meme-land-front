@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Program, web3 } from "@coral-xyz/anchor";
+import { Program, web3, BN } from "@coral-xyz/anchor";
 import { randomnessAccountAddress } from "@orao-network/solana-vrf";
 
 import useAnchorProvider from "./useAnchorProvider";
@@ -36,7 +36,7 @@ const useUserGroup = (campaignId: string) => {
     const random = randomnessAccountAddress(campaignPda.toBuffer());
 
 
-    const result = await program.methods
+    const result = (await program.methods
       .getUserGroup({
         tokenName: name,
         tokenSymbol: symbol,
@@ -49,9 +49,9 @@ const useUserGroup = (campaignId: string) => {
         participantData: participantDataPda,
         campaignStats: campaignStatsPda,
       })
-      .view();
+      .view()) as BN;
 
-    return result as number;
+    return +result;
   };
 
   return useSWR(
