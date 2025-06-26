@@ -51,7 +51,7 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
           <span className="text-[14px] font-semibold">Copy link</span>
           <div
             className="flex items-center justify-between py-[14px] px-4 bg-[#090909] border-[1px] border-[#FFFFFF21] rounded-[6px] my-2">
-            <span className="font-bold text-[20px] break-all">{window.location.href}</span>
+            <span className="font-bold text-[14px] break-all">{window.location.href}</span>
             {isCopied ? (
               <img src={checkIcon} alt="Checkmark" className="shrink-0 w-[27px]"/>
             ) : (
@@ -67,7 +67,7 @@ const TokenDescription = ({campaign}: {campaign: TCampaign}) => {
           {(!!campaign.telegram || !!campaign.website || !!campaign.twitter) && (
             <span>Or Share in Socials:</span>
           )}
-          <div className="flex gap-4 mt-1">
+          <div className="flex gap-2 mt-2">
             {campaign.telegram && (
               <a href={campaign.telegram} target="_blank">
                 <CustomButton variant="icon-only" customStyles="!w-10 !h-10 !p-0">

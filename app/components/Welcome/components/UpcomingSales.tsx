@@ -43,7 +43,7 @@ const UpcomingSales = () => {
                 <div className="h-[222px] w-full bg-[#161B1F] relative flex items-center justify-center">
                   <span className="uppercase text-2xl font-bold text-[#90C5EF] opacity-30">coming soon</span>
                   <div
-                    className="absolute left-8 w-[70px] h-[70px] rounded-[10px] -bottom-8 border-1 border-[#FFFFFF1A] bg-[#161B1F]"/>
+                    className="absolute left-8 w-[70px] h-[70px] rounded-[10px] -bottom-8 border-2 border-[#FFFFFF1A] bg-[#161B1F]"/>
                 </div>
               </div>
             ))}

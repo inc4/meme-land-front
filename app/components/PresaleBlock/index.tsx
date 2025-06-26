@@ -4,6 +4,7 @@ import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import Browse from "~/components/Icons/Browse";
 import bgFigure from "~/assets/svg/token-icon-figure.svg";
+import checkIcon from "~/assets/svg/check.svg";
 import {useMemo, useState} from "react";
 import ParticipateModal from "~/components/PresaleBlock/ParticipateModal";
 import type {TCampaign} from "~/types";
@@ -12,10 +13,12 @@ import clsx from "clsx";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import {NavLink} from "react-router";
 import useCampaignStats from "~/hooks/useCampaignStats";
+import useUserAllocation from "~/hooks/useUserAllocation";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
+  const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string);
 
   const timerData = useMemo(() => {
     if (!campaign) return null;
@@ -92,10 +95,39 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     return null;
   }
 
+  const submitBtn = useMemo(() => {
+    if (homePage) {
+      return (
+        <NavLink to={`/presale/${campaign?.campaignId}`}>
+          <button
+            type="button"
+            className="text-doby-l lg:text-[18px] flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
+          >
+            PARTICIPATE NOW
+          </button>
+        </NavLink>
+      )
+    } else if (userAllocationData) {
+      return (
+        <button
+          type="button"
+          className="text-doby-l lg:text-[18px] flex items-center gap-[10px] justify-center bg-[#3AFFA31F] font-semibold rounded-2xl text-[#3AFFA3] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
+        >
+          <img src={checkIcon} alt="checkmark"/>
+          YOU JOINED
+        </button>
+      )
+    } else if (timerData) {
+      return timerData.btn();
+    } else {
+      return null;
+    }
+  }, [campaign, userAllocationData, timerData, homePage])
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_472px] lg:grid gap-[14px]">
-    {isLoading ? (
-        <div className="rounded-[14px] animate-pulse bg-neutral-900" />
+      {isLoading ? (
+        <div className="rounded-[14px] animate-pulse bg-neutral-900"/>
       ) : campaign && (
         <div className="bg-[#0F1113] rounded-[14px] p-5">
           <div className="relative">
@@ -166,7 +198,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Presale price</span>
               <span className={clsx('font-medium font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                $ {isLoading ? "-" : campaign?.presalePrice.$numberDecimal}
+                {isLoading ? "-" : campaign?.presalePrice.$numberDecimal}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">
@@ -216,16 +248,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             <Countdown timestamp={timerData.timestamp} className="justify-between"/>
           </div>
         )}
-        {homePage ? (
-          <NavLink to={`/presale/${campaign?.campaignId}`}>
-            <button
-              type="button"
-              className="text-doby-l lg:text-[18px] flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
-            >
-              PARTICIPATE NOW
-            </button>
-          </NavLink>
-        ) : timerData && timerData.btn()}
+        {submitBtn}
       </div>
       <ParticipateModal
         campaign={campaign as TCampaign}

@@ -12,12 +12,14 @@ const Tokenomics = ({campaign, isLoading}: {campaign: TCampaign|undefined, isLoa
   ];
   return (
     <section>
-      <h1 className="mb-3 font-bold">Tokenomics</h1>
+      <h1 className="mb-3 font-bold tracking-[-3%]">Tokenomics</h1>
       <span className="opacity-60 font-medium text-body-m">No vesting, all tokens are 100% released and mintedduring TGE</span>
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-[437px_1fr] lg:gap-[14px] mt-6">
         <div className="bg-[#0F1113] rounded-[14px] p-5 lg:pb-0">
           <span className="text-h2 mb-2 block font-bold">Details</span>
-          <span className="text-body-m font-medium">No vesting, all tokens are 100% released and mintedduring TGE</span>
+          <span className="text-body-m font-medium opacity-60 max-w-[293px] block">
+            No vesting, all tokens are 100% released and mintedduring TGE
+          </span>
           <div className="flex flex-col gap-2 mt-6">
             <div className="bg-[#080808] p-3 rounded-xl">
               <span className="font-medium text-body-m block opacity-60">Total Groups</span>
@@ -39,7 +41,9 @@ const Tokenomics = ({campaign, isLoading}: {campaign: TCampaign|undefined, isLoa
         </div>
         <div className="bg-[#0F1113] rounded-[14px] p-5 lg:pb-0">
           <span className="text-2xl font-bold">Pie Chart</span>
-          <span className="text-body-m opacity-60 font-medium mb-2 mt-2 block">No vesting, all tokens are 100% released and mintedduring TGE</span>
+          <span className="text-body-m opacity-60 font-medium mb-2 mt-2 max-w-[293px] block">
+            No vesting, all tokens are 100% released and mintedduring TGE
+          </span>
           <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 items-center">
             <div className="flex flex-col gap-2 w-full">
               {list.map((el) => (

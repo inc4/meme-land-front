@@ -11,7 +11,7 @@ const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) 
   return !!campaigns?.page.size && (
     <section>
       <h1 className="mb-8 font-bold">Completed Sales</h1>
-      <div className="rounded-lg overflow-auto border-1 border-[#1A1A1A]">
+      <div className="rounded-lg overflow-auto border-2 border-[#1A1A1A]">
         <div className="grid grid-cols-[297px_1fr_150px_150px] min-w-[900px] gap-6 text-body-m opacity-50 uppercase p-3 items-center">
           <span>Projects</span>
           <span>Description</span>

@@ -2,7 +2,7 @@ const Rules = () => (
   <div className="static-page">
     <h1>Rules at platfrom</h1>
     <h3>The following are fees charged by the pump.fun platform when you use the pump.fun platform:</h3>
-    <div className="rounded-lg border-1 border-[#1A1A1A]">
+    <div className="rounded-lg border-2 border-[#1A1A1A]">
       <div className="grid grid-cols-2 border-b-1 border-b-[#1A1A1A] py-[22px] px-[44px] bg-[#000000]">
         <span className="font-bold">Action</span>
         <span className="font-bold">Fee</span>

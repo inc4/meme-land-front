@@ -45,10 +45,12 @@ const TokenInfo = ({isLoading, campaign}: {isLoading: boolean, campaign: TCampai
               <InfoIcon/>
               Swap Token
             </h3>
-            <span className="uppercase text-body-m font-semibold flex">
-              waiting
-              <img src={clockIcon} alt="clock" className="ml-[10px]"/>
-            </span>
+            {(!campaign?.raydium && !campaign?.jupiter) && (
+              <span className="uppercase text-body-m font-semibold flex">
+                waiting
+                <img src={clockIcon} alt="clock" className="ml-[10px]"/>
+              </span>
+            )}
           </div>
           <div className="flex flex-col gap-3 lg:flex-row lg:gap-5">
             <a href={campaign?.raydium || ''} target="_blank">
