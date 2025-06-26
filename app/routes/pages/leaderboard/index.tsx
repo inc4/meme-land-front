@@ -8,7 +8,7 @@ import AllocationInfo from "./components/AllocationInfo";
 import RealTimeResults from "./components/RealTimeResults";
 import Skeleton from "~/components/Skeleton";
 
-import useCampaign from "~/hooks/useCampaign";
+import useCampaigns from "~/hooks/useCampaigns";
 import useIsLiveDraw from "~/hooks/useIsLiveDraw";
 import useCampaignStats from "~/hooks/useCampaignStats";
 import useUserGroup from "~/hooks/useUserGroup";
@@ -17,9 +17,12 @@ import { PRESALE_PAGE_SEGMENT } from "~/utils/constants";
 
 const Leaderboard = () => {
   const params = useParams();
-  const campaignId = params[PRESALE_PAGE_SEGMENT] || '';
+  const tokenName = params[PRESALE_PAGE_SEGMENT] || '';
 
-  const { data: campaignData, error: campaignDataError } = useCampaign(campaignId);
+  const { data: campaignsData, error: campaignDataError } = useCampaigns({ tokenName });
+  const campaignData = campaignsData?.page.data[0];
+  const campaignId = campaignData?.campaignId || ''
+
   const { data: campaignStatsData } = useCampaignStats(campaignId);
   const { data: userGroupData } = useUserGroup(campaignId);
   const { data: userAllocationData } = useUserAllocation(campaignId);

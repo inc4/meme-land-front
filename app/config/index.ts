@@ -9,18 +9,16 @@ const getConfig = () => {
       return {
         NETWORK_ID: WalletAdapterNetwork.Devnet,
         API_URL: 'https://memeland-backend.inc4.net/api/1.0.0',
-        CONTRACT_ADDRESS: '',
-        X_LINK: "https://x.com/",
-        TG_LINK: "https://web.telegram.org/",
+        X_LINK: "https://x.com",
+        TG_LINK: "https://web.telegram.org",
       };
     default:
     case 'prod':
       return {
         NETWORK_ID: WalletAdapterNetwork.Mainnet,
-        API_URL: '',
-        CONTRACT_ADDRESS: '',
-        X_LINK: "https://x.com/",
-        TG_LINK: "https://web.telegram.org/",
+        API_URL: 'https://memeland-backend.inc4.net/api/1.0.0',
+        X_LINK: "https://x.com",
+        TG_LINK: "https://web.telegram.org",
       };
   }
 };

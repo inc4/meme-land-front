@@ -24,7 +24,7 @@ const UpcomingSales = () => {
           <>
             {sortByPresaleStartUTC(data?.page.data || []).map((el) => (
               <NavLink
-                to={`/presale/${el.campaignId}`}
+                to={`/presale/${el.tokenName}`}
                 className="bg-[#0F1113] rounded-[14px] py-4 px-5 flex flex-col cursor-pointer min-h-[502px] border-[1px] border-transparent hover:border-gray-600 transition"
               >
                 <div style={{backgroundImage: `url("${formatPinataUrl(el.projectCoverImage)}"`}}

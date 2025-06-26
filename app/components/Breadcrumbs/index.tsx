@@ -15,7 +15,7 @@ const routeConfig: TRouteConfig[] = [
   { path: Constants.FEES_PAGE, label: "Fees" },
   { path: Constants.REFERRAL_PAGE, label: "Referral" },
   { path: Constants.LEADERBOARD_PAGE, label: "Leaderboard" },
-  { path: Constants.PRESALE_PAGE, label: ({ [Constants.PRESALE_PAGE_SEGMENT]: id }) => id },
+  { path: Constants.PRESALE_PAGE, label: ({ [Constants.PRESALE_PAGE_SEGMENT]: id }) => decodeURIComponent(id) },
 ];
 
 const Breadcrumbs = () => {

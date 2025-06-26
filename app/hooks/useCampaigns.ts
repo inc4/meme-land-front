@@ -15,12 +15,12 @@ const useCampaigns = (conditions?: Partial<TCampaign> | null, limit = 10, page=0
   queryParams.append("limit", limit.toString());
   queryParams.append("page", page.toString());
 
-  const fetcher = async () => {
-    const response = await fetch(`${API_URL}/campaigns?${queryParams.toString()}`, {
+  const fetcher = async (queryParams: string, publicKey: string) => {
+    const response = await fetch(`${API_URL}/campaigns?${queryParams}`, {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'X-Wallet': publicKey?.toString() || '',
+        'X-Wallet': publicKey,
       },
     });
 
@@ -31,12 +31,14 @@ const useCampaigns = (conditions?: Partial<TCampaign> | null, limit = 10, page=0
     throw new Error('Error: Get campaigns');
   };
 
-  return useSWR({
-    key: '/campaigns',
-    conditions,
-    limit,
-  },
-    fetcher,
+  return useSWR(
+    publicKey
+    ? {
+      key: 'campaigns',
+      queryParams: queryParams.toString(),
+      publicKey: publicKey.toString(),
+    } : null,
+    ({ queryParams, publicKey }) => fetcher(queryParams, publicKey),
     { refreshInterval: 2000 },
   );
 };
