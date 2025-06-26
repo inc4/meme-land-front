@@ -43,7 +43,15 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         title: 'Presale will end in:',
         titleColor: 'text-[#F24B4D]',
         timestamp: new Date(campaign.presaleEndUTC).getTime(),
-        btn: () => (
+        btn: () => userAllocationData ? (
+          <button
+            type="button"
+            className="text-doby-l lg:text-[18px] flex items-center gap-[10px] justify-center bg-[#3AFFA31F] font-semibold rounded-2xl text-[#3AFFA3] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
+          >
+            <img src={checkIcon} alt="checkmark"/>
+            YOU JOINED
+          </button>
+        ) : (
           <button
             type="button"
             onClick={handleParticipate}
@@ -106,16 +114,6 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             PARTICIPATE NOW
           </button>
         </NavLink>
-      )
-    } else if (userAllocationData) {
-      return (
-        <button
-          type="button"
-          className="text-doby-l lg:text-[18px] flex items-center gap-[10px] justify-center bg-[#3AFFA31F] font-semibold rounded-2xl text-[#3AFFA3] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
-        >
-          <img src={checkIcon} alt="checkmark"/>
-          YOU JOINED
-        </button>
       )
     } else if (timerData) {
       return timerData.btn();
