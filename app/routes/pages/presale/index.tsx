@@ -6,7 +6,7 @@ import Tokenomics from "~/routes/pages/presale/components/Tokenomics";
 import TokenDescription from "~/routes/pages/presale/components/TokenDescription";
 import UpcomingSales from "~/components/Welcome/components/UpcomingSales";
 import CheckDrawModal from "~/components/CheckDrawModal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useCampaign from "~/hooks/useCampaign";
 import {useParams} from "react-router";
 
@@ -15,7 +15,13 @@ const Presale = () => {
   const {data, isLoading} = useCampaign(tokenId);
 
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
-  console.log(data);
+
+  useEffect(() => {
+    if (data?.currentStatus === 'distributionOpened' || data?.currentStatus === 'distributionFinished') {
+      setCheckDrawOpen(true);
+    }
+  }, []);
+
   return (
     <div className="pb-16 flex flex-col gap-16 lg:gap-[120px]">
       <div>
@@ -27,7 +33,11 @@ const Presale = () => {
       <Tokenomics campaign={data} isLoading={isLoading}/>
       {data && <TokenDescription campaign={data} />}
       <UpcomingSales />
-      <CheckDrawModal isOpen={checkDrawOpen} onClose={() => setCheckDrawOpen(false)} />
+      <CheckDrawModal
+        isOpen={checkDrawOpen}
+        onClose={() => setCheckDrawOpen(false)}
+        campaignId={tokenId}
+      />
     </div>
   )
 };

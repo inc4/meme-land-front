@@ -1,8 +1,9 @@
 import Modal from "~/components/Modal";
 import pocketIcon from "~/assets/svg/pocket.svg";
 import CustomButton from "~/components/CustomButton";
+import {NavLink} from "react-router";
 
-const CheckDrawModal = ({isOpen, onClose}: {isOpen: boolean, onClose: () => void}) => {
+const CheckDrawModal = ({isOpen, onClose, campaignId}: {isOpen: boolean, onClose: () => void, campaignId: string}) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -17,9 +18,11 @@ const CheckDrawModal = ({isOpen, onClose}: {isOpen: boolean, onClose: () => void
         <span className="text-[18px]">
           Check when you can claim your tokens
         </span>
-        <CustomButton customStyles="!w-[201px] mt-7">
-          Check Draw
-        </CustomButton>
+        <NavLink to={`/presale/${campaignId}/leaderboard`}>
+          <CustomButton customStyles="!w-[201px] mt-7">
+            Check Draw
+          </CustomButton>
+        </NavLink>
       </div>
     </Modal>
   )
