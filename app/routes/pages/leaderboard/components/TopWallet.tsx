@@ -64,7 +64,7 @@ const TopWallet = ({ data, variant = "gold" }: TProps) => {
 
         <div className="flex flex-col items-center">
           <span className="text-body-s text-beige-600 uppercase font-semibold">Tokens</span>
-          <span className="text-h2 text-white font-medium font-mono">{formatNumberWithCommas(tokenAllocation)}</span>
+          <span className="text-h2 text-white font-medium font-mono">{formatNumberWithCommas(+tokenAllocation.$numberDecimal)}</span>
         </div>
     </NeonShadowBox>
   );

@@ -19,7 +19,7 @@ const RealTimeResults = ({ campaignId }: TProps) => {
   if (!participationsData.totalItems || !list?.length) return;
 
   return (
-    <div>
+    <div className="pb-[88px] lg:pb-[120px]">
       <h2 className="mb-[24px] text-center text-white font-bold lg:mb-[32px]">Real-time results:</h2>
       <div className="grid grid-cols-1 gap-[12px] mb-[64px] lg:grid-cols-3">
         {list[0] && <TopWallet variant="gold" data={list[0]} />}
@@ -52,9 +52,9 @@ const RealTimeResults = ({ campaignId }: TProps) => {
                   "text-body-l text-white font-medium",
                 )}
               >
-                <span className="font-mono">#{index}</span>
+                <span className="font-mono">#{index + 4}</span>
                 <span>{item.wallet}</span>
-                <span className="font-mono text-right">{formatNumberWithCommas(item.tokenAllocation)}</span>
+                <span className="font-mono text-right">{formatNumberWithCommas(+item.tokenAllocation.$numberDecimal)}</span>
               </div>
             ))}
           </div>
