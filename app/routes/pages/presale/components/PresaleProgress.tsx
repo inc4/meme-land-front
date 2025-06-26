@@ -46,7 +46,7 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
         <div className={clsx('bg-[#080808] rounded-xl py-5 px-5 flex items-center justify-between border-2', userAllocationData ? 'border-[#3AFFA3]' : 'border-transparent')}>
           <span className="text-body-m font-semibold">Your Allocation</span>
           <div className="flex flex-col items-end gap-1 font-semibold text-body-m font-mono">
-            <span>{userAllocationData ? userAllocationData.toNumber() / 10 ** 9 : '-'} {campaign.tokenSymbol}</span>
+            <span>{userAllocationData ? userAllocationData / 10 ** 9 : '-'} {campaign.tokenSymbol}</span>
             <span className="opacity-50">(0.00$)</span>
           </div>
         </div>
