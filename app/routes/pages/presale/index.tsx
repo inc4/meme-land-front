@@ -20,7 +20,7 @@ const Presale = () => {
     if (data?.currentStatus === 'distributionOpened' || data?.currentStatus === 'distributionFinished') {
       setCheckDrawOpen(true);
     }
-  }, []);
+  }, [data]);
 
   return (
     <div className="pb-16 flex flex-col gap-16 lg:gap-[120px]">
