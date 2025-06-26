@@ -29,7 +29,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <button
             type="button"
             disabled
-            className="text-doby-l flex items-center justify-center font-semibold rounded-2xl bg-[#3E3E3E] py-4 w-full max-w-[500px] mx-auto"
+            className="text-doby-l lg:text-[18px] flex items-center justify-center font-semibold rounded-2xl bg-[#3E3E3E] py-4 w-full max-w-[500px] lg:py-6 mx-auto"
           >
             WAIT UNTIL PRESALE STARTS
           </button>
@@ -44,7 +44,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <button
             type="button"
             onClick={handleParticipate}
-            className="text-doby-l flex items-center justify-center bg-[#3AFFA3] font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
+            className="text-doby-l lg:text-[18px] flex items-center justify-center bg-[#3AFFA3] font-semibold rounded-2xl text-[#080808] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
           >
             PARTICIPATE NOW
           </button>
@@ -59,7 +59,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <button
             type="button"
             disabled
-            className="text-doby-l flex items-center justify-center bg-[#3E3E3E] font-semibold rounded-2xl text-white shadow-lg py-4 w-full max-w-[500px] mx-auto"
+            className="text-doby-l lg:text-[18px] flex items-center justify-center bg-[#3E3E3E] font-semibold rounded-2xl text-white shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
           >
             WAIT UNTIL DRAW STARTS
           </button>
@@ -74,7 +74,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <NavLink to={`/presale/${campaign?.campaignId}/leaderboard`}>
             <button
               type="button"
-              className="text-doby-l text-black flex items-center justify-center bg-white font-semibold rounded-2xl shadow-lg py-4 w-full max-w-[500px] mx-auto"
+              className="text-doby-l lg:text-[18px] text-black flex items-center justify-center bg-white font-semibold rounded-2xl shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
             >
               CHECK DRAW
             </button>
@@ -101,14 +101,15 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <div className="relative">
             <img src={formatPinataUrl(campaign.projectCoverImage)} alt="token" className="w-full h-[318px] object-cover rounded-[11px]"/>
             {campaign.currentStatus && (
-              <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[18px] bg-contain right-4 px-[33px] pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch bg-center">
+              <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[18px] bg-contain left-4 px-[33px] pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch bg-center">
                 {campaign.currentStatus === 'presaleOpened' && (
                   <div className="text-body-s bg-[#ED4646] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center -mt-1">
                     live
                   </div>
                 )}
                 <div
-                  className="h-[27px] font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] -mt-1 before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative">
+                  className="h-[27px] font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] -mt-1 before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative uppercase"
+                >
                   {campaignStatsData?.totalParticipants.toNumber()} Participant{campaignStatsData?.totalParticipants.toNumber() > 1 && 's'}
                 </div>
               </div>
@@ -124,10 +125,10 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
                 </div>
               </div>
               <div className="flex gap-4">
-                {campaign.telegram && (
-                  <a href={campaign.telegram} target="_blank">
+                {campaign.twitter && (
+                  <a href={campaign.twitter} target="_blank">
                     <CustomButton variant="icon-only" customStyles="!w-10 !h-10 !p-0">
-                      <Telegram className="w-6 h-6"/>
+                      <X className="w-6 h-6"/>
                     </CustomButton>
                   </a>
                 )}
@@ -138,10 +139,10 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
                     </CustomButton>
                   </a>
                 )}
-                {campaign.twitter && (
-                  <a href={campaign.twitter} target="_blank">
+                {campaign.telegram && (
+                  <a href={campaign.telegram} target="_blank">
                     <CustomButton variant="icon-only" customStyles="!w-10 !h-10 !p-0">
-                      <X className="w-6 h-6"/>
+                      <Telegram className="w-6 h-6"/>
                     </CustomButton>
                   </a>
                 )}
@@ -159,12 +160,13 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           variant="green"
           primaryShadowPosition="top"
           secondaryShadowPosition="outer"
+          isBorderVisible={false}
         >
           <div className={clsx('flex flex-col', homePage ? 'gap-4' : 'gap-2')}>
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Presale price</span>
               <span className={clsx('font-medium font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                ${isLoading ? "-" : campaign?.presalePrice.$numberDecimal}
+                $ {isLoading ? "-" : campaign?.presalePrice.$numberDecimal}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">
@@ -176,7 +178,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Listing price</span>
               <span className={clsx('font-medium text-[#12F287] font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                ${isLoading ? "-" : campaign?.listingPrice.$numberDecimal}
+                $ {isLoading ? "-" : campaign?.listingPrice.$numberDecimal}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">
@@ -218,7 +220,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <NavLink to={`/presale/${campaign?.campaignId}`}>
             <button
               type="button"
-              className="text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 w-full max-w-[500px] mx-auto"
+              className="text-doby-l lg:text-[18px] flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
             >
               PARTICIPATE NOW
             </button>

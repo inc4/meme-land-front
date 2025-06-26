@@ -3,12 +3,13 @@ import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import {FEES_PAGE, PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, RULES_PAGE, TERMS_OF_USE_PAGE} from "~/utils/constants";
+import {NavLink} from "react-router";
+import clsx from "clsx";
 
 const navigation = [
-  { name: 'Memepad', href: '#' },
+  { name: 'Memepad', href: '/' },
   { name: 'Rules', href: RULES_PAGE },
   { name: 'Referral', href: REFERRAL_PAGE },
-  { name: 'About', href: '#' },
 ]
 const navigationBottom = [
   { name: 'Privacy & Policy', href: PRIVACY_NOTICE_PAGE },
@@ -25,9 +26,13 @@ const Footer = () => {
         <img src={Logo} alt="" className="max-w-[200px]"/>
         <div className="flex flex-col lg:flex-row gap-[21px] items-center">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-white text-h4 font-semibold">
+            <NavLink
+              to={item.href}
+              key={item.name}
+              className={({isActive}) => clsx('text-h4 font-semibold', isActive ? 'text-[#3AFFA3]' : 'text-white')}
+            >
               {item.name}
-            </a>
+            </NavLink>
           ))}
         </div>
         <div className="flex justify-center gap-4 lg:ml-auto">

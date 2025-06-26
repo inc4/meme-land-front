@@ -60,7 +60,7 @@ const HowItWorks = () => {
 
   return (
     <section>
-      <h1 className="font-bold">How it’s Works?</h1>
+      <h1 className="text-[32px] font-bold">How it’s Works?</h1>
       <div className="mt-6 lg:hidden -mx-1">
         <Slider {...sliderSettings}>
           {cards.map((el, idx) => (
@@ -76,10 +76,12 @@ const HowItWorks = () => {
         </Slider>
       </div>
       <div className="hidden lg:grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch mt-8">
-        {cards.map((el) => (
-          <div className="flex flex-col relative bg-[#0F1113] rounded-[14px] p-5">
+        {cards.map((el, i) => (
+          <div className="flex flex-col relative bg-[#0F1113] rounded-[14px] p-5" key={el.title}>
             <img className="w-12 h-12" src={el.img} alt="icon"/>
-            <img src={arrowIcon} alt="arrow" className="absolute top-9 right-5"/>
+            {i < cards.length - 1 && (
+              <img src={arrowIcon} alt="arrow" className="absolute top-9 right-5"/>
+            )}
             <span className="mt-5 mb-2 text-[20px]">{el.title}</span>
             <span className="text-body-m opacity-60">{el.subtitle}</span>
           </div>
