@@ -15,10 +15,9 @@ import {REFERRAL_PAGE, RULES_PAGE} from "~/utils/constants";
 import useGetBalance from "~/hooks/useGetBalance";
 
 const navigation = [
-  { name: 'Memepad', href: '#' },
+  { name: 'Memepad', href: '/' },
   { name: 'Rules', href: RULES_PAGE },
   { name: 'Referral', href: REFERRAL_PAGE },
-  { name: 'About', href: '#' },
 ]
 
 export default function Header() {
@@ -44,7 +43,11 @@ export default function Header() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <NavLink key={item.name} to={item.href} className="text-h5 lg:text-body-l font-semibold text-white">
+              <NavLink
+                key={item.name}
+                to={item.href}
+                className={({isActive}) => clsx('text-h5 lg:text-body-l font-semibold', isActive ? 'text-[#3AFFA3]' : 'text-white')}
+              >
                 {item.name}
               </NavLink>
             ))}
