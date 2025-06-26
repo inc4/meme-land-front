@@ -19,7 +19,7 @@ const Leaderboard = () => {
   const params = useParams();
   const campaignId = params[PRESALE_PAGE_SEGMENT] || '';
 
-  const { data: campaignData } = useCampaign(campaignId);
+  const { data: campaignData, error: campaignDataError } = useCampaign(campaignId);
   const { data: campaignStatsData } = useCampaignStats(campaignId);
   const { data: userGroupData } = useUserGroup(campaignId);
   const { data: userAllocationData } = useUserAllocation(campaignId);
@@ -29,38 +29,38 @@ const Leaderboard = () => {
     drawEnd: campaignData?.presaleDrawEndUTC,
   });
 
-  if (isLoading || isEarly || !campaignId || !campaignData) return;
+  if (isEarly || campaignDataError) return;
 
   return (
     <div>
       <div className="mb-[24px] lg:mb-[48px]">
-        <Title isLive={isLive} />
+        {!isLoading ? <Title isLive={isLive} /> : <Skeleton className="h-[30px]! w-[300px]!" />}
       </div>
 
       <div className="grid grid-cols-1 gap-[12px] mb-[64px] lg:grid-cols-3 lg:grid-rows-[1fr,127px]">
         <div className="lg:[grid-area:1/1/3/2]">
-          {campaignData && campaignStatsData
+          {!isLoading && campaignData && campaignStatsData
             ? <TokenInfo campaign={campaignData} campaignStats={campaignStatsData} />
             : <Skeleton className="h-[320px]! lg:h-[360px]!" />
           }
         </div>
 
         <div className="lg:[grid-area:1/2/2/3]">
-          {campaignStatsData
+          {!isLoading && campaignStatsData
             ? <WalletInfo campaignStats={campaignStatsData} userGroup={userGroupData} />
             : <Skeleton className="h-[215px]! lg:h-[220px]!" />
           }
         </div>
 
         <div className="lg:[grid-area:2/2/3/3]">
-          {campaignData
+          {!isLoading && campaignData
             ? <DrawSpeed campaign={campaignData} />
             : <Skeleton className="h-[125px]! lg:h-[127px]!" />
           }
         </div>
 
         <div className="lg:[grid-area:1/3/3/4]">
-          {campaignData
+          {!isLoading && campaignData
             ? (
               <AllocationInfo
                 campaign={campaignData}
