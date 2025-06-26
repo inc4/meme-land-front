@@ -21,7 +21,7 @@ const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) 
           <div className="grid grid-cols-[207px_1fr_150px_150px] min-w-[900px] gap-6 p-3 bg-[#0D0D0D]" key={el.projectName}>
             <div className="flex items-center">
               <div className="w-8 h-9 mr-3 rounded-[6px] bg-[#C5C5C5]" />
-              <NavLink to={`/presale/${el.campaignId}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
+              <NavLink to={`/presale/${el.tokenName}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
             </div>
             <span className="font-medium text-body-l flex items-center">{el.shortDescription1}</span>
             <span className="text-[#3AFFA3] font-medium text-right">-</span>

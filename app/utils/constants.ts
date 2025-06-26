@@ -1,6 +1,6 @@
 import { clusterApiUrl, Connection } from "@solana/web3.js";
 
-export const PRESALE_PAGE_SEGMENT = 'tokenId';
+export const PRESALE_PAGE_SEGMENT = 'tokenName';
 export const PRESALE_PAGE = `/presale/:${PRESALE_PAGE_SEGMENT}`;
 export const LEADERBOARD_PAGE = `${PRESALE_PAGE}/leaderboard`;
 export const REFERRAL_PAGE = '/referral';
