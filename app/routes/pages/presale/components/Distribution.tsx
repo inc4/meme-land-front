@@ -38,7 +38,7 @@ const Distribution = ({isLoading, campaign}: {isLoading: boolean, campaign: TCam
             </span>
           </div>
           <div className="bg-[#080808] rounded-xl border-[1px] border-[#1B1B1B] flex flex-col items-center pt-14 pb-6 lg:pt-[100px] lg:pb-[80px] lg:justify-between">
-            <span className="text-2xl lg:text-[44px] text-[#3AFFA3] font-mono">{isLoading ? '-' : campaign?.priceLevelSupport.$numberDecimal}$</span>
+            <span className="text-2xl lg:text-[44px] text-[#3AFFA3] font-mono">{isLoading ? '-' : campaign?.priceLevelSupport.$numberDecimal}</span>
             <span className="text-body-m text-center mt-8 block lg:text-[20px]">
               Price Support <br/> Level
             </span>
