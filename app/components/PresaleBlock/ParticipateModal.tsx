@@ -103,6 +103,7 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
         <CustomButton
           customStyles="!text-body-l"
           handleClick={handleSubmit}
+          disabled={!!validationError}
         >
           Enter to Presale
         </CustomButton>
