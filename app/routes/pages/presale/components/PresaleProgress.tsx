@@ -59,7 +59,9 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
           <span className="text-body-m font-semibold">Your Allocation</span>
           <div className="flex flex-col items-end gap-1 font-semibold text-body-m font-mono">
             <span>{userAllocationData ? formattedAllocation : '-'} {campaign.tokenSymbol}</span>
-            <span className="opacity-50">({(formattedAllocation * +campaign.presalePrice.$numberDecimal * solPrice).toFixed(2)}$)</span>
+            <span className="opacity-50">
+              ({userAllocationData ? (formattedAllocation * +campaign.presalePrice.$numberDecimal * solPrice).toFixed(2) : '-'}$)
+            </span>
           </div>
         </div>
       </div>
