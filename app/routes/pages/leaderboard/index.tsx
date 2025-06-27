@@ -75,7 +75,7 @@ const Leaderboard = () => {
         </div>
       </div>
 
-      <div className="pb-[88px] lg:pb-[120px]">
+      <div>
         <RealTimeResults campaignId={campaignId} />
       </div>
     </div>

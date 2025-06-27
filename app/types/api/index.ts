@@ -104,9 +104,10 @@ export type TParticipations = {
   participationId: string,
   campaignId: string,
   wallet: string,
-  solSpent: number,
-  tokenAllocation: number,
+  solSpent: DecimalString,
+  tokenAllocation: DecimalString,
   createdAt: string;
+  distributionPosition: number;
 };
 
 export type TParticipationsResponse = {
