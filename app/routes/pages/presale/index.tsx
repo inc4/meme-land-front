@@ -17,7 +17,7 @@ const Presale = () => {
 
   const { data: campaignsData, isLoading } = useCampaigns({ tokenName });
   const data = campaignsData?.page.data[0];
-
+  console.log(data);
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
 
   useEffect(() => {

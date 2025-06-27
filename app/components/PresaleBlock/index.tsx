@@ -93,7 +93,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         )
       }
     }
-  }, [campaign]);
+  }, [campaign, userAllocationData]);
 
   const handleParticipate = () => {
     setParticipateModalOpen(true);

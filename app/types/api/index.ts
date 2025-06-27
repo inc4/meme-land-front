@@ -79,6 +79,7 @@ export type TCampaign = {
   bigDescriptionHeader2: string;
   bigDescriptionText2: string;
   projectCoverImage: string;
+  allTimeHigh: DecimalString;
 };
 
 export type TCampaignResponse = {
