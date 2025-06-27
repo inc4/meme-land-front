@@ -1,4 +1,5 @@
 import solIcon from "~/assets/svg/solana-logo.svg";
+import checkIcon from "~/assets/svg/check.svg";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import type {TCampaign} from "~/types";
 import useCampaignStats from "~/hooks/useCampaignStats";
@@ -28,7 +29,15 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
     >
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_452px] lg:grid lg:gap-[68px] gap-8">
         <div>
-          <h3 className="font-semibold text-2xl mb-6">Presale progress:</h3>
+          <h3 className="font-semibold text-2xl mb-6 flex items-center">
+            Presale progress:
+            {campaign.currentStatus !== 'upcoming' && campaign.currentStatus !== 'presaleOpened' && (
+              <span className="text-[#3AFFA3] ml-2 flex items-center gap-2">
+                Completed
+                <img src={checkIcon} alt="check"/>
+              </span>
+            )}
+          </h3>
           <div className="bg-[#222222] rounded-[7px] h-3 w-full">
             <div
               className="bg-linear-to-r from-[#3AFFA3] to-[#25925E] h-full rounded-[7px] shadow-[0px_2px_2px_0px_#00000040]"

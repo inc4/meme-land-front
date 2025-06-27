@@ -19,7 +19,7 @@ const Presale = () => {
   const data = campaignsData?.page.data[0];
 
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
-
+  console.log(data);
   useEffect(() => {
     if (data?.currentStatus === 'distributionOpened' || data?.currentStatus === 'distributionFinished') {
       setCheckDrawOpen(true);

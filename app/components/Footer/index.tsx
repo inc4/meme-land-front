@@ -28,7 +28,7 @@ const { API_URL } = getConfig();
 const Footer = () => {
   const { publicKey } = useWallet();
 
-  const {data, isLoading} = useCampaigns();
+  const {data, isLoading} = useCampaigns({currentStatus: 'distributionFinished'});
   const [totalSales, setTotalSales] = useState(0);
   const [totalParticipants, setTotalParticipants] = useState(0);
   useEffect(() => {

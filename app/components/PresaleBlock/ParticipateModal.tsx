@@ -102,7 +102,7 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
           )}
           <CustomInput
             label="Your chance to get"
-            value={(+amount / campaign.presalePrice.$numberDecimal).toString()}
+            value={(+amount / campaign.presalePrice.$numberDecimal).toFixed(3)}
             tokenName={campaign.tokenSymbol}
             tokenIcon={formatPinataUrl(campaign.tokenImage)}
             fiatPrice={(+amount * +solPrice).toFixed(2)}
