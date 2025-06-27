@@ -64,7 +64,6 @@ const ToasterWrapper = ({wrapperRef}) => {
 
   return createPortal(
     <ToastContainer
-      toastClassName="z-[99999999] bg-red"
       position="bottom-right"
       autoClose={3000}
       hideProgressBar={true}

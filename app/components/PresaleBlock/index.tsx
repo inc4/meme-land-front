@@ -4,6 +4,7 @@ import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import Browse from "~/components/Icons/Browse";
 import bgFigure from "~/assets/svg/token-icon-figure.svg";
+import bgFigureSmall from "~/assets/svg/token-icon-figure-small.svg";
 import checkIcon from "~/assets/svg/check.svg";
 import {useMemo, useState} from "react";
 import ParticipateModal from "~/components/PresaleBlock/ParticipateModal";
@@ -127,28 +128,48 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
       {isLoading ? (
         <div className="rounded-[14px] animate-pulse bg-neutral-900"/>
       ) : campaign && (
-        <div className="bg-[#0F1113] rounded-[14px] p-5">
+        <div className="bg-[#0F1113] rounded-[14px] p-5 overflow-hidden">
           <div className="relative">
             <img src={formatPinataUrl(campaign.projectCoverImage)} alt="token" className="w-full h-[318px] object-cover rounded-[11px]"/>
-            {campaign.currentStatus && (
-              <div style={{backgroundImage: `url("${bgFigure}"`}} className="absolute -top-[18px] bg-contain left-4 px-[33px] pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch bg-center">
+            {campaign.currentStatus && campaignStatsData && (
+              <div
+                style={{backgroundImage: `url("${campaign.currentStatus === 'upcoming' ? bgFigureSmall : bgFigure}"`}}
+                className={clsx(
+                  'absolute bg-cover bg-bottom right-4 lg:left-4 lg:right-auto pt-[11px] pb-[9px] bg-no-repeat flex gap-1 items-stretch',
+                  campaign.currentStatus === 'upcoming' ? 'px-[60px] -top-[24px]' : 'px-[33px] -top-[18px]',
+                  campaign.currentStatus !== 'upcoming' && campaign.currentStatus !== 'presaleOpened' && 'px-[43px]'
+                )}
+              >
+                {campaign.currentStatus === 'upcoming' && (
+                  <div className="bg-[#9D85FF] py-1 px-[9px] rounded-[95px] text-xs font-semibold mt-2">
+                    SOON
+                  </div>
+                )}
                 {campaign.currentStatus === 'presaleOpened' && (
                   <div className="text-body-s bg-[#ED4646] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center -mt-1">
                     live
                   </div>
                 )}
-                <div
-                  className="h-[27px] font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] -mt-1 before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative uppercase"
-                >
-                  {campaignStatsData?.totalParticipants.toNumber()} Participant{campaignStatsData?.totalParticipants.toNumber() > 1 && 's'}
-                </div>
+                {campaign.currentStatus !== 'upcoming' && campaign.currentStatus !== 'presaleOpened' && (
+                  <div className="text-body-s bg-[#25925E] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center -mt-1">
+                    completed
+                  </div>
+                )}
+                {campaign.currentStatus !== 'upcoming' && (
+                  <div
+                    className="h-[27px] font-mono border-[1px] border-[#FFFFFF14] rounded-[95px] text-body-s flex items-center pl-5 pr-[10px] -mt-1 before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#12F287] before:left-[6px] before:absolute relative uppercase"
+                  >
+                    {campaignStatsData?.totalParticipants.toNumber()} Participant{campaignStatsData?.totalParticipants.toNumber() > 1 && 's'}
+                  </div>
+                )}
               </div>
             )}
           </div>
           <div className="flex flex-col mt-5">
             <div className="flex flex-col gap-6 mb-4 lg:flex-row lg:justify-between">
               <div className="flex gap-[10px] items-center">
-                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo" className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
+                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo"
+                     className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
                 <div className="flex flex-col gap-[2px]">
                   <span className="text-white font-bold text-[24px]">{campaign.projectName}</span>
                   <span className="opacity-60 text-white text-body-m">{campaign.shortDescription1}</span>
@@ -208,7 +229,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Listing price</span>
               <span className={clsx('font-medium text-[#12F287] font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                $ {isLoading ? "-" : campaign?.listingPrice.$numberDecimal}
+                {isLoading ? "-" : campaign?.listingPrice.$numberDecimal}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">

@@ -4,7 +4,7 @@ import clsx from "clsx";
 type TVariant = 'default' | 'white' | 'linear' | 'no-bg' | 'icon-only';
 
 type TProps = {
-  children: ReactNode,
+  children: any,
   type?: HTMLButtonElement['type'],
   disabled?: boolean,
   customStyles?: string,

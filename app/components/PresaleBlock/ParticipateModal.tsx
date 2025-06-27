@@ -11,12 +11,16 @@ import participate from "~/utils/participate";
 import {web3} from "@coral-xyz/anchor";
 import {toast} from "react-toastify";
 import spinnerIcon from '~/assets/svg/spinner.svg';
+import spinnerBlackIcon from '~/assets/svg/spinner-black.svg';
+import useSolPrice from "~/hooks/useSolPrice";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
+  const solPrice = useSolPrice();
   const { balance, userAddress } = useGetBalance();
   const provider = useAnchorProvider();
   const { publicKey } = useWallet();
 
+  const [loading, setLoading] = useState(false);
   const [amount, setAmount] = useState('1');
 
   useEffect(() => {
@@ -24,6 +28,7 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
   }, [isOpen]);
 
   const handleSubmit = async ()=> {
+    setLoading(true);
     const toastId = toast.info('Transaction in Progress', {
       autoClose: false,
       icon: <img src={spinnerIcon} alt="loader" className="animate-spin"/>
@@ -37,6 +42,7 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
       toast.error('Transaction Error')
     }
     toast.dismiss(toastId);
+    setLoading(false);
   }
 
   const handleMax = async () => {
@@ -89,6 +95,7 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
             onChange={setAmount}
             tokenName="SOL"
             setMax={handleMax}
+            fiatPrice={(+amount * +solPrice).toFixed(2)}
           />
           {validationError && (
             <span className="text-sm text-red-500 w-full text-left">{validationError}</span>
@@ -98,14 +105,19 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
             value={(+amount / campaign.presalePrice.$numberDecimal).toString()}
             tokenName={campaign.tokenSymbol}
             tokenIcon={formatPinataUrl(campaign.tokenImage)}
+            fiatPrice={(+amount * +solPrice).toFixed(2)}
           />
         </div>
         <CustomButton
-          customStyles="!text-body-l"
+          customStyles="!text-body-l flex justify-center"
           handleClick={handleSubmit}
-          disabled={!!validationError}
+          disabled={!!validationError || loading}
         >
-          Enter to Presale
+          {loading ? (
+            <img src={spinnerBlackIcon} alt="spinner" className="animate-spin"/>
+          ) : (
+            'Enter to Presale'
+          )}
         </CustomButton>
         <CustomButton
           variant="linear"

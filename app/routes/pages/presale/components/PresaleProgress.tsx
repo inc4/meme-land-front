@@ -4,16 +4,19 @@ import type {TCampaign} from "~/types";
 import useCampaignStats from "~/hooks/useCampaignStats";
 import useUserAllocation from "~/hooks/useUserAllocation";
 import clsx from "clsx";
+import useSolPrice from "~/hooks/useSolPrice";
 
 const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
   const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string);
+  const solPrice = useSolPrice();
 
   if (!campaignStatsData || !campaign) {
     return <div className="rounded-[14px] bg-neutral-900 animate-pulse h-[148px] w-full mt-[30px] lg:mt-[14px]"/>;
   }
 
   const percentCompleted = campaignStatsData.totalParticipants * 100 / campaign.amountOfWallet;
+  const formattedAllocation = userAllocationData / 10 ** 9;
 
   return (
     <NeonShadowBox
@@ -46,8 +49,8 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
         <div className={clsx('bg-[#080808] rounded-xl py-5 px-5 flex items-center justify-between border-2', userAllocationData ? 'border-[#3AFFA3]' : 'border-transparent')}>
           <span className="text-body-m font-semibold">Your Allocation</span>
           <div className="flex flex-col items-end gap-1 font-semibold text-body-m font-mono">
-            <span>{userAllocationData ? userAllocationData / 10 ** 9 : '-'} {campaign.tokenSymbol}</span>
-            <span className="opacity-50">(0.00$)</span>
+            <span>{userAllocationData ? formattedAllocation : '-'} {campaign.tokenSymbol}</span>
+            <span className="opacity-50">({(formattedAllocation * +campaign.presalePrice.$numberDecimal * solPrice).toFixed(2)}$)</span>
           </div>
         </div>
       </div>

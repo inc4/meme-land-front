@@ -305,3 +305,13 @@ body {
   display: block;
   font-weight: 700;
 }
+
+.Toastify__toast {
+  padding: 21px 33px!important;
+  border-radius: 12px!important;
+  border: 1px solid #F7F7F72E!important;
+  width: fit-content!important;
+  font-family: 'DM Sans', sans-serif!important;
+  font-size: 14px!important;
+  background: #2626267A!important;
+}
