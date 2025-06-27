@@ -20,8 +20,6 @@ const navigationBottom = [
   { name: 'Privacy & Policy', href: PRIVACY_NOTICE_PAGE },
   { name: 'Fees', href: FEES_PAGE },
   { name: 'Terms & Conditions', href: TERMS_OF_USE_PAGE },
-  { name: 'Refund Policy', href: '#' },
-  { name: 'Platfrom Status', href: '#' },
 ]
 const { API_URL } = getConfig();
 
@@ -49,7 +47,7 @@ const Footer = () => {
       setTotalParticipants(res.totalItems);
     }
   }
-  console.log(data);
+
   return (
     <footer className="p-4 max-w-[1334px] mx-auto w-full pt-[67px] border-t-[1px] border-[#434343]">
       <div className="flex flex-col gap-14 items-center lg:flex-row lg:gap-24">
