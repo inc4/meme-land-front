@@ -5,6 +5,11 @@ import X from "~/components/Icons/X";
 import {FEES_PAGE, PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, RULES_PAGE, TERMS_OF_USE_PAGE} from "~/utils/constants";
 import {NavLink} from "react-router";
 import clsx from "clsx";
+import useCampaigns from "~/hooks/useCampaigns";
+import {useEffect, useState} from "react";
+import getConfig from "~/config";
+import {useWallet} from "@solana/wallet-adapter-react";
+import type {TCampaignResponse} from "~/types";
 
 const navigation = [
   { name: 'Memepad', href: '/' },
@@ -18,8 +23,33 @@ const navigationBottom = [
   { name: 'Refund Policy', href: '#' },
   { name: 'Platfrom Status', href: '#' },
 ]
+const { API_URL } = getConfig();
 
 const Footer = () => {
+  const { publicKey } = useWallet();
+
+  const {data, isLoading} = useCampaigns();
+  const [totalSales, setTotalSales] = useState(0);
+  const [totalParticipants, setTotalParticipants] = useState(0);
+  useEffect(() => {
+    init();
+    setTotalSales(data?.totalItems || 0);
+  }, [data]);
+
+  const init = async () => {
+    const response = await fetch(`${API_URL}/wallets`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Wallet': publicKey?.toString(),
+      }
+    })
+
+    if (response.ok) {
+      const res = await response.json();
+      setTotalParticipants(res.totalItems);
+    }
+  }
+  console.log(data);
   return (
     <footer className="p-4 max-w-[1334px] mx-auto w-full pt-[67px] border-t-[1px] border-[#434343]">
       <div className="flex flex-col gap-14 items-center lg:flex-row lg:gap-24">
@@ -54,11 +84,11 @@ const Footer = () => {
         <div className="grid order-2 grid-cols-2 gap-2 lg:order-1 max-w-[418px] lg:gap-4">
           <div
             className="text-body-m lg:text-body-l py-[14px] px-3 bg-[#17422C52] border-[1px] border-[#666666] text-center rounded-xl font-medium">
-            Successful Sales: <span className="!text-[#3AFFA3] font-mono">31</span>
+            Successful Sales: <span className="!text-[#3AFFA3] font-mono">{totalSales}</span>
           </div>
           <div
             className="text-body-m lg:text-body-l py-[14px] px-3 bg-[#17422C52] border-[1px] border-[#666666] text-center rounded-xl font-medium">
-            Participants: <span className="!text-[#3AFFA3] font-mono">1413</span>
+            Participants: <span className="!text-[#3AFFA3] font-mono">{totalParticipants}</span>
           </div>
         </div>
       </div>

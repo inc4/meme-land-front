@@ -62,7 +62,7 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
 
     return tx;
   } catch (err) {
-    if (err) console.error(err);
+    if (err) throw new Error(err);
   }
 };
 

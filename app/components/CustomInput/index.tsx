@@ -9,6 +9,7 @@ type CustomInputProps = {
   disabled?: boolean;
   tokenIcon?: string;
   fiatPrice?: string;
+  setMax?: () => void;
 }
 
 const CustomInput = ({
@@ -19,7 +20,8 @@ const CustomInput = ({
   disabled = false,
   balance,
   fiatPrice,
-  tokenIcon = solanaLogo
+  tokenIcon = solanaLogo,
+  setMax = () => {},
 }: CustomInputProps) => {
 
   const handleInput = (inputValue: string) => {
@@ -65,12 +67,14 @@ const CustomInput = ({
           <span className="text-[#67686D] text-body-s">
             Balance:{" "}
             <span className="font-mono">{balance}</span>
-            <button
-              className="font-semibold text-[#3AFFA3] ml-2"
-              onClick={() => handleInput(balance?.toString() || '')}
-            >
-              MAX
-            </button>
+            {setMax && (
+              <button
+                className="font-semibold text-[#3AFFA3] ml-2"
+                onClick={setMax}
+              >
+                MAX
+              </button>
+            )}
           </span>
         )}
       </div>

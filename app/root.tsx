@@ -12,6 +12,10 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'react-toastify/dist/ReactToastify.css';
+import {createPortal} from "react-dom";
+import {ToastContainer} from "react-toastify";
+import {useRef} from "react";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,6 +38,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const ref = useRef(null);
+
   return (
     <html lang="en">
       <head>
@@ -46,9 +52,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <div className="z-[999999999] relative" ref={ref}/>
+        <ToasterWrapper wrapperRef={ref}/>
       </body>
     </html>
   );
+}
+
+const ToasterWrapper = ({wrapperRef}) => {
+  if (!wrapperRef.current) return null;
+
+  return createPortal(
+    <ToastContainer
+      toastClassName="z-[99999999] bg-red"
+      position="bottom-right"
+      autoClose={3000}
+      hideProgressBar={true}
+      newestOnTop={false}
+      closeOnClick
+      pauseOnHover
+      draggable
+      theme="dark" // also "dark" or "colored"
+      closeButton={false}
+    />,
+    wrapperRef.current
+  )
 }
 
 export default function App() {
@@ -89,3 +117,4 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+

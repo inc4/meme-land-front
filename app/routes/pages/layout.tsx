@@ -3,6 +3,8 @@ import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import Breadcrumbs from "~/components/Breadcrumbs";
 import { HOME_PAGE } from "~/utils/constants";
+import {createPortal} from "react-dom";
+import {ToastContainer} from "react-toastify";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -17,4 +19,5 @@ export default function Layout() {
       <Footer/>
     </div>
   )
-}
+};
+

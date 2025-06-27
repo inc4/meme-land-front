@@ -7,7 +7,6 @@ import {NavLink} from "react-router";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
 
 const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) => {
-
   return !!campaigns?.page.size && (
     <section>
       <h1 className="mb-8 font-bold">Completed Sales</h1>

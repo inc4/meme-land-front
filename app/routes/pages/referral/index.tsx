@@ -15,7 +15,6 @@ const Referral = () => {
 
   const handleCopy = () => {
     if (!data?.inviteCode) return;
-
     copy(data.inviteCode);
   }
 
@@ -126,7 +125,6 @@ const Referral = () => {
           </span>
         </div>
         <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
           <div
             className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             05

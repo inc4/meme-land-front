@@ -22,7 +22,8 @@ const Countdown = ({ className, timeSectionStyles, timestamp }: TProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [timestamp]);
+
   return (
     <div className={clsx('flex items-center justify-center gap-1', className)}>
       <div className={clsx(

@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 const Modal = ({isOpen, onClose, children, containerStyles = ''}: {isOpen: boolean, onClose: () => void, children: ReactNode, containerStyles?: string}) => {
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-[9999999]">
+    <Dialog open={isOpen} onClose={onClose} className="relative z-[999999]">
       <DialogBackdrop
         transition
         className="backdrop-blur fixed inset-0 bg-[#00000080] transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
