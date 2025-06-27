@@ -50,7 +50,7 @@ const useIsClaimable = (campaignId: string) => {
       return { available: false, reason: "Already claimed" };
     }
 
-    if (status !== "DistributionOpened") {
+    if (status.toLowerCase() !== "distributionopened") {
       return { available: false, reason: "Distribution not open" };
     }
     
