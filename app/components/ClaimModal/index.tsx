@@ -1,8 +1,11 @@
 import { useWallet } from "@solana/wallet-adapter-react";
+import { toast } from "react-toastify";
 
 import Modal from "~/components/Modal";
 import CustomInput from "~/components/CustomInput";
 import CustomButton from "~/components/CustomButton";
+import spinnerIcon from '~/assets/svg/spinner.svg';
+import spinnerBlackIcon from '~/assets/svg/spinner-black.svg';
 
 import useClaim from "~/hooks/useClaim";
 import useSolPrice from "~/hooks/useSolPrice";
@@ -32,13 +35,21 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
   const handleClaim = async () => {
     if (!tokenName || !tokenSymbol || !publicKey) return;
 
+    const toastId = toast.info('Transaction in Progress', {
+      autoClose: false,
+      icon: <img src={spinnerIcon} alt="loader" className="animate-spin" />
+    });
+
     try {
       await claim({ name: tokenName, symbol: tokenSymbol, publicKey });
+      toast.success('Successful transaction');
       onClose();
     } catch (e) {
       console.log(e, 'Claim error');
+      toast.error('Transaction Error');
     }
 
+    toast.dismiss(toastId);
   };
 
   return (
@@ -60,7 +71,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
           handleClick={handleClaim}
           disabled={isMutating}
         >
-          Claim & Hold
+          {isMutating ? <img src={spinnerBlackIcon} alt="loader" className="animate-spin m-auto" /> : 'Claim & Hold'}
         </CustomButton>
         <CustomButton
           variant="linear"
@@ -68,7 +79,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
           handleClick={onClose}
           disabled={isMutating}
         >
-          Close
+          {isMutating ? <img src={spinnerIcon} alt="loader" className="animate-spin m-auto" /> : 'Close'}
         </CustomButton>
       </div>
     </Modal>
