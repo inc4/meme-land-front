@@ -42,7 +42,6 @@ const useParticipations = (
       publicKey: publicKey.toString()
     } : null,
     ({ publicKey, queryParams }) => fetcher(publicKey, queryParams),
-    { refreshInterval: 2000 }
   );
 };
 
