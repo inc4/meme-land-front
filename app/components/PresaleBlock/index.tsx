@@ -100,10 +100,6 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     setParticipateModalOpen(true);
   }
 
-  if (!isLoading && !campaign) {
-    return null;
-  }
-
   const submitBtn = useMemo(() => {
     if (homePage) {
       return (
@@ -122,6 +118,10 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
       return null;
     }
   }, [campaign, userAllocationData, timerData, homePage])
+
+  if (!isLoading && !campaign) {
+    return null;
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_472px] lg:grid gap-[14px]">
