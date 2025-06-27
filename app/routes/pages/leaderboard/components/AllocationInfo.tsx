@@ -12,12 +12,19 @@ type TProps = {
   campaign: TCampaign;
   userAllocation: number | undefined;
   userGroup: number | undefined;
+  currentWalletNumber: number | undefined;
 }
 
-const AllocationInfo = ({ campaign, userAllocation, userGroup }: TProps) => {
+const AllocationInfo = ({ campaign, userAllocation, userGroup, currentWalletNumber }: TProps) => {
   const { tokenSymbol, campaignId } = campaign;
   const { data: isClaimableData } = useIsClaimable(campaignId);
   const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const isDisabledClaim = !isClaimableData?.available
+    || !userAllocation
+    || !currentWalletNumber
+    || !userGroup
+    || currentWalletNumber < userGroup;;
 
   return (
     <>
@@ -47,7 +54,7 @@ const AllocationInfo = ({ campaign, userAllocation, userGroup }: TProps) => {
           <CustomButton
             variant="white"
             customStyles="block max-w-[128px] w-full m-auto mb-[36px] shadow-none text-body-l! lg:mb-[43px]"
-            disabled={!isClaimableData?.available || !userAllocation}
+            disabled={isDisabledClaim}
             handleClick={() => setIsModalOpened(true)}
           >
             Claim

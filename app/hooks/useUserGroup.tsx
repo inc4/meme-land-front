@@ -51,7 +51,8 @@ const useUserGroup = (campaignId: string) => {
       })
       .view()) as BN;
 
-    return +result;
+    // Increment result for value start from 1
+    return +result + 1;
   };
 
   return useSWR(
