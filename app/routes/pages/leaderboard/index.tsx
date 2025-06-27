@@ -13,6 +13,7 @@ import useIsLiveDraw from "~/hooks/useIsLiveDraw";
 import useCampaignStats from "~/hooks/useCampaignStats";
 import useUserGroup from "~/hooks/useUserGroup";
 import useUserAllocation from "~/hooks/useUserAllocation";
+import useCurrentWalletNumber from "~/hooks/useCurrentWalletNumber";
 import { PRESALE_PAGE_SEGMENT } from "~/utils/constants";
 
 const Leaderboard = () => {
@@ -26,6 +27,7 @@ const Leaderboard = () => {
   const { data: campaignStatsData } = useCampaignStats(campaignId);
   const { data: userGroupData } = useUserGroup(campaignId);
   const { data: userAllocationData } = useUserAllocation(campaignId);
+  const currentWalletNumber = useCurrentWalletNumber(campaignData);
   
   const { isLoading, isLive, isEarly } = useIsLiveDraw({
     drawStart: campaignData?.presaleDrawStartUTC,
@@ -50,7 +52,7 @@ const Leaderboard = () => {
 
         <div className="lg:[grid-area:1/2/2/3]">
           {!isLoading && campaignStatsData
-            ? <WalletInfo campaignStats={campaignStatsData} userGroup={userGroupData} />
+            ? <WalletInfo campaignStats={campaignStatsData} currentWalletNumber={currentWalletNumber} />
             : <Skeleton className="h-[215px]! lg:h-[220px]!" />
           }
         </div>
@@ -69,6 +71,7 @@ const Leaderboard = () => {
                 campaign={campaignData}
                 userAllocation={userAllocationData}
                 userGroup={userGroupData}
+                currentWalletNumber={currentWalletNumber}
               />
             ) : <Skeleton className="h-[300px]! lg:h-[360px]!" />
           }
