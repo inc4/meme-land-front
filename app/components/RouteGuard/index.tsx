@@ -62,10 +62,10 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  if (!isVerified && !isPublicRoute(pathname)) {
-    navigate(CONNECT_PAGE, { replace: true });
-    return;
-  }
+  // if (!isVerified && !isPublicRoute(pathname)) {
+  //   navigate(CONNECT_PAGE, { replace: true });
+  //   return;
+  // }
 
   return children;
 };
