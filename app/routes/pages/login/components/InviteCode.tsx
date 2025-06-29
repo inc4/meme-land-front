@@ -86,7 +86,7 @@ const InviteCode = () => {
           <div className="flex flex-col items-center gap-[12px]">
             <img src={userAddIcon} className="p-[17px]" alt="User" />
             <div className="flex flex-col justify-center items-center gap-[4px]">
-              <span className="text-h1 font-bold text-center">Enter your Invitation Code</span>
+              <span className="text-h1 font-bold text-center max-w-[288px]">Enter your Invitation Code</span>
               <span className="text-body-l font-medium text-center">Invitation codes are needed to ensure our platform security and reduce fud.</span>
             </div>
           </div>
