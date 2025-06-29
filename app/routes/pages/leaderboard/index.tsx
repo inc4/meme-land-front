@@ -27,7 +27,7 @@ const Leaderboard = () => {
   const { data: campaignStatsData } = useCampaignStats(campaignId);
   const { data: userGroupData } = useUserGroup(campaignId);
   const { data: userAllocationData } = useUserAllocation(campaignId);
-  const currentWalletNumber = useCurrentWalletNumber(campaignData);
+  const currentWalletNumber = useCurrentWalletNumber({ campaign: campaignData, campaignStats: campaignStatsData });
   
   const { isLoading, isLive, isEarly } = useIsLiveDraw({
     drawStart: campaignData?.presaleDrawStartUTC,
