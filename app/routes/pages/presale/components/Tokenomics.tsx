@@ -31,11 +31,11 @@ const Tokenomics = ({campaign, isLoading}: {campaign: TCampaign|undefined, isLoa
             </div>
             <div className="bg-[#080808] p-3 rounded-xl">
               <span className="font-medium text-body-m block opacity-60">Circulating Supply at TGE</span>
-              <span className="font-bold text-h2 font-mono">10.0 B</span>
+              <span className="font-bold text-h2 font-mono">1B</span>
             </div>
             <div className="bg-[#080808] p-3 rounded-xl">
               <span className="font-medium text-body-m block opacity-60">Maximum tokens supply</span>
-              <span className="font-bold text-h2 font-mono">10.0 B</span>
+              <span className="font-bold text-h2 font-mono">1B</span>
             </div>
           </div>
         </div>
