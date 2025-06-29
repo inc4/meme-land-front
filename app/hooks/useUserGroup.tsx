@@ -19,40 +19,45 @@ const useUserGroup = (campaignId: string) => {
   const { tokenName, tokenSymbol } = apiCampaign || {};
 
   const fetcher = async (name: string, symbol: string, publicKey: web3.PublicKey) => {
-    const program = new Program(idl, provider);
+    try {
+      const program = new Program(idl, provider);
 
-    const { campaignPda, mintPda, campaignStatsPda } = getPdas(name, symbol, program.programId, publicKey);
+      const { campaignPda, mintPda, campaignStatsPda } = getPdas(name, symbol, program.programId, publicKey);
 
-    const [participantDataPda] = web3.PublicKey.findProgramAddressSync(
-      [
-        Buffer.from("participant_data"),
-        campaignPda.toBuffer(),
-        publicKey.toBuffer(),
-      ],
-      program.programId
-    );
+      const [participantDataPda] = web3.PublicKey.findProgramAddressSync(
+        [
+          Buffer.from("participant_data"),
+          campaignPda.toBuffer(),
+          publicKey.toBuffer(),
+        ],
+        program.programId
+      );
 
-    // Get randomness seed account
-    const random = randomnessAccountAddress(campaignPda.toBuffer());
+      // Get randomness seed account
+      const random = randomnessAccountAddress(campaignPda.toBuffer());
 
 
-    const result = (await program.methods
-      .getUserGroup({
-        tokenName: name,
-        tokenSymbol: symbol,
-      })
-      .accounts({
-        user: publicKey,
-        campaign: campaignPda,
-        mintAccount: mintPda,
-        randSeed: random,
-        participantData: participantDataPda,
-        campaignStats: campaignStatsPda,
-      })
-      .view()) as BN;
+      const result = (await program.methods
+        .getUserGroup({
+          tokenName: name,
+          tokenSymbol: symbol,
+        })
+        .accounts({
+          user: publicKey,
+          campaign: campaignPda,
+          mintAccount: mintPda,
+          randSeed: random,
+          participantData: participantDataPda,
+          campaignStats: campaignStatsPda,
+        })
+        .view()) as BN;
 
-    // Increment result for value start from 1
-    return +result + 1;
+      // Increment result for value start from 1
+      return +result + 1;
+    } catch (e) {
+      console.log(e, 'Get user group error');
+      return 1;
+    }
   };
 
   return useSWR(
