@@ -130,11 +130,15 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         </NavLink>
       )
     } else if (timerData) {
-      return timerData.btn();
+      return (
+        <div className={clsx(statusPending && 'pointer-events-none opacity-60')}>
+          {timerData.btn()}
+        </div>
+      )
     } else {
       return null;
     }
-  }, [campaign, userAllocationData, timerData, homePage]);
+  }, [campaign, userAllocationData, timerData, homePage, statusPending]);
 
   const statusPending = useMemo(() => {
     if (!campaign) return false;
@@ -334,9 +338,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             )}
           </div>
         )}
-        <div className={clsx(statusPending && 'pointer-events-none opacity-60')}>
-          {submitBtn}
-        </div>
+        {submitBtn}
       </div>
       <ParticipateModal
         campaign={campaign as TCampaign}
