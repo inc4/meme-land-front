@@ -1,33 +1,35 @@
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { getWalletByAddress } from "~/utils/request";
-import { type TGetWalletsResponse } from "~/types";
+import type { TGetWalletsResponse } from "~/types";
+import getConfig from "~/config";
+
+const { API_URL } = getConfig();
 
 const useWalletByAddress = () => {
   const { publicKey } = useWallet();
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<TGetWalletsResponse | null>(null);
 
-  useEffect(() => {
-    if (!publicKey) {
-      setIsLoading(false);
-      return;
-    }
+  const fetcher = async (publicKey: string) => {
+    const response = await fetch(`${API_URL}/wallets/${publicKey}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Wallet': publicKey,
+      }
+    })
 
-    (async () => {
-      setIsLoading(true);
+    if (!response.ok) return null;
 
-      const wallet = await getWalletByAddress(publicKey.toString());
-      setData(wallet);
+    const wallet: TGetWalletsResponse = await response.json();
 
-      setIsLoading(false);
-    })();
-  }, [publicKey]);
+    return wallet;
+  };
 
-  return {
-    isLoading,
-    data,
-  }
+  return useSWR(
+    {
+      key: 'wallet-by-address',
+      publicKey: publicKey?.toString() || '',
+    },
+    ({ publicKey }) => fetcher(publicKey)
+  )
 };
 
 export default useWalletByAddress;

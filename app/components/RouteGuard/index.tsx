@@ -1,17 +1,16 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { useNavigate, useLocation } from "react-router";
 import { useWallet } from '@solana/wallet-adapter-react';
 
 import Spinner from '../Spinner';
-import { getWalletByAddress } from "~/utils/request";
+import useWalletByAddress from '~/hooks/useWalletByAddress';
 import { CONNECT_PAGE } from '~/utils/constants';
 
 const RouteGuard = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { publicKey, autoConnect, disconnect } = useWallet();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isVerified, setIsVerified] = useState(false);
+  const { disconnect } = useWallet();
+  const { isLoading, error, data } = useWalletByAddress();
 
   const publicRoutes = [CONNECT_PAGE];
 
@@ -26,7 +25,6 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
     if (provider && disconnect) {
 
       const handleDisconnect = () => {
-        setIsVerified(false);
         disconnect();
       };
 
@@ -39,22 +37,10 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
   }, [disconnect]);
 
   useEffect(() => {
-    if (!publicKey && !autoConnect) {
-      setIsLoading(false);
-      return;
-    }
+    if (isLoading) return;
 
-    if (!publicKey || isVerified) return;
-
-    (async () => {
-      setIsLoading(true);
-
-      const wallet = await getWalletByAddress(publicKey.toString());
-      setIsVerified(!!wallet);
-
-      setIsLoading(false);
-    })()
-  }, [publicKey, autoConnect, pathname, isVerified]);
+    if (!data || error) navigate(CONNECT_PAGE);
+  }, [data, isLoading, error, pathname])
 
   if (isLoading) {
     return (
@@ -62,10 +48,9 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  // if (!isVerified && !isPublicRoute(pathname)) {
-  //   navigate(CONNECT_PAGE, { replace: true });
-  //   return;
-  // }
+  if (!data && !isPublicRoute(pathname)) {
+    return;
+  }
 
   return children;
 };

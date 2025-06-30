@@ -1,28 +1,7 @@
 import getConfig from "~/config";
-import type { TGetWalletsResponse, TPostWalletsBody } from "~/types";
+import type { TPostWalletsBody } from "~/types";
 
 const { API_URL } = getConfig();
-
-export const getWalletByAddress = async (publicKey: string) => {
-  try {
-    const response = await fetch(`${API_URL}/wallets/${publicKey}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Wallet': publicKey,
-      }
-    })
-
-    if (!response.ok) return null;
-
-    const wallet: TGetWalletsResponse = await response.json();
-
-    return wallet;
-
-  } catch (e) {
-    console.log(e, "Wallet verification error");
-    return null;
-  }
-};
 
 export const checkInviteCode = async (publicKey: string, inviteCode: string) => {
   try {

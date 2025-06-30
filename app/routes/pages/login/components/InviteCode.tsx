@@ -1,4 +1,4 @@
-import { useState, useEffect, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 import { useWallet } from "@solana/wallet-adapter-react";
 import clsx from "clsx";
@@ -9,7 +9,6 @@ import Spinner from "~/components/Spinner";
 import checkIcon from '~/assets/svg/check.svg';
 import userAddIcon from '~/assets/svg/user-add.svg';
 
-import useWalletByAddress from "~/hooks/useWalletByAddress";
 import { shortenAddress } from "~/utils/other";
 import { checkInviteCode } from "~/utils/request";
 import { HOME_PAGE } from "~/utils/constants";
@@ -17,7 +16,6 @@ import { HOME_PAGE } from "~/utils/constants";
 const InviteCode = () => {
   const navigate = useNavigate();
   const { publicKey } = useWallet();
-  const { isLoading: isWalletLoading, data: wallet } = useWalletByAddress();
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [isDone, setIsDone] = useState(false);
@@ -52,17 +50,6 @@ const InviteCode = () => {
       setIsLoading(false);
     }
   };
-
-  // Redirect to home page if wallet is verified
-  useEffect(() => {
-    if (wallet) navigate(HOME_PAGE);
-  }, [wallet]);
-
-  if (isWalletLoading) {
-    return (
-      <Spinner wrapperStyles="fixed inset-0 flex justify-center items-center w-full h-dvh bg-background" />
-    );
-  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-[36px] h-full pt-[32px] pb-[55px]">
