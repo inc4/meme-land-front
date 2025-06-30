@@ -9,7 +9,7 @@ type TProps = {
 }
 
 const TokenInfo = ({ campaign, campaignStats }: TProps) => {
-  const { tokenName, tokenImage, presaleDrawEndUTC, shortDescription1, shortDescription2 } = campaign;
+  const { projectName, tokenImage, presaleDrawEndUTC, shortDescription1, shortDescription2 } = campaign;
   const { totalTokensClaimed, totalTokensSold } = campaignStats;
   const totaltokensLeft = +totalTokensSold - +totalTokensClaimed;
   const timestamp = new Date(presaleDrawEndUTC).getTime();
@@ -18,7 +18,7 @@ const TokenInfo = ({ campaign, campaignStats }: TProps) => {
     <div className="h-full p-[12px] bg-background border-[2px] border-gray-700 rounded-[12px] lg:pb-[36px]">
       <div className="flex justify-between items-start gap-[10px] mb-[24px]">
         <div className="flex flex-col gap-[4px]">
-          <span className="text-h3 text-white font-bold">{tokenName}</span>
+          <span className="text-h3 text-white font-bold">{projectName}</span>
           <span className="text-body-m text-beige-600 font-medium">{shortDescription1 || shortDescription2}</span>
         </div>
 

@@ -3,7 +3,7 @@ import pocketIcon from "~/assets/svg/pocket.svg";
 import CustomButton from "~/components/CustomButton";
 import {NavLink} from "react-router";
 
-const CheckDrawModal = ({isOpen, onClose, tokenName}: {isOpen: boolean, onClose: () => void, tokenName: string}) => {
+const CheckDrawModal = ({isOpen, onClose, projectName}: {isOpen: boolean, onClose: () => void, projectName: string}) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -18,7 +18,7 @@ const CheckDrawModal = ({isOpen, onClose, tokenName}: {isOpen: boolean, onClose:
         <span className="text-[18px]">
           Check when you can claim your tokens
         </span>
-        <NavLink to={`/presale/${tokenName}/leaderboard`}>
+        <NavLink to={`/presale/${projectName}/leaderboard`}>
           <CustomButton customStyles="!w-[201px] mt-7">
             Check Draw
           </CustomButton>

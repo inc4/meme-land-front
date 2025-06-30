@@ -13,9 +13,9 @@ import { PRESALE_PAGE_SEGMENT } from "~/utils/constants";
 
 const Presale = () => {
   let params = useParams();
-  const tokenName = params[PRESALE_PAGE_SEGMENT];
+  const projectName = params[PRESALE_PAGE_SEGMENT];
 
-  const { data: campaignsData, isLoading } = useCampaigns({ tokenName });
+  const { data: campaignsData, isLoading } = useCampaigns({ projectName });
   const data = campaignsData?.page.data[0];
 
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
@@ -40,7 +40,7 @@ const Presale = () => {
       <CheckDrawModal
         isOpen={checkDrawOpen}
         onClose={() => setCheckDrawOpen(false)}
-        tokenName={tokenName}
+        projectName={projectName}
       />
     </div>
   )
