@@ -117,6 +117,24 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     setParticipateModalOpen(true);
   }
 
+  const statusPending = useMemo(() => {
+    if (!campaign) return false;
+
+    const checkIfTimePassed = (dateStr) => {
+      const inputDate = new Date(dateStr);
+      const now = new Date();
+      return inputDate.getTime() < now.getTime();
+    }
+
+    if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
+      return true;
+    } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
+      return true;
+    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+      return true;
+    }
+  }, [campaign]);
+
   const submitBtn = useMemo(() => {
     if (homePage) {
       return (
@@ -139,24 +157,6 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
       return null;
     }
   }, [campaign, userAllocationData, timerData, homePage, statusPending]);
-
-  const statusPending = useMemo(() => {
-    if (!campaign) return false;
-
-    const checkIfTimePassed = (dateStr) => {
-      const inputDate = new Date(dateStr);
-      const now = new Date();
-      return inputDate.getTime() < now.getTime();
-    }
-
-    if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
-      return true;
-    } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
-      return true;
-    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
-      return true;
-    }
-  }, [campaign]);
 
   if (!isLoading && !campaign) {
     return null;
