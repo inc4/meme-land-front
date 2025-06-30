@@ -25,7 +25,7 @@ const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) 
                 alt="logo"
                 className="w-8 h-8 mr-3 rounded-[6px]"
               />
-              <NavLink to={`/presale/${el.tokenName}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
+              <NavLink to={`/presale/${el.projectName}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
             </div>
             <span className="font-medium text-body-l flex items-center">{el.shortDescription1}</span>
             <span className="text-[#3AFFA3] font-medium text-right">%{el.allTimeHigh.$numberDecimal}</span>

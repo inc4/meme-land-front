@@ -18,16 +18,16 @@ import { PRESALE_PAGE_SEGMENT } from "~/utils/constants";
 
 const Leaderboard = () => {
   const params = useParams();
-  const tokenName = params[PRESALE_PAGE_SEGMENT] || '';
+  const projectName = params[PRESALE_PAGE_SEGMENT] || '';
 
-  const { data: campaignsData, error: campaignDataError } = useCampaigns({ tokenName });
+  const { data: campaignsData, error: campaignDataError } = useCampaigns({ projectName });
   const campaignData = campaignsData?.page.data[0];
   const campaignId = campaignData?.campaignId || ''
 
   const { data: campaignStatsData } = useCampaignStats(campaignId);
   const { data: userGroupData } = useUserGroup(campaignId);
   const { data: userAllocationData } = useUserAllocation(campaignId);
-  const currentWalletNumber = useCurrentWalletNumber(campaignData);
+  const currentWalletNumber = useCurrentWalletNumber({ campaign: campaignData, campaignStats: campaignStatsData });
   
   const { isLoading, isLive, isEarly } = useIsLiveDraw({
     drawStart: campaignData?.presaleDrawStartUTC,
