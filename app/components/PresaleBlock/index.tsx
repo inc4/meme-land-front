@@ -18,6 +18,7 @@ import useUserAllocation from "~/hooks/useUserAllocation";
 import useIsClaimable from "~/hooks/useIsClaimable";
 import raydium from "~/assets/svg/raydium.svg";
 import jupiter from "~/assets/svg/jupiter.svg";
+import spinner from "~/assets/svg/spinner.svg";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
@@ -133,7 +134,26 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     } else {
       return null;
     }
-  }, [campaign, userAllocationData, timerData, homePage])
+  }, [campaign, userAllocationData, timerData, homePage]);
+
+  const statusPending = useMemo(() => {
+    if (!campaign) return false;
+
+    const checkIfTimePassed = (dateStr) => {
+      const inputDate = new Date(dateStr);
+      const now = new Date();
+      console.log(inputDate, now);
+      return inputDate.getTime() < now.getTime();
+    }
+
+    if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleEndUTC)) {
+      return true;
+    } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+      return true;
+    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawEndUTC)) {
+      return true;
+    }
+  }, [campaign]);
 
   if (!isLoading && !campaign) {
     return null;
@@ -189,8 +209,11 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <div className="flex flex-col mt-5">
             <div className="flex flex-col gap-6 mb-4 lg:flex-row lg:justify-between">
               <div className="flex gap-[10px] items-center">
-                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo"
-                     className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
+                <img
+                  src={formatPinataUrl(campaign.tokenImage)}
+                  alt="logo"
+                  className="w-[62px] h-[62px] object-cover rounded-[10px]"
+                />
                 <div className="flex flex-col gap-[2px]">
                   <span className="text-white font-bold text-[24px]">{campaign.projectName}</span>
                   <span className="opacity-60 text-white text-body-m">{campaign.shortDescription1}</span>
@@ -281,7 +304,10 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         {isLoading ? (
           <div className="rounded-[14px] animate-pulse bg-neutral-900 h-[154px]" />
         ) : (
-          <div className="py-5 px-[46px] rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3">
+          <div className="py-5 px-[46px] rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3 relative">
+            {statusPending && (
+              <img src={spinner} alt="loader" className="animate-spin absolute right-4 top-4"/>
+            )}
             <span className={clsx('text-center font-bold text-[20px] w-fit mx-auto block mb-5', timerData.titleColor)}>
               {timerData.title}
             </span>
