@@ -334,7 +334,9 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             )}
           </div>
         )}
-        {submitBtn}
+        <div className={clsx(statusPending && 'pointer-events-none opacity-60')}>
+          {submitBtn}
+        </div>
       </div>
       <ParticipateModal
         campaign={campaign as TCampaign}
