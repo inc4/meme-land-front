@@ -142,15 +142,14 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
     const checkIfTimePassed = (dateStr) => {
       const inputDate = new Date(dateStr);
       const now = new Date();
-      console.log(inputDate, now);
       return inputDate.getTime() < now.getTime();
     }
 
-    if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleEndUTC)) {
+    if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
       return true;
-    } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+    } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
       return true;
-    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawEndUTC)) {
+    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
       return true;
     }
   }, [campaign]);
