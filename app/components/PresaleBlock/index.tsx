@@ -6,7 +6,7 @@ import Browse from "~/components/Icons/Browse";
 import bgFigure from "~/assets/svg/token-icon-figure.svg";
 import bgFigureSmall from "~/assets/svg/token-icon-figure-small.svg";
 import checkIcon from "~/assets/svg/check.svg";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import ParticipateModal from "~/components/PresaleBlock/ParticipateModal";
 import type {TCampaign} from "~/types";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
@@ -15,11 +15,45 @@ import NeonShadowBox from "~/components/NeonShadowBox";
 import {NavLink} from "react-router";
 import useCampaignStats from "~/hooks/useCampaignStats";
 import useUserAllocation from "~/hooks/useUserAllocation";
+import useIsClaimable from "~/hooks/useIsClaimable";
+import raydium from "~/assets/svg/raydium.svg";
+import jupiter from "~/assets/svg/jupiter.svg";
+import spinner from "~/assets/svg/spinner.svg";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
   const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string);
+  const { data: isClaimableData } = useIsClaimable(campaign?.campaignId as string);
+  const [statusPending, setStatusPending] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let pending = false
+      if (!campaign) {
+        setStatusPending(false);
+        return;
+      }
+
+      const checkIfTimePassed = (dateStr) => {
+        const inputDate = new Date(dateStr);
+        const now = new Date();
+        return inputDate.getTime() < now.getTime();
+      }
+      if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
+        pending = true;
+      } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
+        pending = true;
+      } else if (campaign.currentStatus === 'presaleFinished' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+        pending = true;
+      } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawEndUTC)) {
+        pending = true;
+      }
+      setStatusPending(pending);
+    }, 2000);
+
+    return () => clearInterval(interval)
+  }, [campaign]);
 
   const timerData = useMemo(() => {
     if (!campaign) return null;
@@ -79,10 +113,17 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
       }
     } else {
       return {
-        title: 'Draw will end in:',
-        titleColor: 'text-[#F24B4D]',
-        timestamp: new Date(campaign.presaleDrawStartUTC).getTime(),
-        btn: () => (
+        title: campaign.currentStatus === 'distributionOpened' ? 'Draw will end in:' : 'Presale Finished',
+        titleColor: campaign.currentStatus === 'distributionOpened' ? 'text-[#F24B4D]' : 'text-white',
+        btn: () => isClaimableData?.claimed ? (
+          <button
+            type="button"
+            className="text-doby-l lg:text-[18px] flex items-center gap-[10px] justify-center bg-[#3AFFA31F] font-semibold rounded-2xl text-[#3AFFA3] shadow-lg py-4 lg:py-6 w-full max-w-[500px] mx-auto"
+          >
+            <img src={checkIcon} alt="checkmark"/>
+            TOKENS CLAIMED
+          </button>
+          ) : (
           <NavLink to={`/presale/${campaign?.projectName}/leaderboard`}>
             <button
               type="button"
@@ -91,14 +132,19 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
               CHECK DRAW
             </button>
           </NavLink>
-        )
+        ),
+        ...(campaign.currentStatus === 'distributionOpened' ? {
+          timestamp: new Date(campaign.presaleDrawEndUTC).getTime(),
+        } : {
+          finished: true,
+        }),
       }
     }
-  }, [campaign, userAllocationData]);
+  }, [campaign, userAllocationData, isClaimableData]);
 
   const handleParticipate = () => {
     setParticipateModalOpen(true);
-  }
+  };
 
   const submitBtn = useMemo(() => {
     if (homePage) {
@@ -113,11 +159,15 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         </NavLink>
       )
     } else if (timerData) {
-      return timerData.btn();
+      return (
+        <div className={clsx(statusPending && 'pointer-events-none opacity-60')}>
+          {timerData.btn()}
+        </div>
+      )
     } else {
       return null;
     }
-  }, [campaign, userAllocationData, timerData, homePage])
+  }, [campaign, userAllocationData, timerData, homePage, statusPending]);
 
   if (!isLoading && !campaign) {
     return null;
@@ -150,9 +200,14 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
                     live
                   </div>
                 )}
-                {campaign.currentStatus !== 'upcoming' && campaign.currentStatus !== 'presaleOpened' && (
+                {(campaign.currentStatus === 'presaleFinished' || campaign.currentStatus === 'distributionOpened') && (
                   <div className="text-body-s bg-[#25925E] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center -mt-1">
                     completed
+                  </div>
+                )}
+                {campaign.currentStatus === 'distributionFinished' && (
+                  <div className="text-body-s bg-[#778CBF] text-white font-black uppercase rounded-[95px] h-[27px] px-[14px] flex items-center -mt-1">
+                    finished
                   </div>
                 )}
                 {campaign.currentStatus !== 'upcoming' && (
@@ -168,8 +223,11 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           <div className="flex flex-col mt-5">
             <div className="flex flex-col gap-6 mb-4 lg:flex-row lg:justify-between">
               <div className="flex gap-[10px] items-center">
-                <img src={formatPinataUrl(campaign.tokenImage)} alt="logo"
-                     className="w-[62px] h-[62px] object-cover rounded-[10px]"/>
+                <img
+                  src={formatPinataUrl(campaign.tokenImage)}
+                  alt="logo"
+                  className="w-[62px] h-[62px] object-cover rounded-[10px]"
+                />
                 <div className="flex flex-col gap-[2px]">
                   <span className="text-white font-bold text-[24px]">{campaign.projectName}</span>
                   <span className="opacity-60 text-white text-body-m">{campaign.shortDescription1}</span>
@@ -260,11 +318,35 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         {isLoading ? (
           <div className="rounded-[14px] animate-pulse bg-neutral-900 h-[154px]" />
         ) : (
-          <div className="py-5 rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3">
+          <div className="py-5 px-[46px] rounded-[14px] bg-radial-[at_50%_25%] to-[#080808] from-[#72727230] to-100% mb-3 relative">
+            {statusPending && (
+              <img src={spinner} alt="loader" className="animate-spin absolute right-4 top-4"/>
+            )}
             <span className={clsx('text-center font-bold text-[20px] w-fit mx-auto block mb-5', timerData.titleColor)}>
               {timerData.title}
             </span>
-            <Countdown timestamp={timerData.timestamp} className="justify-between"/>
+            {timerData.timestamp ? (
+              <Countdown timestamp={timerData.timestamp} className="justify-between"/>
+            ) : (
+              <div className="grid grid-cols-2 gap-3 items-center justify-center">
+                <NavLink
+                  to={campaign?.raydium || ''}
+                  className={clsx('flex items-center justify-center gap-2 border-1 border-[#FFFFFF2E] h-[54px] rounded-[6px]', !campaign?.raydium && 'pointer-events-none opacity-60')}
+                  target="_blank"
+                >
+                  <img src={raydium} alt="raydium logo"/>
+                  Raydium
+                </NavLink>
+                <NavLink
+                  to={campaign?.jupiter || ''}
+                  className={clsx('flex items-center justify-center gap-2 border-1 border-[#FFFFFF2E] h-[54px] rounded-[6px]', !campaign?.jupiter && 'pointer-events-none opacity-60')}
+                  target="_blank"
+                >
+                  <img src={jupiter} alt="raydium logo"/>
+                  Jupiter
+                </NavLink>
+              </div>
+            )}
           </div>
         )}
         {submitBtn}

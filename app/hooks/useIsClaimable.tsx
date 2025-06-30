@@ -47,7 +47,7 @@ const useIsClaimable = (campaignId: string) => {
     }
   
     if (participantData.claimed) {
-      return { available: false, reason: "Already claimed" };
+      return { available: false, reason: "Already claimed", claimed: true };
     }
 
     if (status.toLowerCase() !== "distributionopened") {
