@@ -105,7 +105,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
           </NavLink>
         ),
         ...(campaign.currentStatus === 'distributionOpened' ? {
-          timestamp: new Date(campaign.presaleDrawStartUTC).getTime(),
+          timestamp: new Date(campaign.presaleDrawEndUTC).getTime(),
         } : {
           finished: true,
         }),
@@ -130,7 +130,9 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
       return true;
     } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
       return true;
-    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+    } else if (campaign.currentStatus === 'presaleFinished' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+      return true;
+    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawEndUTC)) {
       return true;
     }
   }, [campaign]);
