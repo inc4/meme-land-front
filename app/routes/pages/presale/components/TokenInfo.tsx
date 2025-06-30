@@ -1,6 +1,7 @@
 import InfoIcon from "~/components/Icons/Info";
 import ArrowIcon from "~/components/Icons/Arrow";
 import clockIcon from "~/assets/svg/clock.svg";
+import checkIcon from "~/assets/svg/check.svg";
 import raydium from "~/assets/svg/raydium.svg";
 import jupiter from "~/assets/svg/jupiter.svg";
 import type {TCampaign} from "~/types";
@@ -45,10 +46,15 @@ const TokenInfo = ({isLoading, campaign}: {isLoading: boolean, campaign: TCampai
               <InfoIcon/>
               Swap Token
             </h3>
-            {(!campaign?.raydium && !campaign?.jupiter) && (
+            {(!campaign?.raydium && !campaign?.jupiter) ? (
               <span className="uppercase text-body-m font-semibold flex">
                 waiting
                 <img src={clockIcon} alt="clock" className="ml-[10px]"/>
+              </span>
+            ) : (
+              <span className="flex items-center uppercase text-body-m font-semibold gap-[10px] text-[#3AFFA3]">
+                ready
+                <img src={checkIcon} alt="check icon"/>
               </span>
             )}
           </div>
