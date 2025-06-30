@@ -6,7 +6,7 @@ import Browse from "~/components/Icons/Browse";
 import bgFigure from "~/assets/svg/token-icon-figure.svg";
 import bgFigureSmall from "~/assets/svg/token-icon-figure-small.svg";
 import checkIcon from "~/assets/svg/check.svg";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import ParticipateModal from "~/components/PresaleBlock/ParticipateModal";
 import type {TCampaign} from "~/types";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
@@ -25,6 +25,35 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
   const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string);
   const { data: isClaimableData } = useIsClaimable(campaign?.campaignId as string);
+  const [statusPending, setStatusPending] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let pending = false
+      if (!campaign) {
+        setStatusPending(false);
+        return;
+      }
+
+      const checkIfTimePassed = (dateStr) => {
+        const inputDate = new Date(dateStr);
+        const now = new Date();
+        return inputDate.getTime() < now.getTime();
+      }
+      if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
+        pending = true;
+      } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
+        pending = true;
+      } else if (campaign.currentStatus === 'presaleFinished' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
+        pending = true;
+      } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawEndUTC)) {
+        pending = true;
+      }
+      setStatusPending(pending);
+    }, 2000);
+
+    return () => clearInterval(interval)
+  }, [campaign]);
 
   const timerData = useMemo(() => {
     if (!campaign) return null;
@@ -115,27 +144,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
 
   const handleParticipate = () => {
     setParticipateModalOpen(true);
-  }
-
-  const statusPending = useMemo(() => {
-    if (!campaign) return false;
-
-    const checkIfTimePassed = (dateStr) => {
-      const inputDate = new Date(dateStr);
-      const now = new Date();
-      return inputDate.getTime() < now.getTime();
-    }
-
-    if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
-      return true;
-    } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
-      return true;
-    } else if (campaign.currentStatus === 'presaleFinished' && checkIfTimePassed(campaign.presaleDrawStartUTC)) {
-      return true;
-    } else if (campaign.currentStatus === 'distributionOpened' && checkIfTimePassed(campaign.presaleDrawEndUTC)) {
-      return true;
-    }
-  }, [campaign]);
+  };
 
   const submitBtn = useMemo(() => {
     if (homePage) {
