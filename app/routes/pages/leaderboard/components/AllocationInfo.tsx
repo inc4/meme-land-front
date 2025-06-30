@@ -67,7 +67,7 @@ const AllocationInfo = ({ campaign, userAllocation, userGroup, currentWalletNumb
             )}
           >
             <span className="text-body-s text-beige-600 uppercase font-semibold">Your wallet position</span>
-            <span className="text-h3 text-white font-bold">#{userGroup || '---'}</span>
+            <span className="text-h3 text-white font-bold">#{userAllocation && userGroup ? userGroup : '---'}</span>
           </div>
 
         </div>
