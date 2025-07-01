@@ -32,6 +32,7 @@ const Leaderboard = () => {
   const { isLoading, isLive, isEarly } = useIsLiveDraw({
     drawStart: campaignData?.presaleDrawStartUTC,
     drawEnd: campaignData?.presaleDrawEndUTC,
+    currentStatus: campaignData?.currentStatus,
   });
 
   if (isEarly || campaignDataError) return;
@@ -45,15 +46,25 @@ const Leaderboard = () => {
       <div className="grid grid-cols-1 gap-[12px] mb-[64px] lg:grid-cols-3 lg:grid-rows-[1fr,127px]">
         <div className="lg:[grid-area:1/1/3/2]">
           {!isLoading && campaignData && campaignStatsData
-            ? <TokenInfo campaign={campaignData} campaignStats={campaignStatsData} />
-            : <Skeleton className="h-[320px]! lg:h-[360px]!" />
+            ? (
+              <TokenInfo
+                campaign={campaignData}
+                campaignStats={campaignStatsData}
+                isLive={isLive}
+              />
+            ) : <Skeleton className="h-[320px]! lg:h-[360px]!" />
           }
         </div>
 
         <div className="lg:[grid-area:1/2/2/3]">
           {!isLoading && campaignStatsData
-            ? <WalletInfo campaignStats={campaignStatsData} currentWalletNumber={currentWalletNumber} />
-            : <Skeleton className="h-[215px]! lg:h-[220px]!" />
+            ? (
+              <WalletInfo
+                campaignStats={campaignStatsData}
+                currentWalletNumber={currentWalletNumber}
+                isLive={isLive}
+              />
+            ) : <Skeleton className="h-[215px]! lg:h-[220px]!" />
           }
         </div>
 

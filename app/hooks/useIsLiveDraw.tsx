@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import type { TCampaign } from "~/types";
 
 type TParams = {
   drawStart: string | undefined,
-  drawEnd: string | undefined
+  drawEnd: string | undefined,
+  currentStatus: TCampaign['currentStatus'] | undefined,
 };
 
-const useIsLiveDraw = ({ drawStart, drawEnd }: TParams) => {
+const useIsLiveDraw = ({ drawStart, drawEnd, currentStatus }: TParams) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLive, setIsLive] = useState(false);
   const [isEarly, setIsEarly] = useState(false);
@@ -45,6 +47,12 @@ const useIsLiveDraw = ({ drawStart, drawEnd }: TParams) => {
       return;
     }
 
+    if (currentStatus === 'distributionFinished') {
+      setIsLoading(false);
+      setIsLive(false);
+      return;
+    }
+
     const timer = setInterval(() => {
       const live = checkIsLive(drawStart, drawEnd);
 
@@ -55,7 +63,7 @@ const useIsLiveDraw = ({ drawStart, drawEnd }: TParams) => {
     }, intervalMs);
 
     return () => clearInterval(timer);
-  }, [drawStart, drawEnd]);
+  }, [drawStart, drawEnd, currentStatus]);
 
   return { isLoading, isLive, isEarly };
 };

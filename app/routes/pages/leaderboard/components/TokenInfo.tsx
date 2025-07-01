@@ -6,9 +6,10 @@ import { formatNumberShortEU, fromLamports } from "~/utils/numbers";
 type TProps = {
   campaign: TCampaign;
   campaignStats: TCampaignStats;
+  isLive: boolean;
 }
 
-const TokenInfo = ({ campaign, campaignStats }: TProps) => {
+const TokenInfo = ({ campaign, campaignStats, isLive }: TProps) => {
   const { projectName, tokenImage, presaleDrawEndUTC, shortDescription1, shortDescription2 } = campaign;
   const { totalTokensClaimed, totalTokensSold } = campaignStats;
   const totaltokensLeft = +totalTokensSold - +totalTokensClaimed;
@@ -39,7 +40,7 @@ const TokenInfo = ({ campaign, campaignStats }: TProps) => {
 
       <div className="flex flex-col items-center gap-[12px]">
         <span className="text-h3 font-bold text-white">Time since draw start:</span>
-        <Countdown timestamp={timestamp} timeSectionStyles="w-[70px]! lg:w-[64px]!" />
+        <Countdown timestamp={isLive ? timestamp : 1} timeSectionStyles="w-[70px]! lg:w-[64px]!" />
       </div>
 
     </div>

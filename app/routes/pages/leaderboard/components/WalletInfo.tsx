@@ -3,9 +3,10 @@ import type { TCampaignStats } from "~/types";
 type TProps = {
   campaignStats: TCampaignStats;
   currentWalletNumber: number | undefined;
+  isLive: boolean;
 }
 
-const WalletInfo = ({ campaignStats, currentWalletNumber }: TProps) => {
+const WalletInfo = ({ campaignStats, currentWalletNumber, isLive }: TProps) => {
   const { walletsClaimed, totalParticipants } = campaignStats;
   const walletsWaiting = +totalParticipants - +walletsClaimed;
 
@@ -15,7 +16,7 @@ const WalletInfo = ({ campaignStats, currentWalletNumber }: TProps) => {
     <div className="h-full p-[12px] pt-[18px] bg-background border-[2px] border-gray-700 rounded-[12px]">
       <div className="flex flex-col items-center mb-[21px]">
         <span className="text-body-s text-beige-600 uppercase font-semibold">Current Wallet #</span>
-        <span className="text-h2 text-primary font-medium font-mono">{currentWalletNumber || '---'}</span>
+        <span className="text-h2 text-primary font-medium font-mono">{isLive && currentWalletNumber ? currentWalletNumber : '---'}</span>
       </div>
 
       <div className="w-full p-[2px] mb-[12px] bg-night rounded-[8px]">
