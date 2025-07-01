@@ -37,7 +37,7 @@ const useIsLiveDraw = ({ drawStart, drawEnd, currentStatus }: TParams) => {
   }
 
   useEffect(() => {
-    if (!drawStart || !drawEnd) return;
+    if (!drawStart || !drawEnd || !currentStatus) return;
 
     const early = checkIsEarly(drawStart);
     setIsEarly(early);
