@@ -13,6 +13,7 @@ const useCurrentWalletNumber = ({ campaign, campaignStats }: TParams) => {
   const { isLive } = useIsLiveDraw({
     drawStart: campaign?.presaleDrawStartUTC,
     drawEnd: campaign?.presaleDrawEndUTC,
+    currentStatus: campaign?.currentStatus,
   });
 
   const calcCurrentWalletNumber = (start: string, unlockInterval: number, max: number) => {
