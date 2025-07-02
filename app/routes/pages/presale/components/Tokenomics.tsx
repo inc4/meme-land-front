@@ -1,14 +1,15 @@
 import GaugeChart from "~/components/GaugeChart";
 import type {TCampaign} from "~/types";
 import useCopy from "~/hooks/useCopy";
+import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 
 const Tokenomics = ({campaign, isLoading}: {campaign: TCampaign|undefined, isLoading:boolean}) => {
   const list = [
-    { name: 'Public Provision (Presale)', percent: campaign?.publicProvision.$numberDecimal, color: '#FCD10D' },
-    { name: 'Liquidity', percent: campaign?.liquidity.$numberDecimal, color: '#F24BE7' },
-    { name: 'Team', percent: campaign?.pieChartTeam.$numberDecimal, color: '#A8FF44' },
-    { name: 'Marketing', percent: campaign?.marketing.$numberDecimal, color: '#0D86FC' },
+    { name: 'Public Provision (Presale)', percent: formatNumberPretty(campaign?.publicProvision.$numberDecimal), color: '#FCD10D' },
+    { name: 'Liquidity', percent: formatNumberPretty(campaign?.liquidity.$numberDecimal), color: '#F24BE7' },
+    { name: 'Team', percent: formatNumberPretty(campaign?.pieChartTeam.$numberDecimal), color: '#A8FF44' },
+    { name: 'Marketing', percent: formatNumberPretty(campaign?.marketing.$numberDecimal), color: '#0D86FC' },
   ];
   return (
     <section>

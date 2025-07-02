@@ -19,6 +19,7 @@ import useIsClaimable from "~/hooks/useIsClaimable";
 import raydium from "~/assets/svg/raydium.svg";
 import jupiter from "~/assets/svg/jupiter.svg";
 import spinner from "~/assets/svg/spinner.svg";
+import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
@@ -29,17 +30,18 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
 
   useEffect(() => {
     const interval = setInterval(() => {
-      let pending = false
       if (!campaign) {
         setStatusPending(false);
         return;
       }
+      let pending = false;
 
       const checkIfTimePassed = (dateStr) => {
         const inputDate = new Date(dateStr);
         const now = new Date();
         return inputDate.getTime() < now.getTime();
-      }
+      };
+
       if (campaign.currentStatus === 'upcoming' && checkIfTimePassed(campaign.presaleStartUTC)) {
         pending = true;
       } else if (campaign.currentStatus === 'presaleOpened' && checkIfTimePassed(campaign.presaleEndUTC)) {
@@ -275,25 +277,25 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Presale price</span>
               <span className={clsx('font-medium font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                {isLoading ? "-" : campaign?.presalePrice.$numberDecimal}
+                {isLoading ? "-" : formatNumberPretty(campaign?.presalePrice.$numberDecimal)}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Listing Multiplier</span>
               <span className={clsx('font-medium text-[#9D85FF] font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                X{isLoading ? "-" : campaign?.listingMultiplier.$numberDecimal}
+                X{isLoading ? "-" : formatNumberPretty(campaign?.listingMultiplier.$numberDecimal)}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Listing price</span>
               <span className={clsx('font-medium text-[#12F287] font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                {isLoading ? "-" : campaign?.listingPrice.$numberDecimal}
+                {isLoading ? "-" : formatNumberPretty(campaign?.listingPrice.$numberDecimal)}
               </span>
             </div>
             <div className="text-lg flex justify-between items-center">
               <span className={clsx(homePage ? 'text-h4 font-semibold lg:font-bold' : 'font-medium text-[16px]')}>Profit Chance</span>
               <span className={clsx('font-medium text-[#FFA544] font-mono', homePage && 'text-[18px] lg:text-[24px]')}>
-                {isLoading ? "-" : campaign?.profitChance.$numberDecimal}%
+                {isLoading ? "-" : formatNumberPretty(campaign?.profitChance.$numberDecimal)}%
               </span>
             </div>
             {!homePage && (
@@ -305,11 +307,11 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Minimum investment size</span>
-                  <span className="font-mono">{campaign ? campaign.minInvestmentSize.$numberDecimal : '-'}</span>
+                  <span className="font-mono">{campaign ? formatNumberPretty(campaign.minInvestmentSize.$numberDecimal) : '-'}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Maximum investment size</span>
-                  <span className="font-mono">{campaign ? campaign.maxInvestmentSize.$numberDecimal : '-'}</span>
+                  <span className="font-mono">{campaign ? formatNumberPretty(campaign.maxInvestmentSize.$numberDecimal) : '-'}</span>
                 </div>
               </>
             )}
