@@ -13,6 +13,7 @@ import {toast} from "react-toastify";
 import spinnerIcon from '~/assets/svg/spinner.svg';
 import spinnerBlackIcon from '~/assets/svg/spinner-black.svg';
 import useSolPrice from "~/hooks/useSolPrice";
+import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const solPrice = useSolPrice();
@@ -72,9 +73,9 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
   const validationError = useMemo(() => {
     if (+amount > balance) {
       return 'Insufficient balance';
-    } else if (+amount < +campaign.minInvestmentSize.$numberDecimal) {
+    } else if (+amount < +formatNumberPretty(campaign.minInvestmentSize.$numberDecimal)) {
       return 'Amount should be grater then min investment size';
-    } else if (+amount > +campaign.maxInvestmentSize.$numberDecimal) {
+    } else if (+amount > +formatNumberPretty(campaign.maxInvestmentSize.$numberDecimal)) {
       return 'Amount should be less then max investment size';
     } else return null;
   }, [amount, balance, campaign])
@@ -102,7 +103,7 @@ const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose
           )}
           <CustomInput
             label="Your chance to get"
-            value={(+amount / campaign.presalePrice.$numberDecimal).toFixed(3)}
+            value={(+amount / +formatNumberPretty(campaign.presalePrice.$numberDecimal)).toFixed(3)}
             tokenName={campaign.tokenSymbol}
             tokenIcon={formatPinataUrl(campaign.tokenImage)}
             fiatPrice={(+amount * +solPrice).toFixed(2)}

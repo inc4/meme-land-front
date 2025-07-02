@@ -5,6 +5,7 @@ import useCampaigns from "~/hooks/useCampaigns";
 import type {TCampaignResponse} from "~/types";
 import {NavLink} from "react-router";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
+import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) => {
   return !!campaigns?.page.size && (
@@ -28,7 +29,7 @@ const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) 
               <NavLink to={`/presale/${el.projectName}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
             </div>
             <span className="font-medium text-body-l flex items-center">{el.shortDescription1}</span>
-            <span className="text-[#3AFFA3] font-medium text-right">%{el.allTimeHigh.$numberDecimal}</span>
+            <span className="text-[#3AFFA3] font-medium text-right">{formatNumberPretty(el.allTimeHigh.$numberDecimal)}%</span>
             <div className="flex gap-[14px] items-center justify-end">
               {el.dexscreener && (
                 <a href={el.dexscreener} target="_blank">

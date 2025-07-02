@@ -12,6 +12,7 @@ import useSolPrice from "~/hooks/useSolPrice";
 import { formatPinataUrl } from "~/utils/formatPinataUrl";
 import { formatNumberWithCommas, fromLamports } from "~/utils/numbers";
 import type { TCampaign } from "~/types";
+import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 type TProps = {
   isOpen: boolean;
@@ -27,7 +28,7 @@ const ClaimModal = ({ isOpen, onClose, campaign, userAllocation }: TProps) => {
   const solPrice = useSolPrice();
 
   const tokenFiatPrice = solPrice
-    ? +listingPrice.$numberDecimal * +solPrice
+    ? +formatNumberPretty(listingPrice.$numberDecimal) * +solPrice
     : 0;
   
   const allocationPrice = +(+fromLamports(userAllocation) * tokenFiatPrice).toFixed(2);

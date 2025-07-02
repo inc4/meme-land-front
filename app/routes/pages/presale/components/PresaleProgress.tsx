@@ -6,6 +6,7 @@ import useCampaignStats from "~/hooks/useCampaignStats";
 import useUserAllocation from "~/hooks/useUserAllocation";
 import clsx from "clsx";
 import useSolPrice from "~/hooks/useSolPrice";
+import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
@@ -60,7 +61,7 @@ const PresaleProgress = ({campaign}: {campaign: TCampaign | undefined}) => {
           <div className="flex flex-col items-end gap-1 font-semibold text-body-m font-mono">
             <span>{userAllocationData ? formattedAllocation : '-'} {campaign.tokenSymbol}</span>
             <span className="opacity-50">
-              ({userAllocationData ? (formattedAllocation * +campaign.presalePrice.$numberDecimal * solPrice).toFixed(2) : '-'}$)
+              ({userAllocationData ? (formattedAllocation * +formatNumberPretty(campaign.presalePrice.$numberDecimal) * solPrice).toFixed(2) : '-'}$)
             </span>
           </div>
         </div>
