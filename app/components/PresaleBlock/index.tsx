@@ -20,6 +20,7 @@ import raydium from "~/assets/svg/raydium.svg";
 import jupiter from "~/assets/svg/jupiter.svg";
 import spinner from "~/assets/svg/spinner.svg";
 import {formatNumberPretty} from "~/utils/formatNumberPretty";
+import DexLogo from "~/components/Icons/DexLogo";
 
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
@@ -332,12 +333,12 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
             ) : (
               <div className="grid grid-cols-2 gap-3 items-center justify-center">
                 <NavLink
-                  to={campaign?.raydium || ''}
-                  className={clsx('flex items-center justify-center gap-2 border-1 border-[#FFFFFF2E] h-[54px] rounded-[6px]', !campaign?.raydium && 'pointer-events-none opacity-60')}
+                  to={campaign?.dexscreener || ''}
+                  className={clsx('flex items-center justify-center gap-2 border-1 border-[#FFFFFF2E] h-[54px] rounded-[6px]', !campaign?.dexscreener && 'pointer-events-none opacity-60')}
                   target="_blank"
                 >
-                  <img src={raydium} alt="raydium logo"/>
-                  Raydium
+                  <DexLogo className="w-[34px] h-[34px]" />
+                  Dexscreener
                 </NavLink>
                 <NavLink
                   to={campaign?.jupiter || ''}
