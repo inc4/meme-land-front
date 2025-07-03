@@ -22,19 +22,25 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const provider = window.solana;
 
-    if (provider && disconnect) {
+    if (provider) {
 
       const handleDisconnect = () => {
         disconnect();
       };
 
+      const handleAccountChanged = () => {
+        window.location.reload();
+      };
+
       provider.on('disconnect', handleDisconnect);
+      provider.on('accountChanged', handleAccountChanged);
 
       return () => {
         provider.off('disconnect', handleDisconnect);
+        provider.off('accountChanged', handleAccountChanged);
       };
     }
-  }, [disconnect]);
+  }, []);
 
   useEffect(() => {
     if (isLoading) return;
