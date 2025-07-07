@@ -56,7 +56,7 @@ export default function Header() {
             <NavLink to="/" className="-m-1.5 p-1.5">
               <img
                 className="w-[164px]"
-                alt="green meme"
+                alt="Memedrop"
                 src={Logo}
               />
             </NavLink>

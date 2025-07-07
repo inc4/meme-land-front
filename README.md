@@ -1,4 +1,4 @@
-# Welcome to Meme Land Front App!
+# Welcome to Memedrop Front App!
 
 ## Features
 
