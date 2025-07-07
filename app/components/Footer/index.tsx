@@ -1,4 +1,4 @@
-import Logo from "~/assets/imgs/header-logo.png";
+import Logo from "~/assets/svg/logo.svg";
 import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";

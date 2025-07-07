@@ -12,7 +12,7 @@ import useCopy from '~/hooks/useCopy';
 import Hamburger from "~/components/Icons/Hamburger";
 import MenuClose from "~/components/Icons/MenuClose";
 import CustomButton from "~/components/CustomButton";
-import Logo from "~/assets/imgs/header-logo.png";
+import Logo from "~/assets/svg/logo.svg";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
 import balanceIcon from "~/assets/svg/header-address.svg";
