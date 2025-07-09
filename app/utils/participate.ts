@@ -45,7 +45,6 @@ const participate = async (
   const amountInSmallestUnits = new BN(amount * 10 ** decimals);
 
   try {
-    // 1. Get the instruction
     const ix = await program.methods
       .participate({
         tokenName: campaign.tokenName,
@@ -65,7 +64,6 @@ const participate = async (
       })
       .instruction();
 
-    // 2. Create transaction
     const tx = new Transaction().add(ix);
     tx.feePayer = publicKey;
     tx.recentBlockhash = (await provider.connection.getLatestBlockhash()).blockhash;
@@ -82,7 +80,7 @@ const participate = async (
       { signature },
       'finalized'
     );
-    return txId;
+    return signature;
   } catch (err) {
     throw new Error(err instanceof Error ? err.message : String(err));
   }
