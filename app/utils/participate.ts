@@ -1,24 +1,28 @@
 import {BN, Program, web3} from "@coral-xyz/anchor";
 import idl from "~/idl/mem_land.json";
 import getPdas from "~/utils/getPdas";
-import {PublicKey} from "@solana/web3.js";
+import {PublicKey, Transaction, sendAndConfirmRawTransaction} from "@solana/web3.js";
 import type {TCampaign} from "~/types";
 import {Buffer} from "buffer";
 
 // @ts-ignore
 window.Buffer = Buffer;
 
-const participate = async (publicKey: PublicKey | null, campaign: TCampaign, provider: any, amount: string) => {
+const participate = async (
+  publicKey: PublicKey | null,
+  campaign: TCampaign,
+  provider: any, // AnchorProvider
+  amount: string
+) => {
   if (!publicKey) return null;
 
   const program = new Program(idl, provider);
 
   const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
-  const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
 
-  const campaignStatsData = await program.account.campaignStats.fetch(
-    pdas.campaignStatsPda
-  );
+  const campaignData = await program.account.campaign.fetch(pdas.campaignPda);
+  const campaignStatsData = await program.account.campaignStats.fetch(pdas.campaignStatsPda);
+
   const [participantDataPda] = PublicKey.findProgramAddressSync(
     [
       Buffer.from("participant_data"),
@@ -41,7 +45,8 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
   const amountInSmallestUnits = new BN(amount * 10 ** decimals);
 
   try {
-    const tx = await program.methods
+    // 1. Get the instruction
+    const ix = await program.methods
       .participate({
         tokenName: campaign.tokenName,
         tokenSymbol: campaign.tokenSymbol,
@@ -58,11 +63,28 @@ const participate = async (publicKey: PublicKey | null, campaign: TCampaign, pro
         campaignStats: pdas.campaignStatsPda,
         systemProgram: web3.SystemProgram.programId,
       })
-      .rpc();
+      .instruction();
 
-    return tx;
+    // 2. Create transaction
+    const tx = new Transaction().add(ix);
+    tx.feePayer = publicKey;
+    tx.recentBlockhash = (await provider.connection.getLatestBlockhash()).blockhash;
+
+    const phantomProvider = window?.phantom?.solana;
+
+    if (!phantomProvider && !phantomProvider?.isPhantom) {
+      throw new Error('Phantom wallet not detected');
+    }
+
+    const { signature } = await phantomProvider.signAndSendTransaction(tx);
+
+    await provider.connection.confirmTransaction(
+      { signature },
+      'finalized'
+    );
+    return txId;
   } catch (err) {
-    if (err) throw new Error(err);
+    throw new Error(err instanceof Error ? err.message : String(err));
   }
 };
 
