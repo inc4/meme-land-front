@@ -1,28 +1,48 @@
 
-import {useEffect, useState} from 'react'
-import { Dialog, DialogPanel } from '@headlessui/react'
-import Hamburger from "~/components/Icons/Hamburger";
-import Logo from "~/assets/imgs/header-logo.png";
-import balanceIcon from "~/assets/svg/header-address.svg";
+import { useRef, useState } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useClickAway } from 'react-use';
+import { Dialog, DialogPanel } from '@headlessui/react';
+import { NavLink } from "react-router";
 import clsx from "clsx";
-import MenuClose from "~/components/Icons/MenuClose.tsx";
+
+import useGetBalance from "~/hooks/useGetBalance";
+import useCopy from '~/hooks/useCopy';
+
+import Hamburger from "~/components/Icons/Hamburger";
+import MenuClose from "~/components/Icons/MenuClose";
 import CustomButton from "~/components/CustomButton";
+import Logo from "~/assets/svg/logo.svg";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
-import {shortenAddress} from "~/utils/other";
-import {NavLink} from "react-router";
-import {REFERRAL_PAGE, RULES_PAGE} from "~/utils/constants";
-import useGetBalance from "~/hooks/useGetBalance";
+import balanceIcon from "~/assets/svg/header-address.svg";
+
+import { shortenAddress } from "~/utils/other";
+import { HOME_PAGE, REFERRAL_PAGE, RULES_PAGE } from "~/utils/constants";
 
 const navigation = [
-  { name: 'Memepad', href: '/' },
+  { name: 'Memepad', href: HOME_PAGE },
   { name: 'Rules', href: RULES_PAGE },
   { name: 'Referral', href: REFERRAL_PAGE },
 ]
 
 export default function Header() {
+  const { disconnect } = useWallet();
+  const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { userAddress, balance } = useGetBalance()
+  const { userAddress, balance } = useGetBalance();
+  const { isCopied, copy } = useCopy();
+  const ref = useRef(null);
+
+  const toggleDropdown = () => setIsDropdownOpened(!isDropdownOpened);
+
+  const hadnleCopy = () => copy(userAddress);
+
+  const handleDisconnect = () => disconnect();
+
+  useClickAway(ref, () => {
+    setIsDropdownOpened(false);
+  });
 
   return (
     <>
@@ -36,7 +56,7 @@ export default function Header() {
             <NavLink to="/" className="-m-1.5 p-1.5">
               <img
                 className="w-[164px]"
-                alt="green meme"
+                alt="Memedrop"
                 src={Logo}
               />
             </NavLink>
@@ -52,12 +72,37 @@ export default function Header() {
               </NavLink>
             ))}
           </div>
-          <div className="py-2 px-3 rounded-lg flex gap-2 items-center bg-neutral-900 border-[1px] border-[#272420] lg:ml-10 mr-2">
-            <span className="border-r-[1px] border-[#D9D9D920] pr-2 hidden lg:block font-mono text-body-l">
-              {shortenAddress(userAddress)}
-            </span>
-            <span className="font-mono">{balance} SOL</span>
-            <img src={balanceIcon} alt="sol"/>
+          <div className="relative" ref={ref}>
+            <div className="py-2 px-3 rounded-lg flex gap-2 items-center bg-neutral-900 border-[1px] border-[#272420] lg:ml-10 mr-2">
+              <span
+                className="border-r-[1px] border-[#D9D9D920] pr-2 hidden lg:block font-mono text-body-l cursor-pointer"
+                onClick={toggleDropdown}
+              >
+                {shortenAddress(userAddress)}
+              </span>
+              <span className="font-mono">{balance} SOL</span>
+              <img src={balanceIcon} alt="sol"/>
+            </div>
+            <div className={clsx(
+                "absolute flex flex-col justify-between items-center max-w-[152px] w-full left-[42px] top-[50px]",
+                "bg-neutral-900 border-[#D9D9D920] border-[1px] rounded-lg",
+                isDropdownOpened ? 'visible' : 'hidden',
+            )}>
+              <CustomButton
+                variant='no-bg'
+                customStyles='px-[12px] py-[6px] text-body-l! font-medium!'
+                handleClick={hadnleCopy}
+              >
+                {isCopied ? 'Copied' : 'Copy Address'}
+              </CustomButton>
+              <CustomButton
+                variant='no-bg'
+                customStyles='px-[12px] py-[6px] text-body-l! font-medium!'
+                handleClick={handleDisconnect}
+              >
+                Disconnect
+              </CustomButton>
+            </div>
           </div>
           <div className="flex lg:hidden">
             <button

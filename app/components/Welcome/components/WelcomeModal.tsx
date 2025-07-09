@@ -48,7 +48,7 @@ const WelcomeModal = () => {
           <img src={giftIcon} />
         </div>
 
-        <h2 className="text-white font-semibold mb-[32px]">Welcome to Green Meme</h2>
+        <h2 className="text-white font-semibold mb-[32px]">Welcome to Memedrop</h2>
 
         <p className="text-body-l text-white font-semibold mb-[32px]">
           Thanks for joining our platform! We’ve created an

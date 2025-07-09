@@ -32,8 +32,8 @@ export const links: Route.LinksFunction = () => [
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Green.meme App" },
-    { name: "description", content: "Welcome to Green.meme App!" },
+    { title: "Memedrop App" },
+    { name: "description", content: "Welcome to Memedrop App!" },
   ];
 }
 

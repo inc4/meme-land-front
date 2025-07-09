@@ -1,4 +1,4 @@
-import Logo from "~/assets/imgs/header-logo.png";
+import Logo from "~/assets/svg/logo.svg";
 import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
@@ -96,7 +96,7 @@ const Footer = () => {
             <a key={item.name} href={item.href} className="text-body-m lg:text-body-l opacity-50 text-white">{item.name}</a>
           ))}
         </div>
-        <span className="opacity-50">© 2025 GreenMeme Ltd. All rights reserved</span>
+        <span className="opacity-50">© 2025 Memedrop Ltd. All rights reserved</span>
       </div>
     </footer>
   )
