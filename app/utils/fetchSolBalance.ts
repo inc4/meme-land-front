@@ -1,5 +1,9 @@
-import {PublicKey} from "@solana/web3.js";
-import {connection} from "~/utils/constants";
+import { PublicKey, clusterApiUrl, Connection } from "@solana/web3.js";
+import getConfig from "~/config";
+
+const { NETWORK_ID } = getConfig();
+
+const connection = new Connection(clusterApiUrl(NETWORK_ID));
 
 const fetchBalance = async (pubKeyString) => {
   try {

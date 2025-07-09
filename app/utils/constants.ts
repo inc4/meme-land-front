@@ -1,4 +1,3 @@
-import { clusterApiUrl, Connection } from "@solana/web3.js";
 import { PhantomWalletName } from "@solana/wallet-adapter-wallets";
 
 export const PRESALE_PAGE_SEGMENT = 'projectName';
@@ -13,5 +12,3 @@ export const FEES_PAGE = '/fees';
 export const RULES_PAGE = '/rules';
 
 export const supportedWallets = [PhantomWalletName];
-
-export const connection = new Connection(clusterApiUrl('devnet'));
