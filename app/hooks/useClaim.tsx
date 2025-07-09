@@ -2,6 +2,7 @@ import useSWRMutation from "swr/mutation";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Program, web3 } from "@coral-xyz/anchor";
 import { randomnessAccountAddress } from "@orao-network/solana-vrf";
+import { Transaction } from "@solana/web3.js";
 import {
   TOKEN_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -75,7 +76,7 @@ const useClaim = (campaignId: string) => {
       treasurePda
     );
 
-    const tx = await program.methods
+    const ix = await program.methods
       .claimTokens({
         tokenName: name,
         tokenSymbol: symbol,
@@ -94,9 +95,25 @@ const useClaim = (campaignId: string) => {
         associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
         systemProgram: web3.SystemProgram.programId,
       })
-      .rpc();
+      .instruction();
+    
+    const { blockhash, lastValidBlockHeight } =  await provider.connection.getLatestBlockhash();
+  
+    const tx = new Transaction().add(ix);
+    tx.feePayer = publicKey;
+    tx.recentBlockhash = blockhash;
 
-    return tx;
+    // @ts-ignore
+    const phantomProvider = window?.phantom?.solana;
+
+    if (!phantomProvider && !phantomProvider?.isPhantom) {
+      throw new Error('Phantom wallet not detected');
+    }
+
+    const { signature } = await phantomProvider.signAndSendTransaction(tx);
+
+    await provider.connection.confirmTransaction({ signature, lastValidBlockHeight, blockhash }, 'finalized');
+    return signature;
   };
 
   return useSWRMutation(
