@@ -11,7 +11,7 @@ import {useMemo} from "react";
 export function Welcome() {
   const {data, isLoading} = useCampaigns();
   const {data: upcomingPresale} = useCampaigns({currentStatus: "upcoming"});
-  const {data: completedPresales} = useCampaigns({currentStatus: 'distributionFinished'});
+  const {data: completedPresales} = useCampaigns({currentStatus: 'distributionFinished|distributionOpened'});
 
   const currentPresale = useMemo(() => {
     if (isLoading) {
