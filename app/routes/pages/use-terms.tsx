@@ -14,6 +14,7 @@ const UseTerms = () => (
     <ol>
       <li>
         Acceptance of the Terms
+        <br/>
         This website (<a href="https://memedrop.ai" target="_blank" className="underline">https://memedrop.ai</a>) is the intellectual property of SOLBER SOLUTIONS INC, a company duly incorporated and existing under the laws of the Republic of Panama ("Company," "we," "our," or "us"). These terms and conditions (the "Terms") govern your access to and use of the Website and all related services, tools, and platforms (collectively, the "Services"). These Terms incorporate by reference our Privacy Policy and any other documents we may publish from time to time.
       </li>
     </ol>
@@ -23,6 +24,7 @@ const UseTerms = () => (
     <ol start={2}>
       <li>
         Eligibility and Prohibited Users
+        <br/>
         The Services are only available to individuals who are at least 18 years old or of legal age in their jurisdiction. Access is prohibited to users located in or subject to sanctions or restrictions under applicable law.
       </li>
     </ol>
@@ -35,54 +37,67 @@ const UseTerms = () => (
     <ol start={3}>
       <li>
         Modifications to the Terms
+        <br/>
         We reserve the right to modify or replace these Terms at any time. Updates will be posted to the Website and take effect immediately. Continued use of the Services indicates your acceptance of the updated Terms.
       </li>
       <li>
         Use of the Platform
+        <br/>
         Memedrop is a platform for participating in and discovering token launches, primarily focused on memecoins and experimental digital assets. We do not endorse, guarantee, or take responsibility for the performance or behavior of any listed project. Participation is at your own risk.
       </li>
       <li>
         Referral & Incentive Features
+        <br/>
         Memedrop may offer referral programs, leaderboard competitions, and allocation-based incentives. Rules and conditions for these features are outlined on the Website and are subject to change without notice.
       </li>
       <li>
         Token Transactions
+        <br/>
         Any token activity facilitated through Memedrop is user-initiated and conducted via third-party wallets and decentralized infrastructure. Memedrop does not store private keys or process payments. All token purchases are final and non-refundable.
       </li>
       <li>
         Intellectual Property
+        <br/>
         All content on the Website is owned by or licensed to the Company. You may use it for personal, non-commercial purposes only. Do not replicate, distribute, or exploit content without written permission.
       </li>
       <li>
         Third-Party Links
+        <br/>
         We may include links to third-party platforms or tools. These are provided for convenience only. We are not responsible for the accuracy or availability of third-party content, services, or platforms.
       </li>
       <li>
         Forward-looking Statements
+        <br/>
         Any statements regarding future plans, features, or performance of Memedrop or tokens launched on the platform are forward-looking and subject to change. No guarantees are made, and you should not rely on such statements.
       </li>
       <li>
         Disclaimers
+        <br/>
         The Services are provided "as is" and "as available." We disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee uninterrupted service or that all content will be accurate or free of errors.
       </li>
       <li>
         Limitation of Liability
+        <br/>
         To the fullest extent allowed by law, we disclaim any liability for indirect, incidental, special, consequential, or exemplary damages, including loss of profits, data, or goodwill, arising from your use of the Services.
       </li>
       <li>
         Indemnification
+        <br/>
         You agree to indemnify and hold harmless the Company and its affiliates from any claims, damages, or losses related to your use of the Services or violation of these Terms.
       </li>
       <li>
         Governing Law & Dispute Resolution
+        <br/>
         These Terms shall be governed by the laws of the Republic of Seychelles. Disputes shall be resolved by binding arbitration conducted in English, with no class-action proceedings permitted.
       </li>
       <li>
         Miscellaneous
+        <br/>
         If any provision is deemed invalid, the remainder of the Terms remains in effect. These Terms constitute the full agreement between you and the Company. Headings are for reference only.
       </li>
       <li>
         Contact Us
+        <br/>
         If you have any questions or concerns, contact us at: <a href="mailto:info@memedrop.ai" className="underline">info@memedrop.ai</a>
       </li>
     </ol>
