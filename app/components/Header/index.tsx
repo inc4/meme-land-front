@@ -18,12 +18,12 @@ import X from "~/components/Icons/X";
 import balanceIcon from "~/assets/svg/header-address.svg";
 
 import { shortenAddress } from "~/utils/other";
-import { HOME_PAGE, REFERRAL_PAGE, RULES_PAGE } from "~/utils/constants";
+import { HOME_PAGE, REFERRAL_PAGE } from "~/utils/constants";
 
 const navigation = [
   { name: 'Memepad', href: HOME_PAGE },
-  { name: 'Rules', href: RULES_PAGE },
   { name: 'Referral', href: REFERRAL_PAGE },
+  { name: 'Rules', href: '/#rules' },
 ]
 
 export default function Header() {
@@ -66,7 +66,7 @@ export default function Header() {
               <NavLink
                 key={item.name}
                 to={item.href}
-                className={({isActive}) => clsx('text-h5 lg:text-body-l font-semibold', isActive ? 'text-[#3AFFA3]' : 'text-white')}
+                className={({isActive}) => clsx('text-h5 lg:text-body-l font-semibold hover:text-[#3AFFA3]')}
               >
                 {item.name}
               </NavLink>

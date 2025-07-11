@@ -11,8 +11,6 @@ const routeConfig: TRouteConfig[] = [
   { path: Constants.HOME_PAGE, label: "All Project" },
   { path: Constants.TERMS_OF_USE_PAGE, label: "Terms Of Use" },
   { path: Constants.PRIVACY_NOTICE_PAGE, label: "Privacy Notice" },
-  { path: Constants.RULES_PAGE, label: "Rules" },
-  { path: Constants.FEES_PAGE, label: "Fees" },
   { path: Constants.REFERRAL_PAGE, label: "Referral" },
   { path: Constants.LEADERBOARD_PAGE, label: "Leaderboard" },
   { path: Constants.PRESALE_PAGE, label: ({ [Constants.PRESALE_PAGE_SEGMENT]: id }) => decodeURIComponent(id) },

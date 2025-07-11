@@ -48,12 +48,10 @@ const WelcomeModal = () => {
           <img src={giftIcon} />
         </div>
 
-        <h2 className="text-white font-semibold mb-[32px]">Welcome to Memedrop</h2>
+        <h2 className="text-white font-semibold mb-[32px]">Welcome to the Memedrop Trenches</h2>
 
         <p className="text-body-l text-white font-semibold mb-[32px]">
-          Thanks for joining our platform! We’ve created an
-          {' '}<span className="text-bronze">invite code</span>{' '}
-          just for you. Share it with a friend and get a bonus when they join.
+          You're in, and your unique invite code is ready. Send it to your crew to reach the <span className="text-bronze">Top 100</span> and secure <span className="text-bronze">Leaderboard Rewards</span>. On top of that, earn <span className="text-bronze">1% of the fees</span> from every <span className="text-bronze">active referral</span>.
         </p>
 
         <div className="flex flex-col gap-[12px] mb-[32px]">

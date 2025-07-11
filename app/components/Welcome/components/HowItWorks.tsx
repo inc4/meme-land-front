@@ -5,32 +5,45 @@ import walletIcon from "~/assets/svg/wallet-circle.svg";
 import depositIcon from "~/assets/svg/deposit-circle.svg";
 import arrowIcon from "~/assets/svg/arrow-long.svg";
 import Slider from 'react-slick';
+import {NavLink} from "react-router";
 
 const cards = [
   {
     img: walletIcon,
     title: 'Connect Wallet',
-    subtitle: 'Connect your favorite crypto wallet.',
+    subtitle: (
+      <span>
+        Start by connecting your favorite Solana wallet, such as <NavLink to="https://phantom.com/download" target="_blank" className="underline">Phantom</NavLink>. Now you’re all set.
+      </span>
+    ),
   },
   {
     img: presaleIcon,
-    title: 'Choose Presale',
-    subtitle: 'Join your first sale and be eligible for a chance to win $25 in free IDO tokens.',
+    title: 'Join the Presale',
+    subtitle: 'Pick an active launch and contribute between 1–200 $SOL.',
   },
   {
     img: depositIcon,
-    title: 'Deposit Funds',
-    subtitle: 'Pay in crypto, contribute to your winning sale.',
+    title: 'Make it to the Top 10%',
+    subtitle: (
+      <span>
+        Contribute enough $SOL to land in the <b>top 10%</b> and you’ll get a mystery cut of the token supply - randomized per project and <b>starting from 0.1%</b>.
+      </span>
+    ),
   },
   {
     img: waitIcon,
-    title: 'Wait for the random draw',
-    subtitle: 'Pay in crypto, contribute to your winning sale.',
+    title: 'Wait for the Draw',
+    subtitle: (
+      <span>
+        Once the presale ends, an <b>on-chain program</b> shuffles all wallets. The order decides who gets tokens first.
+      </span>
+    ),
   },
   {
     img: receiveIcon,
-    title: 'Receive your tokens',
-    subtitle: 'And sell them on time to make a profit.',
+    title: 'Receive Tokens',
+    subtitle: 'Tokens are distributed live based on the draw.',
   },
 ]
 
@@ -59,7 +72,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <section>
+    <section id="rules">
       <h1 className="text-[32px] font-bold">How it’s Works?</h1>
       <div className="mt-6 lg:hidden -mx-1">
         <Slider {...sliderSettings}>

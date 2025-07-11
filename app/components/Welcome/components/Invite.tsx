@@ -4,6 +4,7 @@ import inviteIcon from "~/assets/imgs/invite.png";
 import checkIcon from '~/assets/svg/check.svg';
 import useCopy from "~/hooks/useCopy";
 import useWalletByAddress from "~/hooks/useWalletByAddress";
+import {NavLink} from "react-router";
 
 const Invite = () => {
   const { data } = useWalletByAddress();
@@ -45,16 +46,16 @@ const Invite = () => {
           <span className="text-body-l font-mono font-medium">+10%</span>
           <span className="text-[10px] font-semibold">Allocation</span>
         </div>
-        <h3 className="text-[24px] font-bold lg:text-[38px] mb-9">Complete Your Profile</h3>
+        <h3 className="text-[24px] font-bold lg:text-[38px] mb-9">Upgrade your Profile</h3>
         <ul className="flex flex-col gap-6">
           <li className="flex gap-4">
             <span className="text-[20px] font-bold">01.</span>
             <div className="flex flex-col gap-1 lg:gap-[10px]">
               <span className="text-[20px] font-bold">
-                Invite 1 Friend
+                Invite at least 1 friend
               </span>
               <span className="text-body-m opacity-60 font-medium">
-                Create Invite code
+                Copy your unique invite code and share it with a friend to grow the squad.
               </span>
             </div>
           </li>
@@ -62,10 +63,10 @@ const Invite = () => {
             <span className="text-[20px] font-bold">02.</span>
             <div className="flex flex-col gap-1 lg:gap-[10px]">
               <span className="text-[20px] font-bold">
-                Follow us on Twitter
+                Follow <NavLink to="https://twitter.com" target="_blank" className="underline">Memedrop on X</NavLink>
               </span>
               <span className="text-body-m opacity-60 font-medium">
-                Join to Offial Twitter account
+                Stay in the loop by following our official X account.
               </span>
             </div>
           </li>
@@ -73,10 +74,10 @@ const Invite = () => {
             <span className="text-[20px] font-bold">03.</span>
             <div className="flex flex-col gap-1 lg:gap-[10px]">
               <span className="text-[20px] font-bold">
-                Follow us in Telegram
+                Join the <NavLink to="https://t.me/memedropai" className="underline">Telegram Channel</NavLink>
               </span>
               <span className="text-body-m opacity-60 font-medium">
-                Join to Official Telegram group
+                Step into the community trenches now.
               </span>
             </div>
           </li>
@@ -84,10 +85,10 @@ const Invite = () => {
             <span className="text-[20px] font-bold">04.</span>
             <div className="flex flex-col gap-1 lg:gap-[10px]">
               <span className="text-[20px] font-bold">
-                Join to First Presale
+                Participate in your first Presale
               </span>
               <span className="text-body-m opacity-60 font-medium">
-                Select Presale and Join
+                Pick an active launch, contribute, and complete the checklist.
               </span>
             </div>
           </li>

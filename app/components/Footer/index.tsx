@@ -2,7 +2,7 @@ import Logo from "~/assets/svg/logo.svg";
 import CustomButton from "~/components/CustomButton";
 import Telegram from "~/components/Icons/Telegram";
 import X from "~/components/Icons/X";
-import {FEES_PAGE, PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, RULES_PAGE, TERMS_OF_USE_PAGE} from "~/utils/constants";
+import {PRIVACY_NOTICE_PAGE, REFERRAL_PAGE, TERMS_OF_USE_PAGE} from "~/utils/constants";
 import {NavLink} from "react-router";
 import clsx from "clsx";
 import useCampaigns from "~/hooks/useCampaigns";
@@ -13,12 +13,10 @@ import type {TCampaignResponse} from "~/types";
 
 const navigation = [
   { name: 'Memepad', href: '/' },
-  { name: 'Rules', href: RULES_PAGE },
   { name: 'Referral', href: REFERRAL_PAGE },
 ]
 const navigationBottom = [
   { name: 'Privacy & Policy', href: PRIVACY_NOTICE_PAGE },
-  { name: 'Fees', href: FEES_PAGE },
   { name: 'Terms & Conditions', href: TERMS_OF_USE_PAGE },
 ]
 const { API_URL } = getConfig();

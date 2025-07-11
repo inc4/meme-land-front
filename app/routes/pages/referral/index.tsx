@@ -22,7 +22,7 @@ const Referral = () => {
     <div className="pt-[52px] pb-16 flex flex-col items-center">
       <h1 className="font-bold mb-4 text-center block">Invite Friends</h1>
       <span className="font-semibold text-[18px] text-center opacity-60 block max-w-[444px]">
-        Contribute together! Boost your chances to secure an allocation and earn higher allocations.
+        Grow your squad, climb the Top 100 leaderboard, and share the Memedrop reward pool each month. The higher your rank, the bigger your cut.
       </span>
       <NeonShadowBox
         variant="green"
@@ -73,13 +73,13 @@ const Referral = () => {
       </div>
       <h2 className="font-bold text-center max-w-[284px] mb-6">How Referral System Works?</h2>
       <div className="flex flex-col gap-3 px-6 lg:px-0 lg:grid lg:grid-cols-5">
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
+        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
           <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
           <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             01
           </div>
           <span className="text-[20px] font-bold">
-            Grab your <span className="text-[#FFA544]">invite code</span> and invite friends.
+            Grab your unique <span className="text-[#FFA544]">invite code</span>. Friends must join and participate in at least one presale for it to count.
           </span>
           <button
             type="button"
@@ -88,43 +88,38 @@ const Referral = () => {
             Copy Code
           </button>
         </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] flex flex-col">
+        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] flex flex-col h-fit">
           <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
           <div
             className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             02
           </div>
           <span className="text-[20px] font-bold">
-            Spread your <span className="text-[#FFA544]">invite code</span> on Twitter/X
+            Publish your <span className="text-[#FFA544]">invite code</span> on Twitter/X
           </span>
-          <button
-            type="button"
-            className="mt-auto white-shadow text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-3 w-full"
-          >
-            Share Code
-          </button>
         </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
+        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
           <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
           <div
             className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             03
           </div>
           <span className="text-[20px] font-bold">
-            Invite 10 friends to boost your allocation in any project <span className="text-[#FFA544]">by +10%</span>
+            Climb the leaderboard to secure a spot in the Top 100. Your rank updates in real time and resets every month.
           </span>
         </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
+        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
           <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
           <div
             className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             04
           </div>
           <span className="text-[20px] font-bold">
-            Invite 25 friends to earn <span className="text-[#FFA544]">+20% allocation bonus</span> in presale
+            On top of that, you earn <span className="text-[#FFA544]">1% of the fees</span> from every active referral. Everything is tracked in your <span className="text-[#FFA544]">Earnings Overview</span>.
+            Get rewarded based on your rank. The Top 100 split a monthly pool worth 0.25–0.5% of presale raises.
           </span>
         </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px]">
+        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
           <div
             className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
             05
