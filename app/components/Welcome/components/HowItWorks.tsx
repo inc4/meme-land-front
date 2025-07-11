@@ -72,7 +72,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <section id="rules">
+    <section>
       <h1 className="text-[32px] font-bold">How it’s Works?</h1>
       <div className="mt-6 lg:hidden -mx-1">
         <Slider {...sliderSettings}>
