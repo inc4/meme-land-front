@@ -8,6 +8,7 @@ import useCopy from "~/hooks/useCopy";
 import paymentIcon from "~/assets/svg/payment.svg";
 import arrowIcon from "~/assets/svg/arrow-long.svg";
 import checkIcon from '~/assets/svg/check.svg';
+import {toast} from "react-toastify";
 
 const Referral = () => {
   const { data } = useWalletByAddress();
@@ -16,6 +17,7 @@ const Referral = () => {
   const handleCopy = () => {
     if (!data?.inviteCode) return;
     copy(data.inviteCode);
+    toast.success('Copied to clipboard');
   }
 
   return (
@@ -82,6 +84,7 @@ const Referral = () => {
             Grab your unique <span className="text-[#FFA544]">invite code</span>. Friends must join and participate in at least one presale for it to count.
           </span>
           <button
+            onClick={handleCopy}
             type="button"
             className="white-shadow text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-3 w-full mt-4"
           >
