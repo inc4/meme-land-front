@@ -29,7 +29,7 @@ const UpcomingSales = () => {
               >
                 <div style={{backgroundImage: `url("${formatPinataUrl(el.projectCoverImage)}"`}}
                      className="h-[222px] bg-cover bg-center rounded-xl relative mb-[52px]">
-                  <img src={formatPinataUrl(el.tokenImage)} alt="" className="absolute left-4 w-[70px] h-[70px] rounded-[10px] -bottom-8"/>
+                  <img src={formatPinataUrl(el.tokenImage)} alt="" className="absolute left-4 w-[70px] h-[70px] rounded-[10px] -bottom-8 object-cover"/>
                 </div>
                 <span className="text-white font-bold text-2xl">{el.tokenName}</span>
                 <span className="text-white text-body-m opacity-60 mb-4">{el.tokenSymbol}</span>
