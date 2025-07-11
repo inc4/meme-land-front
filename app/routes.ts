@@ -1,11 +1,10 @@
 import { type RouteConfig, index, layout, route } from "@react-router/dev/routes";
 import {
     CONNECT_PAGE,
-    FEES_PAGE,
     LEADERBOARD_PAGE,
     PRESALE_PAGE,
     PRIVACY_NOTICE_PAGE,
-    REFERRAL_PAGE, RULES_PAGE,
+    REFERRAL_PAGE,
     TERMS_OF_USE_PAGE
 } from "./utils/constants";
 
@@ -20,7 +19,5 @@ export default [
         route(LEADERBOARD_PAGE, "routes/pages/leaderboard/index.tsx"),
         route(PRIVACY_NOTICE_PAGE, "routes/pages/privacy.tsx"),
         route(TERMS_OF_USE_PAGE, "routes/pages/use-terms.tsx"),
-        route(FEES_PAGE, "routes/pages/fees.tsx"),
-        route(RULES_PAGE, "routes/pages/rules.tsx"),
     ]),
 ] satisfies RouteConfig;

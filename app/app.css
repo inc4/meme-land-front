@@ -294,9 +294,20 @@ body {
 }
 
 .static-page li {
-  list-style: disc;
   padding-left: 10px;
   margin-left: 30px;
+}
+
+.static-page ul li {
+  list-style: disc;
+}
+
+.static-page ol li {
+  list-style: auto;
+}
+
+.static-page ul li:not(:first-child), .static-page ol li:not(:first-child) {
+  margin-top: 10px;
 }
 
 .static-page h3 {

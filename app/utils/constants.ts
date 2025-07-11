@@ -8,7 +8,5 @@ export const HOME_PAGE = '/';
 export const CONNECT_PAGE = '/connect';
 export const PRIVACY_NOTICE_PAGE = '/privacy-notice';
 export const TERMS_OF_USE_PAGE = '/terms-of-use';
-export const FEES_PAGE = '/fees';
-export const RULES_PAGE = '/rules';
 
 export const supportedWallets = [PhantomWalletName];
