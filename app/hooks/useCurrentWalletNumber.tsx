@@ -28,14 +28,11 @@ const useCurrentWalletNumber = ({ campaign, campaignStats }: TParams) => {
     const { totalParticipants } = campaignStats;
 
     // Immediately trigger setInterval function
-    if (isLive) {
-      const num = calcCurrentWalletNumber(presaleDrawStartUTC, tokenUnlockInterval, +totalParticipants);
-      setWalletNumber(num);
-    }
+    const num = calcCurrentWalletNumber(presaleDrawStartUTC, tokenUnlockInterval, +totalParticipants);
+    setWalletNumber(num);
   
     const timer = setInterval(() => {
       if (!isLive) {
-        setWalletNumber(undefined);
         clearInterval(timer);
         return;
       }
