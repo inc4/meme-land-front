@@ -4,6 +4,7 @@ const Privacy = () => (
     <ol>
       <li>
         Introduction
+        <br/>
         This website, <a href="https://memedrop.ai" className="underline">https://memedrop.ai</a> (the "Website"), is owned and operated by Solber Solution INC, a company duly incorporated under the laws of the Republic of Panama ("we," "our," or "us"). We value your privacy and are committed to being transparent about how we collect, use, and safeguard the information you provide or that we gather automatically when you interact with the Website and related services (collectively, the "Services").
       </li>
     </ol>
@@ -12,6 +13,7 @@ const Privacy = () => (
     <ol start={2}>
       <li>
         Your Security
+        <br/>
         We use commercially reasonable safeguards to protect any personal information ("Personal Information") that may be collected, including physical, electronic, and administrative measures such as access controls, encryption, and staff training.
       </li>
     </ol>
@@ -19,6 +21,7 @@ const Privacy = () => (
     <ol start={3}>
       <li>
         Information We Collect
+        <br/>
         We do not knowingly collect personally identifiable information.
       </li>
     </ol>
@@ -27,6 +30,7 @@ const Privacy = () => (
     <ol start={4}>
       <li>
         How We Use Information
+        <br/>
         The anonymized data from Google Analytics is used only to:
       </li>
     </ol>
@@ -39,6 +43,7 @@ const Privacy = () => (
     <ol start={5}>
       <li>
         Sharing of Data
+        <br/>
         Since we do not collect identifiable personal data, there is nothing to sell or trade.
       </li>
     </ol>
@@ -47,6 +52,7 @@ const Privacy = () => (
     <ol start={6}>
       <li>
         Targeted Advertising & Analytics
+        <br/>
         We may use third-party services (e.g., Google Analytics) that deploy cookies or similar tech to understand user activity across websites and show relevant ads.
       </li>
     </ol>
@@ -66,10 +72,12 @@ const Privacy = () => (
     <ol start={7}>
       <li>
         Links to Third-Party Sites
+        <br/>
         Our Website may contain links to other sites. We are not responsible for their privacy practices or content. Their privacy policies govern your interaction with those platforms.
       </li>
       <li>
         Your Choices
+        <br/>
         You can delete or control cookies via your browser settings. For more detailed control, use the Google Analytics Opt-out Add-on.
       </li>
     </ol>
@@ -77,22 +85,27 @@ const Privacy = () => (
     <ol start={9}>
       <li>
         Children’s Privacy
+        <br/>
         Memedrop is not intended for users under 18. We do not knowingly collect information from minors. If such data is found, it will be deleted promptly.
       </li>
       <li>
         Data Retention
+        <br/>
         We retain anonymized data as long as necessary to fulfill the purposes outlined in this policy. Data is deleted or anonymized when no longer needed.
       </li>
       <li>
         International Transfers
+        <br/>
         Any data processed may be stored outside your jurisdiction, including in areas with differing data protection laws. We implement necessary safeguards where required.
       </li>
       <li>
         Governing Law & Dispute Resolution
+        <br/>
         This Privacy Policy is governed by the laws of the Republic of Seychelles. Any dispute shall be resolved through binding arbitration before the Seychelles International Arbitration Centre, as outlined in our Terms and Conditions.
       </li>
       <li>
         Contact Us
+        <br/>
         If you have any questions or concerns, please reach out:
       </li>
     </ol>
