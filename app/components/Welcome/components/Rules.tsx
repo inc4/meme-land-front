@@ -33,7 +33,7 @@ const Rules = () => {
   };
 
   return (
-    <section>
+    <section id="rules">
       <h1 className="font-bold mb-6 lg:mb-8 text-[32px]">Participation Mechanics</h1>
       <div className="mt-8 lg:hidden -mx-1">
         <Slider {...sliderSettings}>
