@@ -80,7 +80,7 @@ const HowItWorks = () => {
             <div className="px-1">
               <div className="flex flex-col relative bg-[#0F1113] rounded-[14px] p-5 min-h-[202px] mr-6">
                 <img className="w-12 h-12" src={el.img} alt="icon"/>
-                {i < cards.length - 1 && (
+                {idx < cards.length - 1 && (
                   <img src={arrowIcon} alt="arrow" className="absolute top-9 right-5"/>
                 )}
                 <span className="mt-5 mb-2 font-bold text-[20px]">{el.title}</span>
