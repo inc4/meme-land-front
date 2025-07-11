@@ -24,7 +24,7 @@ const CompleteSales = ({campaigns}: {campaigns: TCampaignResponse | undefined}) 
               <img
                 src={formatPinataUrl(el.tokenImage)}
                 alt="logo"
-                className="w-8 h-8 mr-3 rounded-[6px]"
+                className="w-8 h-8 mr-3 rounded-[6px] object-cover"
               />
               <NavLink to={`/presale/${el.projectName}`} className="text-[20px] font-bold">{el.projectName}</NavLink>
             </div>

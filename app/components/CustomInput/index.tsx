@@ -58,7 +58,7 @@ const CustomInput = ({
         />
         <div className="font-semibold ml-auto text-body-m py-2 px-3 h-[38px] flex items-center gap-2 bg-[#FFFFFF1F] rounded-xl">
           <span>{tokenName}</span>
-          <img src={tokenIcon} alt="logo" className="w-4 h-4"/>
+          <img src={tokenIcon} alt="logo" className="w-4 h-4 object-cover"/>
         </div>
       </div>
       <div className="flex justify-between">
