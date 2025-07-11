@@ -24,7 +24,7 @@ const AllocationInfo = ({ campaign, userAllocation, userGroup, currentWalletNumb
     || !userAllocation
     || !currentWalletNumber
     || !userGroup
-    || currentWalletNumber < userGroup;;
+    || currentWalletNumber < userGroup;
 
   return (
     <>

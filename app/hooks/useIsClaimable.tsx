@@ -40,8 +40,9 @@ const useIsClaimable = (campaignId: string) => {
         .catch(() => null),
     ]);
 
-    const status = Object.keys(campaign.status)[0];
-  
+    const s = Object.keys(campaign.status)[0];
+    const status = s.toLowerCase();
+
     if (!participantData) {
       return { available: false, reason: "Not participated" };
     }
@@ -50,11 +51,11 @@ const useIsClaimable = (campaignId: string) => {
       return { available: false, reason: "Already claimed", claimed: true };
     }
 
-    if (status.toLowerCase() !== "distributionopened") {
-      return { available: false, reason: "Distribution not open" };
+    if (status === "distributionopened" || status === "distributionfinished") {
+      return { available: true };
     }
     
-    return { available: true };
+    return { available: false, reason: "Distribution not open" };
   };
 
   return useSWR(
