@@ -1,9 +1,6 @@
-import { PublicKey, clusterApiUrl, Connection } from "@solana/web3.js";
-import getConfig from "~/config";
+import { PublicKey, Connection } from "@solana/web3.js";
 
-const { NETWORK_ID } = getConfig();
-
-const connection = new Connection(clusterApiUrl(NETWORK_ID));
+const connection = new Connection(import.meta.env.VITE_RPC_URL);
 
 const fetchBalance = async (pubKeyString) => {
   try {
