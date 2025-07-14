@@ -354,11 +354,13 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         )}
         {submitBtn}
       </div>
-      <ParticipateModal
-        campaign={campaign as TCampaign}
-        isOpen={participateModalOpen}
-        onClose={() => setParticipateModalOpen(false)}
-      />
+      {participateModalOpen && (
+        <ParticipateModal
+          campaign={campaign as TCampaign}
+          isOpen={participateModalOpen}
+          onClose={() => setParticipateModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
