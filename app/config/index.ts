@@ -16,7 +16,7 @@ const getConfig = () => {
     case 'prod':
       return {
         NETWORK_ID: WalletAdapterNetwork.Mainnet,
-        API_URL: 'https://memeland-backend.inc4.net/api/1.0.0',
+        API_URL: 'https://backend.memedrop.ai/api/1.0.0',
         X_LINK: "https://x.com",
         TG_LINK: "https://web.telegram.org",
       };
