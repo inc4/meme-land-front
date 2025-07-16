@@ -18,6 +18,7 @@ import X from "~/components/Icons/X";
 import balanceIcon from "~/assets/svg/header-address.svg";
 
 import { shortenAddress } from "~/utils/other";
+import { removeLocalStorage } from '~/utils/localStorage';
 import { HOME_PAGE, REFERRAL_PAGE } from "~/utils/constants";
 
 const navigation = [
@@ -38,7 +39,10 @@ export default function Header() {
 
   const hadnleCopy = () => copy(userAddress);
 
-  const handleDisconnect = () => disconnect();
+  const handleDisconnect = () => {
+    disconnect();
+    removeLocalStorage('walletName');
+  }
 
   useClickAway(ref, () => {
     setIsDropdownOpened(false);

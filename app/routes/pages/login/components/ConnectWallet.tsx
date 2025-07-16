@@ -1,11 +1,21 @@
+import { useEffect } from "react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { isMobile } from "react-device-detect";
 import NeonShadowBox from "~/components/NeonShadowBox";
 import CustomButton from "~/components/CustomButton";
 import walletOutlineIcon from "~/assets/svg/wallet-outline.svg";
 import walletSolidIcon from "~/assets/svg/wallet-solid.svg";
+import { getLocalStorage, removeLocalStorage } from "~/utils/localStorage";
 
 const ConnectWallet = () => {
   const { setVisible } = useWalletModal();
+
+  useEffect(() => {
+    if (getLocalStorage('walletName')) {
+      removeLocalStorage('walletName');
+      if (isMobile) window.location.reload();
+    }
+  }, []);
 
   return (
     <NeonShadowBox

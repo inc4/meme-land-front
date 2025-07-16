@@ -5,6 +5,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import Spinner from '../Spinner';
 import useWalletByAddress from '~/hooks/useWalletByAddress';
 import { CONNECT_PAGE } from '~/utils/constants';
+import { removeLocalStorage } from '~/utils/localStorage';
 
 const RouteGuard = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
 
       const handleDisconnect = () => {
         disconnect();
+        removeLocalStorage('walletName');
       };
 
       const handleAccountChanged = () => {
