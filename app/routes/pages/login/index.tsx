@@ -10,10 +10,11 @@ import InviteCode from "./components/InviteCode";
 import Spinner from "~/components/Spinner";
 import useWalletByAddress from "~/hooks/useWalletByAddress";
 import { HOME_PAGE, supportedWallets } from "~/utils/constants";
+import { removeLocalStorage } from "~/utils/localStorage";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { connecting, connected, autoConnect, wallet, disconnect } = useWallet();
+  const { connecting, connected, autoConnect, wallet, publicKey, disconnect } = useWallet();
   const { isLoading, data } = useWalletByAddress();
 
   useEffect(() => {
@@ -23,8 +24,9 @@ const Login = () => {
 
     // Manually trigger disconnect() if wallet is not installed
     if (readyState === WalletReadyState.NotDetected) {
-      window.open(url);
       disconnect();
+      removeLocalStorage('walletName');
+      window.open(url);
       return;
     }
 
@@ -32,6 +34,7 @@ const Login = () => {
     if (readyState === WalletReadyState.Unsupported) {
       alert('Unsupported wallet');
       disconnect();
+      removeLocalStorage('walletName');
       return;
     }
 
@@ -40,6 +43,7 @@ const Login = () => {
     if (!isSupported) {
       toast.info('Unsupported wallet');
       disconnect();
+      removeLocalStorage('walletName');
       return;
     }
   }, [wallet, disconnect])
@@ -59,7 +63,7 @@ const Login = () => {
     <div className="grow flex justify-center items-center">
       {connecting ? (
         <ConnectionPending />
-      ) : connected || (autoConnect && wallet) ? (
+      ) : connected || (autoConnect && wallet && publicKey) ? (
         <InviteCode />
       ) : (
         <ConnectWallet />
