@@ -6,8 +6,10 @@ import { randomnessAccountAddress } from "@orao-network/solana-vrf";
 import useAnchorProvider from "./useAnchorProvider";
 import useCampaign from "./useCampaign";
 import getPdas from "~/utils/getPdas";
-import idl from '~/idl/mem_land.json'
+import getConfig from "~/config";
 import {Buffer} from "buffer";
+
+const { IDL } = getConfig();
 
 // @ts-ignore
 window.Buffer = Buffer;
@@ -20,7 +22,7 @@ const useUserGroup = (campaignId: string) => {
 
   const fetcher = async (name: string, symbol: string, publicKey: web3.PublicKey) => {
     try {
-      const program = new Program(idl, provider);
+      const program = new Program(IDL, provider);
 
       const { campaignPda, mintPda, campaignStatsPda } = getPdas(name, symbol, program.programId, publicKey);
 

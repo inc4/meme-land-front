@@ -5,8 +5,10 @@ import { Program, web3 } from "@coral-xyz/anchor";
 import useAnchorProvider from "./useAnchorProvider";
 import useCampaign from "./useCampaign";
 import getPdas from "~/utils/getPdas";
-import idl from '~/idl/mem_land.json'
+import getConfig from "~/config";
 import {Buffer} from "buffer";
+
+const { IDL } = getConfig();
 
 // @ts-ignore
 window.Buffer = Buffer;
@@ -18,7 +20,7 @@ const useIsClaimable = (campaignId: string) => {
   const { tokenName, tokenSymbol } = apiCampaign || {};
 
   const fetcher = async (name: string, symbol: string, publicKey: web3.PublicKey) => {
-    const program = new Program(idl, provider);
+    const program = new Program(IDL, provider);
 
     const { campaignPda } = getPdas(name, symbol, program.programId, publicKey);
 
