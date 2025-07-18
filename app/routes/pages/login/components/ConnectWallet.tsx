@@ -12,7 +12,7 @@ const ConnectWallet = () => {
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') window.location.reload();
+      if (document.visibilityState === 'hidden') window.location.reload();
     };
 
     if (getLocalStorage('walletName')) removeLocalStorage('walletName');
