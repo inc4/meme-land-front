@@ -1,14 +1,17 @@
 import clsx from "clsx";
+import Slider from "react-slick";
+import { toast } from "react-toastify";
 
 import NeonShadowBox from "~/components/NeonShadowBox";
 import CopyIcon from "~/components/Icons/Copy";
 import useWalletByAddress from "~/hooks/useWalletByAddress";
 import useCopy from "~/hooks/useCopy";
 
-import paymentIcon from "~/assets/svg/payment.svg";
 import arrowIcon from "~/assets/svg/arrow-long.svg";
 import checkIcon from '~/assets/svg/check.svg';
-import {toast} from "react-toastify";
+import inviteBg1 from '~/assets/svg/invite-bg-1.svg';
+import inviteBg2 from '~/assets/svg/invite-bg-2.svg';
+import inviteBg3 from '~/assets/svg/invite-bg-3.svg';
 
 const Referral = () => {
   const { data } = useWalletByAddress();
@@ -20,17 +23,92 @@ const Referral = () => {
     toast.success('Copied to clipboard');
   }
 
+  const sliderSettings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    arrows: false,
+    slidesToShow: 1.1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, // Below lg
+        settings: {
+          slidesToShow: 2.1,
+        },
+      },
+      {
+        breakpoint: 640, // Below sm
+        settings: {
+          slidesToShow: 1.1,
+        },
+      },
+    ],
+  };
+
+  const cards = [
+    {
+      content: (
+        <>
+          <span className="text-[20px] font-bold">
+            Grab your <span className="text-[#FFA544]">invite code</span> and invite friends. 
+          </span>
+          <button
+            onClick={handleCopy}
+            type="button"
+            className="white-shadow text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-3 w-full mt-4"
+          >
+            Copy Code
+          </button>
+        </>
+      )
+    },
+    {
+      content: (
+        <span className="text-[20px] font-bold">
+          Spread your <span className="text-[#FFA544]">invite code</span> on Twitter/X
+        </span>
+      )
+    },
+    {
+      content: (
+        <span className="text-[20px] font-bold">
+          Invite 10 friends to boost your allocation in any project <span className="text-[#FFA544]">by +10%</span>
+        </span>
+      )
+    },
+    {
+      content: (
+        <span className="text-[20px] font-bold">
+          Invite 25 friends to earn <span className="text-[#FFA544]">+20% allocation bonus</span> in presale
+        </span>
+      )
+    },
+    {
+      content: (
+        <span className="text-[20px] font-bold">
+          Get <span className="text-[#FFA544]">1% Fee</span> from any referral
+        </span>
+      )
+    }
+  ]
+
   return (
-    <div className="pt-[52px] pb-16 flex flex-col items-center">
-      <h1 className="font-bold mb-4 text-center block">Invite Friends</h1>
+    <div className="pt-[26px] pb-[100px] flex flex-col items-center lg:pt-[52px] lg:pb-[120px]">
+      <div className="hidden lg:block">
+        <img src={inviteBg2} className="absolute left-0 top-[10%]" />
+        <img src={inviteBg3} className="absolute left-[20%] top-[30%]" />
+        <img src={inviteBg1} className="absolute right-0 top-[10%]" />
+      </div>
+      <h1 className="font-bold mb-4 text-center block tracking-[1px]">Invite Friends</h1>
       <span className="font-semibold text-[18px] text-center opacity-60 block max-w-[444px]">
-        Grow your squad, climb the Top 100 leaderboard, and share the Memedrop reward pool each month. The higher your rank, the bigger your cut.
+        Contribute together! Boost your chances to secure an allocation and earn higher allocations.
       </span>
       <NeonShadowBox
         variant="green"
         primaryShadowPosition="top"
         secondaryShadowPosition="outer"
-        customStyles="!border-[#3AFFA3] border-[1px] p-6 mt-8 mb-3 max-w-[444px] w-full"
+        customStyles="!border-[#3AFFA3] border-[1px] p-6 mt-[32px] mb-[45px] max-w-[495px] w-full lg:mt-[188px] lg:mb-[341px]"
       >
         <div>
           <span className="text-[#3AFFA3] text-body-m font-semibold">YOUR REFERRAL CODE</span>
@@ -50,7 +128,7 @@ const Referral = () => {
           </div>
         </div>
       </NeonShadowBox>
-      <div className="bg-[#0F1113] rounded-[14px] p-6 flex flex-col mb-16 max-w-[444px] w-full">
+      {/* <div className="bg-[#0F1113] rounded-[14px] p-6 flex flex-col mb-16 max-w-[444px] w-full">
         <span className="text-h3 text-[#3AFFA3] flex items-center font-bold mb-7">
           <img src={paymentIcon} alt="payment" className="mr-[10px]"/>
           Earnings Overview
@@ -72,65 +150,35 @@ const Referral = () => {
         <span className="font-mono text-lg break-all">
           {data?.wallet || '---'}
         </span>
+      </div> */}
+      <h2 className="max-w-[284px] font-bold text-center mb-[40px] tracking-[0.4px] lg:w-full">How Referral System Works?</h2>
+
+      <div className="hidden lg:grid lg:grid-cols-5 lg:gap-3">
+        {cards.map((el, index) => (
+          <div className="rounded-[14px] bg-[#0F1113] p-4.5 relative min-h-[238px] h-fit">
+            <img src={arrowIcon} alt="arrow" className="absolute left-auto right-[18px] top-[36px]"/>
+            <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
+              0{index + 1}
+            </div>
+            {el.content}
+          </div>
+        ))}
       </div>
-      <h2 className="font-bold text-center max-w-[284px] mb-6">How Referral System Works?</h2>
-      <div className="flex flex-col gap-3 px-6 lg:px-0 lg:grid lg:grid-cols-5">
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
-          <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
-            01
-          </div>
-          <span className="text-[20px] font-bold">
-            Grab your unique <span className="text-[#FFA544]">invite code</span>. Friends must join and participate in at least one presale for it to count.
-          </span>
-          <button
-            onClick={handleCopy}
-            type="button"
-            className="white-shadow text-doby-l flex items-center justify-center bg-white font-semibold rounded-2xl text-[#080808] shadow-lg py-3 w-full mt-4"
-          >
-            Copy Code
-          </button>
-        </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] flex flex-col h-fit">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
-          <div
-            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
-            02
-          </div>
-          <span className="text-[20px] font-bold">
-            Publish your <span className="text-[#FFA544]">invite code</span> on Twitter/X
-          </span>
-        </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
-          <div
-            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
-            03
-          </div>
-          <span className="text-[20px] font-bold">
-            Climb the leaderboard to secure a spot in the Top 100. Your rank updates in real time and resets every month.
-          </span>
-        </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
-          <img src={arrowIcon} alt="arrow" className="rotate-90 absolute -left-[88px] top-0 lg:rotate-0 lg:left-auto lg:right-[18px] lg:top-[36px]"/>
-          <div
-            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
-            04
-          </div>
-          <span className="text-[20px] font-bold">
-            On top of that, you earn <span className="text-[#FFA544]">1% of the fees</span> from every active referral. Everything is tracked in your <span className="text-[#FFA544]">Earnings Overview</span>.
-            Get rewarded based on your rank. The Top 100 split a monthly pool worth 0.25–0.5% of presale raises.
-          </span>
-        </div>
-        <div className="rounded-[14px] bg-[#0F1113] p-5 relative min-h-[238px] h-fit">
-          <div
-            className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
-            05
-          </div>
-          <span className="text-[20px] font-bold">
-            Get <span className="text-[#FFA544]">1% Fee</span> from any referral
-          </span>
-        </div>
+
+      <div className="w-full lg:hidden">
+        <Slider {...sliderSettings}>
+          {cards.map((el, index) => (
+            <div>
+              <div className="rounded-[14px] bg-[#0F1113] p-4.5 mr-[22px] relative min-h-[238px] h-fit">
+                <img src={arrowIcon} alt="arrow" className="absolute left-auto right-[18px] top-[36px]"/>
+                <div className="bg-linear-to-b from-[#00000000] to-[#3AFFA330] w-12 h-12 rounded-full flex items-center justify-center text-[#25925E] text-body-l font-medium font-mono mb-8">
+                  0{index + 1}
+                </div>
+                {el.content}
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   )
