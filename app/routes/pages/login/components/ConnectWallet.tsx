@@ -11,9 +11,7 @@ const ConnectWallet = () => {
   const { setVisible } = useWalletModal();
 
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') window.location.reload();
-    };
+    const handleVisibilityChange = () => window.location.reload();
 
     if (getLocalStorage('walletName')) removeLocalStorage('walletName');
 
