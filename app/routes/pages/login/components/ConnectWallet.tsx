@@ -11,9 +11,14 @@ const ConnectWallet = () => {
   const { setVisible } = useWalletModal();
 
   useEffect(() => {
-    if (getLocalStorage('walletName')) {
-      removeLocalStorage('walletName');
-      if (isMobile) window.location.reload();
+    const handleVisibilityChange = () => window.location.reload();
+
+    if (getLocalStorage('walletName')) removeLocalStorage('walletName');
+
+    if (isMobile) document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
   }, []);
 

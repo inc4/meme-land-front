@@ -1,9 +1,11 @@
 import {BN, Program, web3} from "@coral-xyz/anchor";
-import idl from "~/idl/mem_land.json";
 import getPdas from "~/utils/getPdas";
+import getConfig from "~/config";
 import {PublicKey, Transaction, sendAndConfirmRawTransaction} from "@solana/web3.js";
 import type {TCampaign} from "~/types";
 import {Buffer} from "buffer";
+
+const { IDL } = getConfig();
 
 // @ts-ignore
 window.Buffer = Buffer;
@@ -16,7 +18,7 @@ const participate = async (
 ) => {
   if (!publicKey) return null;
 
-  const program = new Program(idl, provider);
+  const program = new Program(IDL, provider);
 
   const pdas = getPdas(campaign.tokenName, campaign.tokenSymbol, program.programId, publicKey);
 

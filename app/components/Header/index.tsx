@@ -112,7 +112,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen((state) => !state)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              className="inline-flex items-center justify-center rounded-md text-gray-700"
             >
               {mobileMenuOpen ? <MenuClose/> : <Hamburger/>}
             </button>

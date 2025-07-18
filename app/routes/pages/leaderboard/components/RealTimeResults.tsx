@@ -72,7 +72,7 @@ const RealTimeResults = ({ campaignId }: TProps) => {
           </div>
 
           {/* Body */}
-          <div className="max-h-[250px] h-full overflow-y-scroll">
+          <div className="max-h-[250px] h-full">
             {totalData.slice(3).map((item, index) => (
               <div
                 key={item.participationId}

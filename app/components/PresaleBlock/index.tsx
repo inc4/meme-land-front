@@ -16,7 +16,6 @@ import {NavLink} from "react-router";
 import useCampaignStats from "~/hooks/useCampaignStats";
 import useUserAllocation from "~/hooks/useUserAllocation";
 import useIsClaimable from "~/hooks/useIsClaimable";
-import raydium from "~/assets/svg/raydium.svg";
 import jupiter from "~/assets/svg/jupiter.svg";
 import spinner from "~/assets/svg/spinner.svg";
 import {formatNumberPretty} from "~/utils/formatNumberPretty";
@@ -60,7 +59,7 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
 
   const timerData = useMemo(() => {
     if (!campaign) return null;
-
+    console.log(campaign);
     if (campaign?.currentStatus === 'upcoming') {
       return {
         title: 'Presale will start in:',
