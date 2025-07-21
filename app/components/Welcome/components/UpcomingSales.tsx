@@ -2,10 +2,9 @@ import Countdown from "~/components/Countdown";
 import useCampaigns from "~/hooks/useCampaigns";
 import {formatPinataUrl} from "~/utils/formatPinataUrl";
 import {NavLink} from "react-router";
+import type {TCampaignResponse} from "~/types";
 
-const UpcomingSales = () => {
-  const {data, isLoading} = useCampaigns({currentStatus: 'upcoming'}, 3);
-
+const UpcomingSales = ({data, isLoading}: {data: TCampaignResponse|undefined, isLoading: boolean}) => {
   const sortByPresaleStartUTC = (data) => {
     return data.sort((a, b) => {
       return new Date(a.presaleStartUTC).getTime() - new Date(b.presaleStartUTC).getTime();

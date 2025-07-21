@@ -13,7 +13,7 @@ const { IDL } = getConfig();
 // @ts-ignore
 window.Buffer = Buffer;
 
-const useUserAllocation = (campaignId: string) => {
+const useUserAllocation = (campaignId: string, disabled?: boolean) => {
   const { publicKey } = useWallet();
   const provider = useAnchorProvider();
   const { data: apiCampaign } = useCampaign(campaignId);
@@ -49,13 +49,13 @@ const useUserAllocation = (campaignId: string) => {
 
   return useSWR(
     publicKey && tokenName && tokenSymbol ? {
-      key: 'allocation',
+      key: disabled ? null : 'allocation',
       publicKey,
       tokenName,
       tokenSymbol,
     } : null,
     ({ tokenName, tokenSymbol, publicKey }) => fetcher(tokenName, tokenSymbol, publicKey),
-    { refreshInterval: 2000 },
+    { refreshInterval: 8000 },
   )
 };
 

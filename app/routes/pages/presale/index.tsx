@@ -16,10 +16,11 @@ const Presale = () => {
   const projectName = params[PRESALE_PAGE_SEGMENT];
 
   const { data: campaignsData, isLoading } = useCampaigns({ projectName });
+  const {data: upcomingPresale, isLoading: upcomingPresaleLoading} = useCampaigns({currentStatus: 'upcoming'}, 3);
   const data = campaignsData?.page.data[0];
 
   const [checkDrawOpen, setCheckDrawOpen] = useState(false);
-  console.log(data);
+
   useEffect(() => {
     if (data?.currentStatus === 'distributionOpened' || data?.currentStatus === 'distributionFinished') {
       setCheckDrawOpen(true);
@@ -36,7 +37,7 @@ const Presale = () => {
       <Distribution campaign={data} isLoading={isLoading} />
       <Tokenomics campaign={data} isLoading={isLoading}/>
       {data && <TokenDescription campaign={data} />}
-      <UpcomingSales />
+      <UpcomingSales data={upcomingPresale} isLoading={upcomingPresaleLoading} />
       <CheckDrawModal
         isOpen={checkDrawOpen}
         onClose={() => setCheckDrawOpen(false)}

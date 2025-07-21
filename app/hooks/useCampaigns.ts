@@ -39,7 +39,7 @@ const useCampaigns = (conditions?: Partial<TCampaign> | null, limit = 10, page=0
       publicKey: publicKey.toString(),
     } : null,
     ({ queryParams, publicKey }) => fetcher(queryParams, publicKey),
-    { refreshInterval: 2000 },
+    { refreshInterval: 8000 },
   );
 };
 

@@ -70,7 +70,7 @@ const useUserGroup = (campaignId: string) => {
       tokenSymbol,
     } : null,
     ({ tokenName, tokenSymbol, publicKey }) => fetcher(tokenName, tokenSymbol, publicKey),
-    { refreshInterval: 2000 },
+    { refreshInterval: 8000 },
   )
 };
 

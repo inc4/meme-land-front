@@ -32,7 +32,7 @@ const useCampaign = (campaignId: string) => {
       publicKey: publicKey.toString()
     } : null,
     ({ campaignId, publicKey }) => fetcher(campaignId, publicKey),
-    { refreshInterval: 2000 }
+    { refreshInterval: 8000 }
   );
 };
 

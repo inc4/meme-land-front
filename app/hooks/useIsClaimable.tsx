@@ -13,7 +13,7 @@ const { IDL } = getConfig();
 // @ts-ignore
 window.Buffer = Buffer;
 
-const useIsClaimable = (campaignId: string) => {
+const useIsClaimable = (campaignId: string, disable?: boolean) => {
   const { publicKey } = useWallet();
   const provider = useAnchorProvider();
   const { data: apiCampaign } = useCampaign(campaignId);
@@ -62,13 +62,13 @@ const useIsClaimable = (campaignId: string) => {
 
   return useSWR(
     publicKey && tokenName && tokenSymbol ? {
-      key: 'is-claimable',
+      key: disable ? null : 'is-claimable',
       publicKey,
       tokenName,
       tokenSymbol,
     } : null,
     ({ tokenName, tokenSymbol, publicKey }) => fetcher(tokenName, tokenSymbol, publicKey),
-    { refreshInterval: 2000 },
+    { refreshInterval: 8000 },
   )
 };
 

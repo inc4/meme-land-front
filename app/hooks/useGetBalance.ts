@@ -16,7 +16,7 @@ const useGetBalance = () => {
       interval = setInterval(() => {
         fetchSolBalance(userAddress)
           .then((bal) => setBalance(bal))
-      }, 2000)
+      }, 8000)
     }
 
     return () => clearInterval(interval);

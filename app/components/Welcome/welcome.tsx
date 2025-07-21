@@ -9,17 +9,13 @@ import useCampaigns from "~/hooks/useCampaigns";
 import {useMemo} from "react";
 
 export function Welcome() {
-  const {data, isLoading} = useCampaigns();
-  const {data: upcomingPresale} = useCampaigns({currentStatus: "upcoming"});
+  const {data, isLoading} = useCampaigns({currentStatus: "presaleOpened"});
+  const {data: upcomingPresale, isLoading: upcomingPresaleLoading} = useCampaigns({currentStatus: 'upcoming'}, 3);
   const {data: completedPresales} = useCampaigns({currentStatus: 'distributionFinished|distributionOpened'});
 
   const currentPresale = useMemo(() => {
-    if (isLoading) {
-      return undefined;
-    } else {
-      return data?.page.data[0] || upcomingPresale?.page.data[0] || completedPresales?.page.data[0];
-    }
-  }, [data, upcomingPresale, isLoading]);
+    return data?.page.data[0] || upcomingPresale?.page.data[0] || completedPresales?.page.data[0] || undefined;
+  }, [data, upcomingPresale, completedPresales]);
 
 
   return (
@@ -27,7 +23,7 @@ export function Welcome() {
       <WelcomeModal />
       <PresaleBlock homePage campaign={currentPresale} isLoading={isLoading} />
       <HowItWorks />
-      <UpcomingSales />
+      <UpcomingSales data={upcomingPresale} isLoading={upcomingPresaleLoading} />
       <Invite />
       <CompleteSales campaigns={completedPresales} />
       <Rules />

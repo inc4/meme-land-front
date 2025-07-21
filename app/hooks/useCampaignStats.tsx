@@ -10,7 +10,7 @@ import type { TCampaignStats } from "~/types";
 
 const { IDL } = getConfig();
 
-const useCampaignStats = (campaignId: string) => {
+const useCampaignStats = (campaignId: string, disabled?: boolean) => {
   const { publicKey } = useWallet();
   const provider = useAnchorProvider();
   const { data: apiCampaign } = useCampaign(campaignId);
@@ -20,7 +20,6 @@ const useCampaignStats = (campaignId: string) => {
     const program = new Program(IDL, provider);
 
     const { campaignStatsPda } = getPdas(name, symbol, program.programId, publicKey);
-
     const campaignStatsAccount = await provider.connection.getAccountInfo(campaignStatsPda);
 
     if (campaignStatsAccount) {
@@ -35,13 +34,13 @@ const useCampaignStats = (campaignId: string) => {
 
   return useSWR(
     publicKey && tokenName && tokenSymbol ? {
-      key: 'campaign-stats',
+      key: disabled ? null : 'campaign-stats',
       publicKey,
       tokenName,
       tokenSymbol,
     } : null,
     ({ tokenName, tokenSymbol, publicKey }) => fetcher(tokenName, tokenSymbol, publicKey),
-    { refreshInterval: 2000 },
+    { refreshInterval: 8000 },
   )
 };
 

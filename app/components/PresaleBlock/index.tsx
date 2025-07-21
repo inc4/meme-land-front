@@ -24,8 +24,8 @@ import DexLogo from "~/components/Icons/DexLogo";
 const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoading:boolean, campaign:TCampaign | undefined}) => {
   const [participateModalOpen, setParticipateModalOpen] = useState(false);
   const { data: campaignStatsData } = useCampaignStats(campaign?.campaignId as string);
-  const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string);
-  const { data: isClaimableData } = useIsClaimable(campaign?.campaignId as string);
+  const { data: userAllocationData } = useUserAllocation(campaign?.campaignId as string, homePage);
+  const { data: isClaimableData } = useIsClaimable(campaign?.campaignId as string, homePage);
   const [statusPending, setStatusPending] = useState(false);
 
   useEffect(() => {
@@ -52,14 +52,14 @@ const PresaleBlock = ({homePage, isLoading, campaign}:{homePage?:boolean, isLoad
         pending = true;
       }
       setStatusPending(pending);
-    }, 2000);
+    }, 8000);
 
     return () => clearInterval(interval)
   }, [campaign]);
 
   const timerData = useMemo(() => {
     if (!campaign) return null;
-    console.log(campaign);
+
     if (campaign?.currentStatus === 'upcoming') {
       return {
         title: 'Presale will start in:',
