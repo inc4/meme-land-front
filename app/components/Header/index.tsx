@@ -46,7 +46,7 @@ export default function Header() {
   useClickAway(ref, () => {
     setIsDropdownOpened(false);
   });
-  console.log(publicKey);
+
   return (
     <>
       {mobileMenuOpen && (

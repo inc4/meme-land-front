@@ -3,7 +3,6 @@ import { PublicKey, Connection } from "@solana/web3.js";
 const connection = new Connection(import.meta.env.VITE_RPC_URL);
 
 const fetchBalance = async (pubKeyString) => {
-  console.log(1);
   try {
     const publicKey = new PublicKey(pubKeyString);
     const lamports = await connection.getBalance(publicKey);
