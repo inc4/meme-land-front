@@ -1,4 +1,3 @@
-
 import { useRef, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useClickAway } from 'react-use';
@@ -28,16 +27,16 @@ const navigation = [
 ]
 
 export default function Header() {
-  const { disconnect } = useWallet();
+  const { disconnect, publicKey } = useWallet();
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { userAddress, balance } = useGetBalance();
+  const { balance } = useGetBalance();
   const { isCopied, copy } = useCopy();
   const ref = useRef(null);
 
   const toggleDropdown = () => setIsDropdownOpened(!isDropdownOpened);
 
-  const hadnleCopy = () => copy(userAddress);
+  const hadnleCopy = () => copy(publicKey?.toString() || '');
 
   const handleDisconnect = () => {
     disconnect();
@@ -47,7 +46,7 @@ export default function Header() {
   useClickAway(ref, () => {
     setIsDropdownOpened(false);
   });
-
+  console.log(publicKey);
   return (
     <>
       {mobileMenuOpen && (
@@ -82,7 +81,7 @@ export default function Header() {
                 className="border-r-[1px] border-[#D9D9D920] pr-2 hidden lg:block font-mono text-body-l cursor-pointer"
                 onClick={toggleDropdown}
               >
-                {shortenAddress(userAddress)}
+                {publicKey && shortenAddress(publicKey?.toString())}
               </span>
               <span className="font-mono">{balance} SOL</span>
               <img src={balanceIcon} alt="sol"/>

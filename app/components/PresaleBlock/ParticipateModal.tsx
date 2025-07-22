@@ -17,7 +17,7 @@ import {formatNumberPretty} from "~/utils/formatNumberPretty";
 
 const ParticipateModal = ({isOpen, onClose, campaign}: {isOpen: boolean, onClose: () => void, campaign: TCampaign}) => {
   const solPrice = useSolPrice();
-  const { balance, userAddress } = useGetBalance();
+  const { balance } = useGetBalance();
   const provider = useAnchorProvider();
   const { publicKey } = useWallet();
 

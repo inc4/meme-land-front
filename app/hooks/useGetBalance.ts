@@ -1,34 +1,26 @@
 import {useEffect, useState} from "react";
 import fetchSolBalance from "~/utils/fetchSolBalance";
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const useGetBalance = () => {
   const [balance, setBalance] = useState(0);
-  const [userAddress, setUserAddress] = useState('');
-
-  useEffect(() => {
-    getAddress();
-  }, []);
+  const { publicKey } = useWallet();
 
   useEffect(() => {
     let interval;
 
-    if (userAddress) {
+    if (publicKey) {
+      fetchSolBalance(publicKey)
       interval = setInterval(() => {
-        fetchSolBalance(userAddress)
+        fetchSolBalance(publicKey)
           .then((bal) => setBalance(bal))
       }, 8000)
     }
 
     return () => clearInterval(interval);
+  }, [publicKey]);
 
-  }, [userAddress]);
-
-  const getAddress = async () => {
-    const resp = await window.solana.connect(); // triggers the Phantom popup
-    return setUserAddress(resp.publicKey.toString());
-  };
-
-  return {userAddress, balance}
+  return {balance}
 };
 
 export default useGetBalance;
