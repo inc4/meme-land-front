@@ -11,6 +11,8 @@ const useGetBalance = () => {
 
     if (publicKey) {
       fetchSolBalance(publicKey)
+        .then((bal) => setBalance(bal));
+
       interval = setInterval(() => {
         fetchSolBalance(publicKey)
           .then((bal) => setBalance(bal))
